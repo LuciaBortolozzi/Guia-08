@@ -101,9 +101,4 @@ public abstract class Audiovisuales implements ICalculable{
         pagos.get(indice).setFechaDePago(fechaDePago);
         pagos.get(indice).setMonto(monto);
     }
-
-    @Override
-    public double calculoMontoTotal() {
-        return 0;
-    }
 }

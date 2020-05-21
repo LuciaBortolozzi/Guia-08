@@ -1,0 +1,2 @@
+Una vez publicado el material, la información se guarda junto con la fecha de publicación
+(fecha del día) y código en el archivo Audiovisuales.txt de ancho fijo

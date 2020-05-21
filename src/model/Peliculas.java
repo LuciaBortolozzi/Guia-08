@@ -32,4 +32,9 @@ public class Peliculas extends Audiovisuales {
     public void setFechaFilm(Calendar fechaFilm) {
         this.fechaFilm = fechaFilm;
     }
+
+    @Override
+    public double calculoMontoTotal() {
+        return 0;
+    }
 }

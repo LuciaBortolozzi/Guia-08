@@ -190,6 +190,11 @@ public class Validaciones {
         return fechaActual;
     }
 
+    public static Calendar unAnioAntes(Calendar fechaActual) {
+        fechaActual.add(Calendar.YEAR, -1);
+        return fechaActual;
+    }
+
     public static int validarEdad(Calendar fechaDeNac, Calendar fechaActual) {
 
         int edad = fechaActual.get(Calendar.YEAR) - fechaDeNac.get(Calendar.YEAR);

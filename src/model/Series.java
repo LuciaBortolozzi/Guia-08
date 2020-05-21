@@ -32,4 +32,9 @@ public class Series extends Audiovisuales {
     public void setEpisodio(int episodio) {
         this.episodio = episodio;
     }
+
+    @Override
+    public double calculoMontoTotal() {
+        return 0;
+    }
 }
