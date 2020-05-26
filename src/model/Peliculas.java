@@ -5,16 +5,24 @@ import java.util.TreeSet;
 
 public class Peliculas extends Audiovisuales {
     private int duracion;
-    private Calendar fechaFilm;
+    private int anioFilm;
+
+    public Peliculas() {
+    }
+
+    public Peliculas(int duracion, int anioFilm) {
+        this.duracion = duracion;
+        this.anioFilm = anioFilm;
+    }
 
     public Peliculas(int codigo, String nombre, String genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores) {
         super(codigo, nombre, genero, sinopsis, fechaPubli, actores);
     }
 
-    public Peliculas(int codigo, String nombre, String genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores, int duracion, Calendar fechaFilm) {
+    public Peliculas(int codigo, String nombre, String genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores, int duracion, int anioFilm) {
         super(codigo, nombre, genero, sinopsis, fechaPubli, actores);
         this.duracion = duracion;
-        this.fechaFilm = fechaFilm;
+        this.anioFilm = anioFilm;
     }
 
     public int getDuracion() {
@@ -25,11 +33,16 @@ public class Peliculas extends Audiovisuales {
         this.duracion = duracion;
     }
 
-    public Calendar getFechaFilm() {
-        return fechaFilm;
+    public int getAnioFilm() {
+        return anioFilm;
     }
 
-    public void setFechaFilm(Calendar fechaFilm) {
-        this.fechaFilm = fechaFilm;
+    public void setAnioFilm(int anioFilm) {
+        this.anioFilm = anioFilm;
+    }
+
+    @Override
+    public double calculoMontoTotal() {
+        return 0;
     }
 }

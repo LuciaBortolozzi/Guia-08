@@ -7,6 +7,14 @@ public class Series extends Audiovisuales {
     private int temporada;
     private int episodio;
 
+    public Series() {
+    }
+
+    public Series(int temporada, int episodio) {
+        this.temporada = temporada;
+        this.episodio = episodio;
+    }
+
     public Series(int codigo, String nombre, String genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores) {
         super(codigo, nombre, genero, sinopsis, fechaPubli, actores);
     }
@@ -31,5 +39,10 @@ public class Series extends Audiovisuales {
 
     public void setEpisodio(int episodio) {
         this.episodio = episodio;
+    }
+
+    @Override
+    public double calculoMontoTotal() {
+        return 0;
     }
 }

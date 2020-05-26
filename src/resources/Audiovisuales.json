@@ -1,0 +1,76 @@
+{
+		"Peliculas": [{
+				"nombre": "Indiana Jones - Raiders of the Lost Ark",
+				"anio": 1981,
+				"genero": "aventura",
+				"sinopsis": "aca va la sinopsis",
+				"actores": ["Harrison Ford", "Karen Allen"],
+				"duracion": 115
+			},
+			{
+				"nombre": "Indiana Jones and the Temple of Doom",
+				"anio": 1984,
+				"genero": "aventura",
+				"sinopsis": "aca va la sinopsis",
+				"actores": ["Harrison Ford", "Kate Capshaw"],
+				"duracion": 118
+			},
+			{
+				"nombre": "Indiana Jones and the Last Crusade",
+				"anio": 1989,
+				"genero": "aventura",
+				"sinopsis": "aca va la sinopsis",
+				"actores": ["Harrison Ford", "Sean Connery", "Denholm Elliott", "Alison Doody"],
+				"duracion": 127
+			}
+		],
+		"Series": [{
+				"nombre": "Seinfeld",
+				"genero": "comedia",
+				"actores": ["Jerry Seinfeld", "Julia LouisDreyfus", "Jason Alexander", "Michael Richards"],
+				"temporada": 1,
+				"episodio": 1,
+				"sinopsis": "aca va la sinopsis"
+			},
+			{
+				"nombre": "Seinfeld",
+				"genero": "comedia",
+				"actores": ["Jerry Seinfeld", "Julia LouisDreyfus", "Jason Alexander", "Michael Richards"],
+				"temporada": 1,
+				"episodio": 2,
+				"sinopsis": "aca va la sinopsis"
+			},
+			{
+				"nombre": "Seinfeld",
+				"genero": "comedia",
+				"actores": ["Jerry Seinfeld", "Julia LouisDreyfus", "Jason Alexander", "Michael Richards"],
+				"temporada": 1,
+				"episodio": 3,
+				"sinopsis": "aca va la sinopsis"
+			},
+			{
+				"nombre": "Seinfeld",
+				"genero": "comedia",
+				"actores": ["Jerry Seinfeld", "Julia LouisDreyfus", "Jason Alexander", "Michael Richards"],
+				"temporada": 2,
+				"episodio": 1,
+				"sinopsis": "aca va la sinopsis"
+			},
+			{
+				"nombre": "Seinfeld",
+				"genero": "comedia",
+				"actores": ["Jerry Seinfeld", "Julia LouisDreyfus", "Jason Alexander", "Michael Richards"],
+				"temporada": 2,
+				"episodio": 2,
+				"sinopsis": "aca va la sinopsis"
+			},
+			{
+				"nombre": "Seinfeld",
+				"genero": "comedia",
+				"actores": ["Jerry Seinfeld", "Julia LouisDreyfus", "Jason Alexander", "Michael Richards"],
+				"temporada": 2,
+				"episodio": 3,
+				"sinopsis": "aca va la sinopsis"
+			}
+		]
+}
