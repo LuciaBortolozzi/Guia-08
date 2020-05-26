@@ -15,11 +15,11 @@ public class Peliculas extends Audiovisuales {
         this.anioFilm = anioFilm;
     }
 
-    public Peliculas(int codigo, String nombre, String genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores) {
+    public Peliculas(int codigo, String nombre, Generos genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores) {
         super(codigo, nombre, genero, sinopsis, fechaPubli, actores);
     }
 
-    public Peliculas(int codigo, String nombre, String genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores, int duracion, int anioFilm) {
+    public Peliculas(int codigo, String nombre, Generos genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores, int duracion, int anioFilm) {
         super(codigo, nombre, genero, sinopsis, fechaPubli, actores);
         this.duracion = duracion;
         this.anioFilm = anioFilm;

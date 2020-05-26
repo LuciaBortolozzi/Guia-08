@@ -15,11 +15,11 @@ public class Series extends Audiovisuales {
         this.episodio = episodio;
     }
 
-    public Series(int codigo, String nombre, String genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores) {
+    public Series(int codigo, String nombre, Generos genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores) {
         super(codigo, nombre, genero, sinopsis, fechaPubli, actores);
     }
 
-    public Series(int codigo, String nombre, String genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores, int temporada, int episodio) {
+    public Series(int codigo, String nombre, Generos genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores, int temporada, int episodio) {
         super(codigo, nombre, genero, sinopsis, fechaPubli, actores);
         this.temporada = temporada;
         this.episodio = episodio;
