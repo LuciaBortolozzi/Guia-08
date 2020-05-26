@@ -1,12 +1,19 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TreeSet;
 
 public class Series extends Audiovisuales {
     private int temporada;
     private int episodio;
+
+    public Series() {
+    }
+
+    public Series(int temporada, int episodio) {
+        this.temporada = temporada;
+        this.episodio = episodio;
+    }
 
     public Series(int codigo, String nombre, String genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores) {
         super(codigo, nombre, genero, sinopsis, fechaPubli, actores);

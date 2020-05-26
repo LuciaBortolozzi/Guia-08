@@ -1,6 +1,6 @@
 package model;
 
-public class Actores {
+public class Actores implements Comparable<Actores>{
 
     private String nombre;
     private String apellido;
@@ -37,5 +37,11 @@ public class Actores {
 
     public void setSexo(char sexo) {
         this.sexo = sexo;
+    }
+
+    @Override
+    public int compareTo(Actores a) {
+        int lastCmp = apellido.compareTo(a.apellido);                   // Primer parametro
+        return (lastCmp != 0 ? lastCmp : nombre.compareTo(a.nombre));   // Segundo parametro
     }
 }
