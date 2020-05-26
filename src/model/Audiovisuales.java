@@ -7,7 +7,7 @@ import java.util.TreeSet;
 public abstract class Audiovisuales implements ICalculable{
     protected int codigo;
     protected String nombre;
-    protected String genero;
+    protected Generos genero;
     protected String sinopsis;
     protected Calendar fechaPubli;
     protected TreeSet<Actores> actores;
@@ -17,7 +17,7 @@ public abstract class Audiovisuales implements ICalculable{
     public Audiovisuales() {
     }
 
-    public Audiovisuales(int codigo, String nombre, String genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores) {
+    public Audiovisuales(int codigo, String nombre, Generos genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.genero = genero;
@@ -42,11 +42,11 @@ public abstract class Audiovisuales implements ICalculable{
         this.nombre = nombre;
     }
 
-    public String getGenero() {
+    public Generos getGenero() {
         return genero;
     }
 
-    public void setGenero(String genero) {
+    public void setGenero(Generos genero) {
         this.genero = genero;
     }
 

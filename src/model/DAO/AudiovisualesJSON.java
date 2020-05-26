@@ -36,25 +36,11 @@ public class AudiovisualesJSON {
                     ((Peliculas) audiovisuales.get(i)).setNombre((pelicula.get("nombre").toString()));
                     ((Peliculas) audiovisuales.get(i)).setAnioFilm(Integer.parseInt((pelicula.get("anio")).toString()));
                     ((Peliculas) audiovisuales.get(i)).setSinopsis ((pelicula.get("sinopsis").toString()));
-                    ((Peliculas) audiovisuales.get(i)).setGenero((pelicula.get("genero").toString()));
+                    //((Peliculas) audiovisuales.get(i)).setGenero((pelicula.get("genero").toString()));
 
                     JsonArray actoresJSONArray = pelicula.getJsonArray("actores");
-                    String[] actoresST = new String[actoresJSONArray.size()];
-                    int j = 0;
-                    for(JsonValue jsonV : actoresJSONArray) {
-                        actoresST[j++] = (jsonV.toString()).replace("\"", "").trim();
-                    }
                     TreeSet<Actores> actoresArray = new TreeSet<Actores>();
-                    for(String a: actoresST) {
-                        Actores actor;
-                        Iterator<Actores> actorIterator = actores.iterator();
-                        while (actorIterator.hasNext()) {
-                            actor = actorIterator.next();
-                            if(actor.getNombre().replace("\"", "").trim().equals(a.replace("\"", "").trim())) {
-                                actoresArray.add(actor);
-                            }
-                        }
-                    }
+                    setActorJSON(actores, actoresArray, actoresJSONArray);
                     ((Peliculas) audiovisuales.get(i)).setActores(actoresArray);
                     ((Peliculas) audiovisuales.get(i)).setDuracion(Integer.parseInt(pelicula.get("duracion").toString()));
                     i++;
@@ -67,25 +53,12 @@ public class AudiovisualesJSON {
                     JsonObject serie = (JsonObject) iteratorSeries.next();
                     audiovisuales.set(i, new Series());
                     ((Series) audiovisuales.get(i)).setNombre((serie.get("nombre").toString()));
-                    ((Series) audiovisuales.get(i)).setGenero((serie.get("genero").toString()));
+                    //((Series) audiovisuales.get(i)).setGenero((serie.get("genero").toString()));
 
                     JsonArray actoresJSONArray = serie.getJsonArray("actores");
-                    String[] actoresST = new String[actoresJSONArray.size()];
-                    int j = 0;
-                    for(JsonValue jsonV : actoresJSONArray) {
-                        actoresST[j++] = (jsonV.toString()).replace("\"", "").trim();
-                    }
                     TreeSet<Actores> actoresArray = new TreeSet<Actores>();
-                    for(String a: actoresST) {
-                        Actores actor;
-                        Iterator<Actores> actorIterator = actores.iterator();
-                        while (actorIterator.hasNext()) {
-                            actor=actorIterator.next();
-                            if(actor.getNombre().replace("\"", "").trim().equals(a.replace("\"", "").trim())) {
-                                actoresArray.add(actor);
-                            }
-                        }
-                    }
+                    setActorJSON(actores, actoresArray, actoresJSONArray);
+
                     ((Series) audiovisuales.get(i)).setActores(actoresArray);
                     ((Series) audiovisuales.get(i)).setTemporada(Integer.parseInt((serie.get("temporada")).toString()));
                     ((Series) audiovisuales.get(i)).setEpisodio(Integer.parseInt((serie.get("episodio")).toString()));
@@ -99,6 +72,25 @@ public class AudiovisualesJSON {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void setActorJSON(TreeSet<Actores> actores, TreeSet<Actores> actoresArray, JsonArray actoresJSONArray) {
+
+        ArrayList<String> actoresST = new ArrayList<String>(actoresJSONArray.size());
+        for(JsonValue jsonV : actoresJSONArray) {
+            actoresST.add(jsonV.toString().replace("\"", "").trim());
+        }
+
+        for(String a: actoresST) {
+            Actores actor;
+            Iterator<Actores> actorIterator = actores.iterator();
+            while (actorIterator.hasNext()) {
+                actor = actorIterator.next();
+                if(actor.getNombre().replace("\"", "").trim().equals(a.replace("\"", "").trim())) {
+                    actoresArray.add(actor);
+                }
+            }
         }
     }
 }
