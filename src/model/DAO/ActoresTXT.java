@@ -11,7 +11,7 @@ public class ActoresTXT {
 
     public TreeSet<Actores> bajarActores() {
 
-        File archivo = new File ( directorio + "resources/AudiovisualesActores.txt");
+        File archivo = new File ( directorio + "AudiovisualesActores.txt");
         TreeSet<Actores> actores = new TreeSet<Actores>();
 
         try {
