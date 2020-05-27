@@ -10,7 +10,9 @@ import java.util.Calendar;
 import java.util.Scanner;
 
 public class CalificacionesTXT {
-    private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
+
+    //private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
+    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
     SuscriptorControlador suscriptorCtrl = new SuscriptorControlador();
 
     public ArrayList<Calificaciones> bajarCalificaciones() {

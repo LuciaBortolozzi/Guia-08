@@ -1,2 +1,1 @@
-Una vez publicado el material, la información se guarda junto con la fecha de publicación
-(fecha del día) y código en el archivo Audiovisuales.txt de ancho fijo
+06   1           Indiana Jones - Raiders of the Lost Ark001                                aca va la sinopsis06/04/202011521991
