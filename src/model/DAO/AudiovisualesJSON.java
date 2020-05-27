@@ -14,7 +14,8 @@ import javax.json.stream.JsonParser;
 
 public class AudiovisualesJSON {
 
-    private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
+    //private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
+    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     public void bajarAudiovisuales(ArrayList<Audiovisuales> audiovisuales, TreeSet<Actores> actores) throws Exception {
         File aJson;
