@@ -14,7 +14,7 @@ public class SuscriptoresTXT {
 //    private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
-    public TreeSet<Suscriptores> bajarGeneros() {
+    public TreeSet<Suscriptores> bajarSuscriptores() {
 
         File archivo = new File ( directorio + "Suscriptores.txt");
         TreeSet<Suscriptores> suscriptores = new TreeSet<Suscriptores>();
