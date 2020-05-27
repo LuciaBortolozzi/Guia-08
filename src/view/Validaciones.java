@@ -185,8 +185,18 @@ public class Validaciones {
         }
     }
 
+    public static Calendar ultimoMes(Calendar fechaActual) {
+        fechaActual.add(Calendar.MONTH, -1);
+        return fechaActual;
+    }
+
     public static Calendar seisMesesAntes(Calendar fechaActual) {
         fechaActual.add(Calendar.MONTH, -6);
+        return fechaActual;
+    }
+
+    public static Calendar tresMesesAntes(Calendar fechaActual) {
+        fechaActual.add(Calendar.MONTH, -3);
         return fechaActual;
     }
 

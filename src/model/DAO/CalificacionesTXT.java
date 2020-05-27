@@ -1,5 +1,6 @@
 package model.DAO;
 
+import controller.SuscriptorControlador;
 import model.Calificaciones;
 
 import java.io.File;
@@ -9,8 +10,10 @@ import java.util.Calendar;
 import java.util.Scanner;
 
 public class CalificacionesTXT {
+
     //private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
+    SuscriptorControlador suscriptorCtrl = new SuscriptorControlador();
 
     public ArrayList<Calificaciones> bajarCalificaciones() {
 
@@ -36,9 +39,10 @@ public class CalificacionesTXT {
                     int estrellas = Integer.parseInt(calificacionST[0]);                                //estrellas
                     String motivo = calificacionST[1];                                                  //motivo
                     Calendar fechaRealizada = convertirAFechaCalendar(calificacionST[2]);               //fechaRealizada
-                    boolean suscriptor = Boolean.parseBoolean(calificacionST[3]);                       //suscriptor
+                    int codSuscriptor = Integer.parseInt(calificacionST[3]);                            //suscriptor
 
-                    //calificaciones.add(new Calificaciones(estrellas, motivo, fechaRealizada, suscriptor));
+                    calificaciones.add(new Calificaciones(estrellas, motivo, fechaRealizada, suscriptorCtrl.buscarSuscriptor(codSuscriptor)));
+                    //error de mi guia: Sugiero cargar el array de Precios antes de cargar los vuelos, en lugar de hacerlo por cada vuelo.
                 }
 
                 leerArchivoCalificaciones.close();
