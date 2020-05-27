@@ -40,6 +40,7 @@ public class CalificacionesTXT {
                     int codSuscriptor = Integer.parseInt(calificacionST[3]);                            //suscriptor
 
                     calificaciones.add(new Calificaciones(estrellas, motivo, fechaRealizada, suscriptorCtrl.buscarSuscriptor(codSuscriptor)));
+                    //error de mi guia: Sugiero cargar el array de Precios antes de cargar los vuelos, en lugar de hacerlo por cada vuelo.
                 }
 
                 leerArchivoCalificaciones.close();
