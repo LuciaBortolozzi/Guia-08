@@ -87,7 +87,8 @@ public class AudiovisualesJSON {
             Iterator<Actores> actorIterator = actores.iterator();
             while (actorIterator.hasNext()) {
                 actor = actorIterator.next();
-                if(actor.getNombre().replace("\"", "").trim().equals(a.replace("\"", "").trim())) {
+                String concatenaNombreApellido = actor.getNombre() + actor.getApellido();
+                if(concatenaNombreApellido.replace(" ","").equals(a.replace("\"", "").replace(" ",""))) {
                     actoresArray.add(actor);
                 }
             }

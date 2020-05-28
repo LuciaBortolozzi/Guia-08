@@ -86,53 +86,57 @@ public class AudiovisualesTXT {
 		
 		try{
 			File fichero = new File(directorio + "Audiovisuales.txt");
-			PrintWriter archivoSalida = new PrintWriter(fichero);
 			
-			for(Audiovisuales audi: audiovisuales) 
+			if (fichero.exists())
 			{
-	
-				if(audi instanceof Peliculas) 
+				PrintWriter archivoSalida = new PrintWriter(fichero);
+				
+				for(Audiovisuales audi: audiovisuales) 
 				{
-					
-					
-					//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + duracion + anio)
-					archivoSalida.println(       String.format("%2s", "06") 
-											   + String.format("%4s", audi.getCodigo())   
-											   + String.format("%50s", audi.getNombre())  
-											   + String.format("%3s", audi.getGenero().getCodigo())  
-											   + String.format("%50s", audi.getSinopsis())
-											   + String.format("%2s", audi.getFechaPubli().get(Calendar.DAY_OF_MONTH))
-											   + "/"
-											   + String.format("%2s", audi.getFechaPubli().get(Calendar.MONTH))
-											   + "/"
-											   + String.format("%2s", audi.getFechaPubli().get(Calendar.YEAR))
-											   + String.format("%4s", ((Peliculas) audi).getDuracion())
-											   + String.format("%4s", ((Peliculas) audi).getAnioFilm())
-											   );
-					
-				}else if(audi instanceof Series) 
-				{
-					
-					
-					//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
-					archivoSalida.println(       String.format("%2s", "07") 
-											   + String.format("%4s", audi.getCodigo()   
-											   + String.format("%50s", audi.getNombre())  
-											   + String.format("%3s", audi.getGenero().getCodigo())  
-											   + String.format("%50s", audi.getSinopsis()) 
-											   + String.format("%2s", audi.getFechaPubli().get(Calendar.DAY_OF_MONTH))
-											   + "/"
-											   + String.format("%2s", audi.getFechaPubli().get(Calendar.MONTH))
-											   + "/"
-											   + String.format("%2s", audi.getFechaPubli().get(Calendar.YEAR))
-											   + String.format("%3s", ((Series) audi).getTemporada())
-											   + String.format("%3s", ((Series) audi).getEpisodio()))
-											   );
-											
+		
+					if(audi instanceof Peliculas) 
+					{
+						
+						
+						//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + duracion + anio)
+						archivoSalida.println(       String.format("%2s", "06") 
+												   + String.format("%4s", audi.getCodigo())   
+												   + String.format("%50s", audi.getNombre())  
+												   + String.format("%3s", audi.getGenero().getCodigo())  
+												   + String.format("%50s", audi.getSinopsis())
+												   + String.format("%2s", audi.getFechaPubli().get(Calendar.DAY_OF_MONTH))
+												   + "/"
+												   + String.format("%2s", audi.getFechaPubli().get(Calendar.MONTH))
+												   + "/"
+												   + String.format("%2s", audi.getFechaPubli().get(Calendar.YEAR))
+												   + String.format("%4s", ((Peliculas) audi).getDuracion())
+												   + String.format("%4s", ((Peliculas) audi).getAnioFilm())
+												   );
+						
+					}else if(audi instanceof Series) 
+					{
+						
+						
+						//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
+						archivoSalida.println(       String.format("%2s", "07") 
+												   + String.format("%4s", audi.getCodigo()   
+												   + String.format("%50s", audi.getNombre())  
+												   + String.format("%3s", audi.getGenero().getCodigo())  
+												   + String.format("%50s", audi.getSinopsis()) 
+												   + String.format("%2s", audi.getFechaPubli().get(Calendar.DAY_OF_MONTH))
+												   + "/"
+												   + String.format("%2s", audi.getFechaPubli().get(Calendar.MONTH))
+												   + "/"
+												   + String.format("%2s", audi.getFechaPubli().get(Calendar.YEAR))
+												   + String.format("%3s", ((Series) audi).getTemporada())
+												   + String.format("%3s", ((Series) audi).getEpisodio()))
+												   );
+												
+					}
 				}
+	
+				archivoSalida.close();
 			}
-
-			archivoSalida.close();
 			
 		} catch (Exception e3) {
 			System.out.println("No se puede grabar el archivo de Audiovisuales.txt");

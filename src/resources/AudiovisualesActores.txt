@@ -1,2 +1,1 @@
-y sus correspondientes
-actores en AudiovisualesActores.txt separado por TAB.
+   1	Harrison Ford	Karen Allen

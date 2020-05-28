@@ -13,7 +13,7 @@ public class ActoresTXT {
     public void bajarActores(TreeSet<Actores> actores) {
 
         try {
-            File archivo = new File ( directorio + "AudiovisualesActores.txt");
+            File archivo = new File ( directorio + "Actores.txt");
             if (archivo.exists()){
                 Scanner leerArchivoActores = new Scanner(archivo);
                 ArrayList<String> actoresST = new ArrayList<String>();
