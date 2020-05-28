@@ -13,10 +13,8 @@ public class AudiovisualesTXT {
 	
 	//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + duracion + anio)
 	//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
-	public ArrayList<Audiovisuales> leoDevuelvoArchivoAudiovisuales (Set<Actores> actores, Set<Generos> generos) throws Exception
+	public void leoDevuelvoArchivoAudiovisuales (ArrayList<Audiovisuales> audiovisuales, Set<Generos> generos) throws Exception
 	{
-
-		ArrayList<Audiovisuales> audiovisuales = new ArrayList<Audiovisuales>();
 		
 		try{
       
@@ -37,13 +35,13 @@ public class AudiovisualesTXT {
 				int j = 0;
 				for (String audi : audiovisualST)
 				{
-					
-					if(audi.substring(0,2).equals("06")) {
+					String tipo = audi.substring(0,2);
+					if(tipo.equals("06")) {
 						audiovisuales.set(j, new Peliculas());
 						((Peliculas)audiovisuales.get(j)).setDuracion(Integer.parseInt(audi.substring(119,123)));
-						((Peliculas)audiovisuales.get(j)).setAnioFilm(Integer.parseInt(audi.substring(123,127).replace(" ", "")));
+						((Peliculas)audiovisuales.get(j)).setAnioFilm(Integer.parseInt(audi.substring(123,127)));
 						
-					}else if(audi.substring(0,2).equals("07")) {
+					} else if (tipo.equals("07")) {
 						audiovisuales.set(j, new Series());	
 						((Series)audiovisuales.get(j)).setTemporada(Integer.parseInt(audi.substring(119,122)));
 						((Series)audiovisuales.get(j)).setEpisodio(Integer.parseInt(audi.substring(122,125)));
@@ -79,7 +77,6 @@ public class AudiovisualesTXT {
 		} catch (FileNotFoundException e) {
 			System.out.println("No se pudo leer el archivo Audiovisuales.txt ");
 		}
-		return audiovisuales;
 	}
 	
 	public void grabarAudiovisualesTXT(ArrayList<Audiovisuales> audiovisuales) {
