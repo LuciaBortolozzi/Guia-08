@@ -1,13 +1,10 @@
 package controller;
 
-import model.Actores;
-import model.Audiovisuales;
+import model.*;
 import model.DAO.ActoresTXT;
 import model.DAO.AudiovisualesJSON;
 import model.DAO.GenerosTXT;
 import model.DAO.SuscriptoresTXT;
-import model.Generos;
-import model.Suscriptores;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,6 +17,8 @@ public class controlador {
     TreeSet<Actores> actores = new TreeSet<Actores>();
     ArrayList<Generos> generos = new ArrayList<Generos>();
     TreeSet<Suscriptores> suscriptores = new TreeSet<Suscriptores>();
+
+    CalificacionesControlador calificacionesControlador = new CalificacionesControlador();
 
     public void agregarActoresAMemoria () {
         
@@ -49,6 +48,7 @@ public class controlador {
 
     }
 
-
-
+    public void opcion1(){
+        calificacionesControlador.calificar(audiovisuales, suscriptores);
+    }
 }

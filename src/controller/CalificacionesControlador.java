@@ -65,7 +65,9 @@ public class CalificacionesControlador {
         }
 
         /*
-        // Audiovisuales o pelicula/serie? asumi que audiovisuales
+        // Audiovisuales o pelicula/serie?
+        // asumi que audiovisuales
+
         int tipoAudiovisual = Validaciones.tipo("(1) si es pelicula o (2) si es serie: ");
 
         if (tipoAudiovisual == 1){
