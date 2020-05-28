@@ -12,9 +12,7 @@ public class GenerosTXT {
 //    private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
-    public ArrayList<Generos> bajarGeneros() {
-
-        ArrayList<Generos> generos = new ArrayList<Generos>();
+    public void bajarGeneros(ArrayList<Generos> generos) {
 
         try {
             File archivo = new File ( directorio + "Generos.txt");
@@ -43,6 +41,5 @@ public class GenerosTXT {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return generos;
     }
 }
