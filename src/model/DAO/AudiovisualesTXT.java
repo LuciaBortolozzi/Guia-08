@@ -15,10 +15,11 @@ public class AudiovisualesTXT {
 	//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
 	public ArrayList<Audiovisuales> leoDevuelvoArchivoAudiovisuales (Set<Actores> actores, Set<Generos> generos) throws Exception
 	{
+
 		ArrayList<Audiovisuales> audiovisuales = new ArrayList<Audiovisuales>();
 		
 		try{
-			
+      
 			File archaudiovisual = new File ( directorio + "Audiovisuales.txt");
 
 			if (archaudiovisual.exists())

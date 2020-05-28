@@ -16,10 +16,10 @@ public class SuscriptoresTXT {
 
     public TreeSet<Suscriptores> bajarSuscriptores() {
 
-        File archivo = new File ( directorio + "Suscriptores.txt");
         TreeSet<Suscriptores> suscriptores = new TreeSet<Suscriptores>();
 
         try {
+            File archivo = new File ( directorio + "Suscriptores.txt");
             if (archivo.exists()){
                 Scanner leerArchivoSuscriptores = new Scanner(archivo);
                 ArrayList<String> suscriptoresST = new ArrayList<String>();

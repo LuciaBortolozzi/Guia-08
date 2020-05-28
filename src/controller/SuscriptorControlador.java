@@ -15,7 +15,7 @@ public class SuscriptorControlador {
 
     public Suscriptores buscarSuscriptor(int codSuscriptor){
         Suscriptores suscriptor = null;
-        TreeSet<Suscriptores> suscriptores = suscriptoresTXT.bajarSuscriptores();
+        TreeSet<Suscriptores> suscriptores = suscriptoresTXT.bajarSuscriptores();       // ESTO ESTA MAL
 
         Iterator iteratorSuscriptores = suscriptores.iterator();
         while (iteratorSuscriptores.hasNext()) {
