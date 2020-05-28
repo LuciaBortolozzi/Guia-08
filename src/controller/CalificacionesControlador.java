@@ -56,6 +56,7 @@ public class CalificacionesControlador {
                         String motivo = Validaciones.ingresar("motivo de la calificacion propuesta: ", true);
 //                        Calendar fechaRealizada
 
+//                        meterEnAudiovisuales();
 //                        calificacionesTXT.grabarCalificaciones(codAudiovisual, nroDocSuscriptor, estrellas, motivo, fecha);
 
                     }
@@ -64,8 +65,7 @@ public class CalificacionesControlador {
             }
         }
 
-        /*
-        // Audiovisuales o pelicula/serie?
+        /*// Audiovisuales o pelicula/serie?
         // asumi que audiovisuales
 
         int tipoAudiovisual = Validaciones.tipo("(1) si es pelicula o (2) si es serie: ");

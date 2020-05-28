@@ -40,6 +40,7 @@ public class CalificacionesTXT {
                     int codSuscriptor = Integer.parseInt(calificacionST[3]);                            //suscriptor
 
                     // calificaciones.add(new Calificaciones(estrellas, motivo, fechaRealizada, suscriptorCtrl.buscarSuscriptor(suscriptores, codSuscriptor)));
+                    // audiovisuales.set(new Calificaciones) ?
                     // No hacer new Calificaciones aca porque es por composicion
                 }
 
