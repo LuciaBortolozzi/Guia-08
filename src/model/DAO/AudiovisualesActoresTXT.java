@@ -28,17 +28,16 @@ public class AudiovisualesActoresTXT {
 					String lineaActual = leerArchivo.nextLine();
 					audiovisualActoresST.add(lineaActual);
 				}
-				System.out.println("HOLAAA ");
-				int j = 0;
+
 				for (String audiAct : audiovisualActoresST)
 				{
 					TreeSet<Actores> actoresArray = new TreeSet<Actores>();
-					String[] audiActST = audiAct.split("\t");
+					String[] audiActST = audiAct.split("\t");					// Revisarr
 					for(Audiovisuales audi : audiovisuales) 
 					{
-						if(Integer.parseInt(audiActST[0])==audi.getCodigo()) 
+						if(Integer.parseInt(audiActST[0]) == audi.getCodigo())
 						{
-							for(int i = 1; i<10;i++) 
+							for(int i = 1; i < 10; i++)
 							{
 								if(audiActST[i]==null) 
 								{
