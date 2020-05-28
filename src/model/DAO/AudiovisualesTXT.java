@@ -15,10 +15,12 @@ public class AudiovisualesTXT {
 	//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
 	public ArrayList<Audiovisuales> leoDevuelvoArchivoAudiovisuales (Set<Actores> actores, Set<Generos> generos) throws Exception
 	{
-		File archaudiovisual = new File ( directorio + "Audiovisuales.txt");
 		ArrayList<Audiovisuales> audiovisuales = new ArrayList<Audiovisuales>();
 		
 		try{
+			
+			File archaudiovisual = new File ( directorio + "Audiovisuales.txt");
+
 			if (archaudiovisual.exists())
 			{
 				
@@ -83,9 +85,7 @@ public class AudiovisualesTXT {
 		
 		try{
 			File fichero = new File(directorio + "Audiovisuales.txt");
-			fichero.delete();
-			FileWriter archivo = new FileWriter(directorio + "Audiovisuales.txt",true);
-			PrintWriter archivoSalida = new PrintWriter(archivo);
+			PrintWriter archivoSalida = new PrintWriter(fichero);
 			
 			for(Audiovisuales audi: audiovisuales) 
 			{
@@ -132,7 +132,6 @@ public class AudiovisualesTXT {
 			}
 
 			archivoSalida.close();
-			archivo.close();
 			
 		} catch (Exception e3) {
 			System.out.println("No se puede grabar el archivo de Audiovisuales.txt");
