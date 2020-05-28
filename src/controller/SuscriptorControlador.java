@@ -1,6 +1,6 @@
 package controller;
 
-import model.DAO.SuscriptoresTXT;
+
 import model.Suscriptores;
 import view.Validaciones;
 
@@ -10,20 +10,23 @@ import java.util.TreeSet;
 
 public class SuscriptorControlador {
 
-    SuscriptoresTXT suscriptoresTXT = new SuscriptoresTXT();
     AudiovisualesControlador audiovisualesCtrl = new AudiovisualesControlador();
 
-    public Suscriptores buscarSuscriptor(int codSuscriptor){
+    /*public Suscriptores buscarSuscriptor(TreeSet<Suscriptores> suscriptores, int codSuscriptor){
         Suscriptores suscriptor = null;
-        TreeSet<Suscriptores> suscriptores = suscriptoresTXT.bajarSuscriptores();       // ESTO ESTA MAL
 
         Iterator iteratorSuscriptores = suscriptores.iterator();
         while (iteratorSuscriptores.hasNext()) {
+
+
+
             // codigo deberia estar en suscriptor tambien? o hacemos por nroDoc?
+
+
         }
 
         return suscriptor;
-    }
+    }*/
 
     public void recomendarMejoresSeries(){
 

@@ -14,9 +14,7 @@ public class SuscriptoresTXT {
 //    private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
-    public TreeSet<Suscriptores> bajarSuscriptores() {
-
-        TreeSet<Suscriptores> suscriptores = new TreeSet<Suscriptores>();
+    public void bajarSuscriptores(TreeSet<Suscriptores> suscriptores) {
 
         try {
             File archivo = new File ( directorio + "Suscriptores.txt");
@@ -49,7 +47,6 @@ public class SuscriptoresTXT {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return suscriptores;
     }
 
     public Calendar convertirAFechaCalendar(String f) {

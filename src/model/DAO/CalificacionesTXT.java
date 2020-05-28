@@ -13,11 +13,8 @@ public class CalificacionesTXT {
 
     //private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
-    SuscriptorControlador suscriptorCtrl = new SuscriptorControlador();
 
-    public ArrayList<Calificaciones> bajarCalificaciones() {
-
-        ArrayList<Calificaciones> calificaciones = new ArrayList<Calificaciones>();
+    /*public void bajarCalificaciones(ArrayList<Calificaciones> calificaciones) {
 
         try {
             File archivo = new File ( directorio + "Calificaciones.txt");
@@ -42,8 +39,8 @@ public class CalificacionesTXT {
                     Calendar fechaRealizada = convertirAFechaCalendar(calificacionST[2]);               //fechaRealizada
                     int codSuscriptor = Integer.parseInt(calificacionST[3]);                            //suscriptor
 
-                    calificaciones.add(new Calificaciones(estrellas, motivo, fechaRealizada, suscriptorCtrl.buscarSuscriptor(codSuscriptor)));
-                    //error de mi guia: Sugiero cargar el array de Precios antes de cargar los vuelos, en lugar de hacerlo por cada vuelo.
+                    // calificaciones.add(new Calificaciones(estrellas, motivo, fechaRealizada, suscriptorCtrl.buscarSuscriptor(suscriptores, codSuscriptor)));
+                    // No hacer new Calificaciones aca porque es por composicion
                 }
 
                 leerArchivoCalificaciones.close();
@@ -52,7 +49,6 @@ public class CalificacionesTXT {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return calificaciones;
     }
 
     public Calendar convertirAFechaCalendar(String f) {
@@ -69,5 +65,5 @@ public class CalificacionesTXT {
         fecha.set(Calendar.YEAR, year);
 
         return fecha;
-    }
+    }*/
 }
