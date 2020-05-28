@@ -19,7 +19,9 @@ public class AudiovisualesTXT {
 		ArrayList<Audiovisuales> audiovisuales = new ArrayList<Audiovisuales>();
 		
 		try{
+      
 			File archaudiovisual = new File ( directorio + "Audiovisuales.txt");
+
 			if (archaudiovisual.exists())
 			{
 				
@@ -84,9 +86,7 @@ public class AudiovisualesTXT {
 		
 		try{
 			File fichero = new File(directorio + "Audiovisuales.txt");
-			fichero.delete();
-			FileWriter archivo = new FileWriter(directorio + "Audiovisuales.txt",true);
-			PrintWriter archivoSalida = new PrintWriter(archivo);
+			PrintWriter archivoSalida = new PrintWriter(fichero);
 			
 			for(Audiovisuales audi: audiovisuales) 
 			{
@@ -133,7 +133,6 @@ public class AudiovisualesTXT {
 			}
 
 			archivoSalida.close();
-			archivo.close();
 			
 		} catch (Exception e3) {
 			System.out.println("No se puede grabar el archivo de Audiovisuales.txt");
