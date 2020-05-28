@@ -17,11 +17,12 @@ public class CalificacionesTXT {
 
     public ArrayList<Calificaciones> bajarCalificaciones() {
 
-        File archivo = new File ( directorio + "resources/Calificaciones.txt");
         ArrayList<Calificaciones> calificaciones = new ArrayList<Calificaciones>();
 
         try {
-            if (archivo.exists()){
+            File archivo = new File ( directorio + "Calificaciones.txt");
+            if (archivo.exists()) {
+
                 Scanner leerArchivoCalificaciones = new Scanner(archivo);
                 ArrayList<String> calificacionesST = new ArrayList<String>();
 
@@ -46,8 +47,8 @@ public class CalificacionesTXT {
                 }
 
                 leerArchivoCalificaciones.close();
-            }
 
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

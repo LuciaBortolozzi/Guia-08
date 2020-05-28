@@ -22,7 +22,6 @@ public class AudiovisualesJSON {
         FileInputStream fsInJson;
         try {
             aJson = new File(directorio + "Audiovisuales.json");
-
             if (aJson.exists()){
                 fsInJson = new FileInputStream(aJson);
                 JsonReader rdrJson = Json.createReader(fsInJson);

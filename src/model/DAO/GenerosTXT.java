@@ -14,10 +14,10 @@ public class GenerosTXT {
 
     public ArrayList<Generos> bajarGeneros() {
 
-        File archivo = new File ( directorio + "Generos.txt");
         ArrayList<Generos> generos = new ArrayList<Generos>();
 
         try {
+            File archivo = new File ( directorio + "Generos.txt");
             if (archivo.exists()){
                 Scanner leerArchivoGeneros = new Scanner(archivo);
                 ArrayList<String> generosST = new ArrayList<String>();
