@@ -10,12 +10,13 @@ public class ActoresTXT {
     //private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
+  //Actores.txt -> ("\n" + nombre + "/t"+ apellido + "/t" + sexo)	
     public TreeSet<Actores> bajarActores() {
 
         TreeSet<Actores> actores = new TreeSet<Actores>();
 
         try {
-            File archivo = new File ( directorio + "AudiovisualesActores.txt");
+            File archivo = new File ( directorio + "Actores.txt");
             if (archivo.exists()){
                 Scanner leerArchivoActores = new Scanner(archivo);
                 ArrayList<String> actoresST = new ArrayList<String>();
