@@ -14,8 +14,6 @@ import java.util.TreeSet;
 
 public class CalificacionesControlador {
 
-    CalificacionesTXT calificacionesTXT = new CalificacionesTXT();
-
     public static void calificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores){
 
         // IMPORTANTE: usuario carga suscriptor + calificacion
@@ -57,7 +55,7 @@ public class CalificacionesControlador {
 //                        Calendar fechaRealizada
 
 //                        meterEnAudiovisuales();
-//                        calificacionesTXT.grabarCalificaciones(codAudiovisual, nroDocSuscriptor, estrellas, motivo, fecha);
+//                        CalificacionesTXT.grabarCalificaciones(codAudiovisual, nroDocSuscriptor, estrellas, motivo, fecha);
 
                     }
 
