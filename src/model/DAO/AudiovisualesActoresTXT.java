@@ -11,9 +11,10 @@ public class AudiovisualesActoresTXT {
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 	
 	//AudiovisualesActores.txt -> (codigoAudiovisual + "/t" + nombreApellido + "/t" + nombreApellido + ...)
-	public static ArrayList<Audiovisuales> leoDevuelvoArchivoAudiovisuales (Set<Actores> actores) throws Exception {
+	public static ArrayList<Audiovisuales> leoDevuelvoArchivoAudiovisuales () throws Exception {
 
-		ArrayList<Audiovisuales> audiovisuales = new ArrayList<Audiovisuales>();
+		TreeSet<Actores> actores = ActoresTXT.bajarActores();
+		ArrayList<Audiovisuales> audiovisuales = AudiovisualesTXT.leoDevuelvoArchivoAudiovisuales();
 
 		try{
       
