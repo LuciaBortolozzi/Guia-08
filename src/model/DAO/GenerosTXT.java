@@ -12,8 +12,8 @@ public class GenerosTXT {
 //    private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
-    public void bajarGeneros(ArrayList<Generos> generos) {
-
+    public static ArrayList<Generos> bajarGeneros() {
+        ArrayList<Generos> generos = new ArrayList<Generos>();
         try {
             File archivo = new File ( directorio + "Generos.txt");
             if (archivo.exists()){
@@ -41,5 +41,7 @@ public class GenerosTXT {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return generos;
     }
 }

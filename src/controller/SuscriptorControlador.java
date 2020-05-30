@@ -12,7 +12,7 @@ public class SuscriptorControlador {
 
     AudiovisualesControlador audiovisualesCtrl = new AudiovisualesControlador();
 
-    /*public Suscriptores buscarSuscriptor(TreeSet<Suscriptores> suscriptores, int codSuscriptor){
+    /*public static Suscriptores buscarSuscriptor(TreeSet<Suscriptores> suscriptores, int codSuscriptor){
         Suscriptores suscriptor = null;
 
         Iterator iteratorSuscriptores = suscriptores.iterator();
@@ -28,7 +28,7 @@ public class SuscriptorControlador {
         return suscriptor;
     }*/
 
-    public void recomendarMejoresSeries(){
+    public static void recomendarMejoresSeries(){
 
         /*A todos los suscriptores jóvenes (menores de 35 años), se les recomienda la temporada
         completa de la serie con mejor calificación promedio durante los últimos 3 meses, evaluada
@@ -47,7 +47,7 @@ public class SuscriptorControlador {
 
     }
 
-    public void recomendarMejorPelicula(){
+    public static void recomendarMejorPelicula(){
 
         /*Para cada uno de los géneros existentes, la película con mejor calificación obtenida en el
         último mes es recomendada a todos los suscriptores mayores de 55 años, mediante otro
