@@ -14,7 +14,7 @@ public class AudiovisualesJSON {
     //private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
-    public static void bajarAudiovisuales(ArrayList<Audiovisuales> audiovisuales, TreeSet<Actores> actores) throws Exception {
+    public static void bajarAudiovisuales(ArrayList<Audiovisuales> audiovisualesAux, TreeSet<Actores> actores) throws Exception {
         File aJson;
         FileInputStream fsInJson;
         try {
@@ -29,17 +29,17 @@ public class AudiovisualesJSON {
                 Iterator iteratorPeliculas = peliculas.iterator();
                 while (iteratorPeliculas.hasNext()) {
                     JsonObject pelicula = (JsonObject) iteratorPeliculas.next();
-                    audiovisuales.set(i, new Peliculas());
-                    ((Peliculas) audiovisuales.get(i)).setNombre((pelicula.get("nombre").toString()));
-                    ((Peliculas) audiovisuales.get(i)).setAnioFilm(Integer.parseInt((pelicula.get("anio")).toString()));
-                    ((Peliculas) audiovisuales.get(i)).setSinopsis ((pelicula.get("sinopsis").toString()));
+                    audiovisualesAux.set(i, new Peliculas());
+                    ((Peliculas) audiovisualesAux.get(i)).setNombre((pelicula.get("nombre").toString()));
+                    ((Peliculas) audiovisualesAux.get(i)).setAnioFilm(Integer.parseInt((pelicula.get("anio")).toString()));
+                    ((Peliculas) audiovisualesAux.get(i)).setSinopsis ((pelicula.get("sinopsis").toString()));
                     //((Peliculas) audiovisuales.get(i)).setGenero((pelicula.get("genero").toString()));
 
                     JsonArray actoresJSONArray = pelicula.getJsonArray("actores");
                     TreeSet<Actores> actoresArray = new TreeSet<Actores>();
                     setActorJSON(actores, actoresArray, actoresJSONArray);
-                    ((Peliculas) audiovisuales.get(i)).setActores(actoresArray);
-                    ((Peliculas) audiovisuales.get(i)).setDuracion(Integer.parseInt(pelicula.get("duracion").toString()));
+                    ((Peliculas) audiovisualesAux.get(i)).setActores(actoresArray);
+                    ((Peliculas) audiovisualesAux.get(i)).setDuracion(Integer.parseInt(pelicula.get("duracion").toString()));
                     i++;
                 }
 
@@ -48,18 +48,18 @@ public class AudiovisualesJSON {
                 while (iteratorSeries.hasNext()) {
 
                     JsonObject serie = (JsonObject) iteratorSeries.next();
-                    audiovisuales.set(i, new Series());
-                    ((Series) audiovisuales.get(i)).setNombre((serie.get("nombre").toString()));
+                    audiovisualesAux.set(i, new Series());
+                    ((Series) audiovisualesAux.get(i)).setNombre((serie.get("nombre").toString()));
                     //((Series) audiovisuales.get(i)).setGenero((serie.get("genero").toString()));
 
                     JsonArray actoresJSONArray = serie.getJsonArray("actores");
                     TreeSet<Actores> actoresArray = new TreeSet<Actores>();
                     setActorJSON(actores, actoresArray, actoresJSONArray);
 
-                    ((Series) audiovisuales.get(i)).setActores(actoresArray);
-                    ((Series) audiovisuales.get(i)).setTemporada(Integer.parseInt((serie.get("temporada")).toString()));
-                    ((Series) audiovisuales.get(i)).setEpisodio(Integer.parseInt((serie.get("episodio")).toString()));
-                    ((Series) audiovisuales.get(i)).setSinopsis ((serie.get("sinopsis").toString()));
+                    ((Series) audiovisualesAux.get(i)).setActores(actoresArray);
+                    ((Series) audiovisualesAux.get(i)).setTemporada(Integer.parseInt((serie.get("temporada")).toString()));
+                    ((Series) audiovisualesAux.get(i)).setEpisodio(Integer.parseInt((serie.get("episodio")).toString()));
+                    ((Series) audiovisualesAux.get(i)).setSinopsis ((serie.get("sinopsis").toString()));
                     i++;
                 }
 
