@@ -14,6 +14,7 @@ public class GenerosTXT {
 
     public static ArrayList<Generos> bajarGeneros() {
         ArrayList<Generos> generos = new ArrayList<Generos>();
+
         try {
             File archivo = new File ( directorio + "Generos.txt");
             if (archivo.exists()){

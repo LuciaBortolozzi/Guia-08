@@ -13,8 +13,9 @@ import model.DAO.*;
 
 public class AudiovisualesControlador {
 
-    public static Audiovisuales buscarAudiovisual(int codAudiovisual) {
+    public static Audiovisuales buscarAudiovisual(int codAudiovisual) throws Exception {
 
+    	ArrayList<Audiovisuales> audiovisuales = ingresarModificarAudiovisual();
         Audiovisuales audiovisual;
         Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
         while (iteratorAudiovisuales.hasNext()) {
@@ -39,8 +40,11 @@ public class AudiovisualesControlador {
         }
     }*/
 	
-public void ingresarModificarAudiovisual(ArrayList<Audiovisuales> audiovisualesAux, ArrayList<Audiovisuales> audiovisuales) throws Exception {
-		
+	public static ArrayList<Audiovisuales> ingresarModificarAudiovisual() throws Exception {
+
+		ArrayList<Audiovisuales> audiovisuales = AudiovisualesTXT.leoDevuelvoArchivoAudiovisuales();
+		ArrayList<Audiovisuales> audiovisualesAux = AudiovisualesJSON.bajarAudiovisuales();
+
 		Calendar fechaActual = Calendar.getInstance();
 	
 		for(Audiovisuales audiAux: audiovisualesAux) {
