@@ -1,8 +1,6 @@
 package controller;
 
 
-import model.Audiovisuales;
-
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,110 +40,70 @@ public class AudiovisualesControlador {
 	
 	public static ArrayList<Audiovisuales> ingresarModificarAudiovisual() throws Exception {
 
-		ArrayList<Audiovisuales> audiovisuales = AudiovisualesTXT.leoDevuelvoArchivoAudiovisuales();
+		ArrayList<Audiovisuales> audiovisuales = AudiovisualesActoresTXT.leoDevuelvoArchivoAudiovisuales();
 		ArrayList<Audiovisuales> audiovisualesAux = AudiovisualesJSON.bajarAudiovisuales();
-
 		Calendar fechaActual = Calendar.getInstance();
-	
-		for(Audiovisuales audiAux: audiovisualesAux) {
-			
-			for(Audiovisuales audi : audiovisuales) {
-				
-				if(audiAux.getNombre().replace(" ", "").toUpperCase().equals(audi.getNombre().replace(" ", "").toUpperCase())) {
-					
-					if(audiAux instanceof Series) {
-						 
-						if( ((Series)audiAux).getTemporada() == ((Series)audi).getTemporada() && ((Series)audiAux).getEpisodio() == ((Series)audi).getEpisodio()) {
-							
-							int codigoAudiovisual = audi.getCodigo();
-							audi = audiAux;
-							audi.setCodigo(codigoAudiovisual);
-							audi.setFechaPubli(fechaActual);
-						}
-						
-						
+		
+		for(Audiovisuales audiAux: audiovisualesAux) 
+		{
+			boolean encontrado = false;
+			for(int i=0;i<audiovisuales.size();i++)
+			{
+				if(audiAux instanceof Series) 
+				{
+					if( audiAux.getNombre().replace(" ", "").toUpperCase().equals(audiovisuales.get(i).getNombre().replace(" ", "").toUpperCase()) &&
+						((Series)audiAux).getTemporada() == ((Series)audiovisuales.get(i)).getTemporada() && 
+						((Series)audiAux).getEpisodio() == ((Series)audiovisuales.get(i)).getEpisodio()) 
+					{//MODIFICACION
+						audiovisuales.get(i).setNombre(audiAux.getNombre());
+						audiovisuales.get(i).setSinopsis(audiAux.getSinopsis());
+						//audiovisuales.get(i).setFechaPubli(fechaActual); VER SI LO CAMBIAMOS O NO
+						audiovisuales.get(i).setActores(audiAux.getActores());
+						audiovisuales.get(i).setGenero(audiAux.getGenero());
+						((Series)audiovisuales.get(i)).setTemporada(((Series)audiAux).getTemporada());
+						((Series)audiovisuales.get(i)).setEpisodio(((Series)audiAux).getEpisodio());
+						encontrado = true;
 					}
 					
-				}
-				
-			}
-			
-		}
-	
-		
-		
-		
-		
-		int posicion = 0;
-		
-		//contador Audiovisuales
-		int contadorAudiovisuales = 0;
-		for(int i=0;i<audiovisuales.length;i++) {
-			
-			if(audiovisuales[i] == null) {
-				
-				break;
-			}else {
-				contadorAudiovisuales++;
-			}
-		}
-		
-		for(Audiovisuales audiNuevos:audiovisualesAux) {
-			posicion++;
-			if(audiNuevos == null) {
-				
-				break;
-			}else {
-				
-				for(int i=0;i<audiovisuales.length;i++) {
-					
-					if(audiovisuales[i] == null) {
-						
-						break;
-					}else {
-						
-						if(audiNuevos instanceof Series) {
-							
-							if((audiNuevos.getNombreAudiovisual().replace(" ","").toLowerCase()).equals(audiovisuales[i].getNombreAudiovisual().replace(" ","").toLowerCase())	
-								&& ((Series)audiNuevos).getTemporadasSeries()==((Series)audiovisuales[i]).getTemporadasSeries()
-								&& ((Series)audiNuevos).getEpisodiosSeries() ==((Series)audiovisuales[i]).getEpisodiosSeries()) 
-							{
-								
-								int codigoAudiovisual = audiovisuales[i].getCodigoAudiovisual();
-								audiovisuales[i] = audiNuevos;
-								audiovisuales[i].setCodigoAudiovisual(codigoAudiovisual);
-								audiovisuales[i].setFechaPublicacionAudiovisual(fechaActual);
-							}else {
-								
-								audiovisuales[contadorAudiovisuales] = new Series();
-								audiovisuales[contadorAudiovisuales] = audiNuevos;
-								audiovisuales[contadorAudiovisuales].setCodigoAudiovisual(contadorAudiovisuales+1);
-								audiovisuales[contadorAudiovisuales].setFechaPublicacionAudiovisual(fechaActual);
-								contadorAudiovisuales++;
-								i=contadorAudiovisuales;
-							}
-						}else if(audiNuevos instanceof Peliculas) {
-							
-							if((audiNuevos.getNombreAudiovisual().replace(" ","").toLowerCase()).equals(audiovisuales[i].getNombreAudiovisual().replace(" ","").toLowerCase())) 
-							{
-								
-								int codigoAudiovisual = audiovisuales[i].getCodigoAudiovisual();
-								audiovisuales[i] = audiNuevos;
-								audiovisuales[i].setCodigoAudiovisual(codigoAudiovisual);
-								audiovisuales[i].setFechaPublicacionAudiovisual(fechaActual);
-							}else {
-								
-								audiovisuales[contadorAudiovisuales] = new Peliculas();
-								audiovisuales[contadorAudiovisuales] = audiNuevos;
-								audiovisuales[contadorAudiovisuales].setCodigoAudiovisual(contadorAudiovisuales+1);
-								audiovisuales[contadorAudiovisuales].setFechaPublicacionAudiovisual(fechaActual);
-								contadorAudiovisuales++;
-								i=contadorAudiovisuales;
-							}
-						}
+				}else if(audiAux instanceof Peliculas) 
+				{
+					if( audiAux.getNombre().replace(" ", "").toUpperCase().equals(audiovisuales.get(i).getNombre().replace(" ", "").toUpperCase())) 
+					{//MODIFICACION
+						audiovisuales.get(i).setNombre(audiAux.getNombre());
+						audiovisuales.get(i).setSinopsis(audiAux.getSinopsis());
+						//audiovisuales.get(i).setFechaPubli(fechaActual); VER SI LO CAMBIAMOS O NO
+						audiovisuales.get(i).setActores(audiAux.getActores());
+						audiovisuales.get(i).setGenero(audiAux.getGenero());
+						((Peliculas)audiovisuales.get(i)).setAnioFilm(((Peliculas)audiAux).getAnioFilm());
+						((Peliculas)audiovisuales.get(i)).setDuracion(((Peliculas)audiAux).getDuracion());
+						encontrado = true;
 					}
 				}
-			}	
+			}
+			
+			if(!encontrado) {
+				
+				//NUEVA PELICULA O SERIE
+				audiovisuales.set(audiovisuales.size(), new Series());
+				audiovisuales.get(audiovisuales.size()).setNombre(audiAux.getNombre());
+				audiovisuales.get(audiovisuales.size()).setSinopsis(audiAux.getSinopsis());
+				audiovisuales.get(audiovisuales.size()).setFechaPubli(fechaActual);
+				audiovisuales.get(audiovisuales.size()).setActores(audiAux.getActores());
+				audiovisuales.get(audiovisuales.size()).setGenero(audiAux.getGenero());
+				
+				if(audiAux instanceof Series) 
+				{
+					((Series)audiovisuales.get(audiovisuales.size())).setTemporada(((Series)audiAux).getTemporada());
+					((Series)audiovisuales.get(audiovisuales.size())).setEpisodio(((Series)audiAux).getEpisodio());
+					
+				}else if(audiAux instanceof Peliculas) 
+				{
+					((Peliculas)audiovisuales.get(audiovisuales.size())).setAnioFilm(((Peliculas)audiAux).getAnioFilm());
+					((Peliculas)audiovisuales.get(audiovisuales.size())).setDuracion(((Peliculas)audiAux).getDuracion());	
+				}
+			}
 		}
+		return audiovisuales;
 	}
+	
 }
