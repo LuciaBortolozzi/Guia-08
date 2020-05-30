@@ -205,6 +205,22 @@ public class Validaciones {
         return fechaActual;
     }
 
+    public static Calendar convertirAFechaCalendar(String f) {
+        Calendar fecha = Calendar.getInstance();
+
+        //dd/mm/aaaa
+        String[] aux = f.split("/");
+        int day = Integer.parseInt(aux[0]);
+        int month = Integer.parseInt(aux[1]);
+        int year = Integer.parseInt(aux[2]);
+
+        fecha.set(Calendar.DAY_OF_MONTH, day);
+        fecha.set(Calendar.MONTH, (month - 1));
+        fecha.set(Calendar.YEAR, year);
+
+        return fecha;
+    }
+
     public static int validarEdad(Calendar fechaDeNac, Calendar fechaActual) {
 
         int edad = fechaActual.get(Calendar.YEAR) - fechaDeNac.get(Calendar.YEAR);

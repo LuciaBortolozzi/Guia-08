@@ -3,6 +3,7 @@ package model;
 import java.util.Calendar;
 
 public class Suscriptores implements Comparable<Suscriptores>{
+    private int codigo;
     private long nroDoc;
     private String nombre;
     private String apellido;
@@ -12,7 +13,8 @@ public class Suscriptores implements Comparable<Suscriptores>{
     public Suscriptores() {
     }
 
-    public Suscriptores(long nroDoc, String nombre, String apellido, Calendar fechaDeNac, char sexo) {
+    public Suscriptores(int codigo, long nroDoc, String nombre, String apellido, Calendar fechaDeNac, char sexo) {
+        this.codigo = codigo;
         this.nroDoc = nroDoc;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -58,6 +60,14 @@ public class Suscriptores implements Comparable<Suscriptores>{
 
     public void setSexo(char sexo) {
         this.sexo = sexo;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     @Override

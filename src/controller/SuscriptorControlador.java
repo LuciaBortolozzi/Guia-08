@@ -1,6 +1,7 @@
 package controller;
 
 
+import model.Audiovisuales;
 import model.Suscriptores;
 import view.Validaciones;
 
@@ -10,23 +11,19 @@ import java.util.TreeSet;
 
 public class SuscriptorControlador {
 
-    AudiovisualesControlador audiovisualesCtrl = new AudiovisualesControlador();
+    public static Suscriptores buscarSuscriptor(int codSuscriptor){
 
-    /*public static Suscriptores buscarSuscriptor(TreeSet<Suscriptores> suscriptores, int codSuscriptor){
-        Suscriptores suscriptor = null;
+        Suscriptores suscriptor;
+        Iterator<Suscriptores> iteratorAudiovisuales = suscriptores.iterator();
+        while (iteratorAudiovisuales.hasNext()) {
+            suscriptor = iteratorAudiovisuales.next();
 
-        Iterator iteratorSuscriptores = suscriptores.iterator();
-        while (iteratorSuscriptores.hasNext()) {
-
-
-
-            // codigo deberia estar en suscriptor tambien? o hacemos por nroDoc?
-
-
+            if (suscriptor.getCodigo() == codSuscriptor){
+                return suscriptor;
+            }
         }
-
-        return suscriptor;
-    }*/
+        return null;
+    }
 
     public static void recomendarMejoresSeries(){
 
