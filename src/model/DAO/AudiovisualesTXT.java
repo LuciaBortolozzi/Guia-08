@@ -13,28 +13,24 @@ public class AudiovisualesTXT {
 	
 	//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + duracion + anio)
 	//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
-	public void leoDevuelvoArchivoAudiovisuales (ArrayList<Audiovisuales> audiovisuales, Set<Generos> generos) throws Exception
-	{
+	public static void leoDevuelvoArchivoAudiovisuales (ArrayList<Audiovisuales> audiovisuales, Set<Generos> generos) throws Exception {
 		
 		try{
       
 			File archaudiovisual = new File ( directorio + "Audiovisuales.txt");
 
-			if (archaudiovisual.exists())
-			{
+			if (archaudiovisual.exists()) {
 				
 				Scanner leerArchivo = new Scanner(archaudiovisual);
 				ArrayList<String> audiovisualST = new ArrayList<String>();
 	
-				while (leerArchivo.hasNext())
-				{
+				while (leerArchivo.hasNext()) {
 					String lineaActual = leerArchivo.nextLine();
 					audiovisualST.add(lineaActual);
 				}
 				
 				int j = 0;
-				for (String audi : audiovisualST)
-				{
+				for (String audi : audiovisualST) {
 					String tipo = audi.substring(0,2);
 					if(tipo.equals("06")) {
 						audiovisuales.set(j, new Peliculas());
@@ -79,20 +75,17 @@ public class AudiovisualesTXT {
 		}
 	}
 	
-	public void grabarAudiovisualesTXT(ArrayList<Audiovisuales> audiovisuales) {
+	public static void grabarAudiovisualesTXT(ArrayList<Audiovisuales> audiovisuales) {
 		
 		try{
 			File fichero = new File(directorio + "Audiovisuales.txt");
 			
-			if (fichero.exists())
-			{
+			if (fichero.exists()) {
 				PrintWriter archivoSalida = new PrintWriter(fichero);
 				
-				for(Audiovisuales audi: audiovisuales) 
-				{
+				for(Audiovisuales audi: audiovisuales) {
 		
-					if(audi instanceof Peliculas) 
-					{
+					if(audi instanceof Peliculas) {
 						
 						
 						//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + duracion + anio)
@@ -110,8 +103,7 @@ public class AudiovisualesTXT {
 												   + String.format("%4s", ((Peliculas) audi).getAnioFilm())
 												   );
 						
-					}else if(audi instanceof Series) 
-					{
+					} else if(audi instanceof Series) {
 						
 						
 						//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
@@ -139,8 +131,4 @@ public class AudiovisualesTXT {
 			System.out.println("No se puede grabar el archivo de Audiovisuales.txt");
 		}
 	}
-		
-		
-	
-	
 }

@@ -20,31 +20,27 @@ public class controlador {
 
     CalificacionesControlador calificacionesControlador = new CalificacionesControlador();
 
-    public void agregarActoresAMemoria () {
-        
-        ActoresTXT actoresTXT = new ActoresTXT();
-        actoresTXT.bajarActores(actores);
+    public void agregarActoresAMemoria() {
+
+        actores = ActoresTXT.bajarActores();
 
     }
 
-    public void agregarGenerosAMemoria () {
+    public void agregarGenerosAMemoria() {
 
-        GenerosTXT generosTXT = new GenerosTXT();
-        generosTXT.bajarGeneros(generos);
-
-    }
-
-    public void agregarSuscriptoresAMemoria () {
-
-        SuscriptoresTXT suscriptoresTXT = new SuscriptoresTXT();
-        suscriptoresTXT.bajarSuscriptores(suscriptores);
+        generos = GenerosTXT.bajarGeneros();
 
     }
 
-    public void agregarAudiovisualesAObjeto () throws Exception {
+    public void agregarSuscriptoresAMemoria() {
 
-        AudiovisualesJSON audiovisualesJSON = new AudiovisualesJSON();
-        audiovisualesJSON.bajarAudiovisuales(audiovisuales, actores);
+        suscriptores = SuscriptoresTXT.bajarSuscriptores();
+
+    }
+
+    public void agregarAudiovisualesAObjeto() throws Exception {
+
+        audiovisuales = AudiovisualesJSON.bajarAudiovisuales(actores);
 
     }
 
