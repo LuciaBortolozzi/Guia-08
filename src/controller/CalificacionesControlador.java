@@ -2,34 +2,28 @@ package controller;
 
 import model.Audiovisuales;
 import model.DAO.CalificacionesTXT;
-import model.Peliculas;
-import model.Series;
+import model.DAO.SuscriptoresTXT;
 import model.Suscriptores;
+
 import view.Mostrar;
 import view.Validaciones;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.TreeSet;
 
 public class CalificacionesControlador {
 
-    public static void calificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores){
-
-        // IMPORTANTE: usuario carga suscriptor + calificacion
-        // para calificar: usuario ingresa por teclado nombre de peli y suscriptor
-
-        /*Luego de reproducir una película o una serie, el suscriptor tiene la posibilidad de recomendar
-        la misma, basado en la calificación de una a cinco estrellas (siendo esta última, la máxima
-        puntuación)  indicando  con  un  breve  comentario  del  motivo  de  la  calificación  propuesta.
-        Estas  calificaciones  son ingresadas  manualmente  por  el  usuario  de  la  aplicación  a
-        desarrollar, quedando almacenadas en el archivo Calificaciones.txt con sus datos separadas
-        por “;” (punto y coma) incluyendo la fecha en formato dd/mm/aaaa de la calificación.*/
+    public static void calificar() throws Exception {
 
         Mostrar.mostrar("Calificar");
 
         String nombreAudiovisual = Validaciones.ingresar("nombre del audiovisual: ", true);
         String nombreSuscriptor = Validaciones.ingresar("nombre del suscriptor: ", true);
+
+        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();
+        TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
 
         Audiovisuales audiovisual;
         Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
@@ -46,21 +40,20 @@ public class CalificacionesControlador {
 
                     if (suscriptor.getNombre().equals(nombreSuscriptor)){       // Encontro suscriptor
 
-                        int codAudiovisual = audiovisual.getCodigo();
-                        long nroDocSuscriptor = suscriptor.getNroDoc();
                         Mostrar.mostrar("Ingresar estrellas: ");
                         int estrellas = Validaciones.limite(1,5);
 
                         String motivo = Validaciones.ingresar("motivo de la calificacion propuesta: ", true);
-//                        Calendar fechaRealizada
+                        Calendar fechaRealizada = Calendar.getInstance();
 
-//                        meterEnAudiovisuales();
-//                        CalificacionesTXT.grabarCalificaciones(codAudiovisual, nroDocSuscriptor, estrellas, motivo, fecha);
-
+                        audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, suscriptor);
                     }
 
                 }
             }
         }
+
+        CalificacionesTXT.grabarCalificacionesTXT(audiovisuales);
     }
+
 }

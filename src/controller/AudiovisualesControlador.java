@@ -45,6 +45,7 @@ public class AudiovisualesControlador {
 		ArrayList<Audiovisuales> audiovisuales = AudiovisualesTXT.leoDevuelvoArchivoAudiovisuales();
 		ArrayList<Audiovisuales> audiovisualesAux = AudiovisualesJSON.bajarAudiovisuales();
 
+
 		Calendar fechaActual = Calendar.getInstance();
 	
 		for(Audiovisuales audiAux: audiovisualesAux) {
