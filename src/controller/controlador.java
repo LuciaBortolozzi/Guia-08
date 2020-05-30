@@ -13,34 +13,31 @@ import java.util.TreeSet;
 
 public class controlador {
 
-    ArrayList<Audiovisuales> audiovisuales = new ArrayList<Audiovisuales>();
-    TreeSet<Actores> actores = new TreeSet<Actores>();
-    ArrayList<Generos> generos = new ArrayList<Generos>();
-    TreeSet<Suscriptores> suscriptores = new TreeSet<Suscriptores>();
 
     public void agregarActoresAMemoria() {
-
+        TreeSet<Actores> actores = new TreeSet<Actores>();
         actores = ActoresTXT.bajarActores();
 
     }
 
     public void agregarGenerosAMemoria() {
-
+        ArrayList<Generos> generos = new ArrayList<Generos>();
         generos = GenerosTXT.bajarGeneros();
 
     }
 
     public void agregarSuscriptoresAMemoria() {
-
+        TreeSet<Suscriptores> suscriptores = new TreeSet<Suscriptores>();
         suscriptores = SuscriptoresTXT.bajarSuscriptores();
 
     }
 
     public void agregarAudiovisualesAObjeto() throws Exception {
-
-        audiovisuales = AudiovisualesJSON.bajarAudiovisuales(actores);
+        ArrayList<Audiovisuales> audiovisuales = new ArrayList<Audiovisuales>();
+        audiovisuales = AudiovisualesJSON.bajarAudiovisuales();
 
     }
+
 
     public void opcion1(){
         CalificacionesControlador.calificar(audiovisuales, suscriptores);

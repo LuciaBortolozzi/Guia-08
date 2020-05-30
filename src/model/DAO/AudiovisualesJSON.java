@@ -14,7 +14,10 @@ public class AudiovisualesJSON {
     //private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
-    public static void bajarAudiovisuales(ArrayList<Audiovisuales> audiovisualesAux, TreeSet<Actores> actores) throws Exception {
+    public static ArrayList <Audiovisuales> bajarAudiovisuales() throws Exception {
+
+        ArrayList <Audiovisuales> audiovisualesAux = new ArrayList<Audiovisuales>();
+
         File aJson;
         FileInputStream fsInJson;
         try {
@@ -37,7 +40,7 @@ public class AudiovisualesJSON {
 
                     JsonArray actoresJSONArray = pelicula.getJsonArray("actores");
                     TreeSet<Actores> actoresArray = new TreeSet<Actores>();
-                    setActorJSON(actores, actoresArray, actoresJSONArray);
+                    setActorJSON(actoresArray, actoresJSONArray);
                     ((Peliculas) audiovisualesAux.get(i)).setActores(actoresArray);
                     ((Peliculas) audiovisualesAux.get(i)).setDuracion(Integer.parseInt(pelicula.get("duracion").toString()));
                     i++;
@@ -54,7 +57,7 @@ public class AudiovisualesJSON {
 
                     JsonArray actoresJSONArray = serie.getJsonArray("actores");
                     TreeSet<Actores> actoresArray = new TreeSet<Actores>();
-                    setActorJSON(actores, actoresArray, actoresJSONArray);
+                    setActorJSON(actoresArray, actoresJSONArray);
 
                     ((Series) audiovisualesAux.get(i)).setActores(actoresArray);
                     ((Series) audiovisualesAux.get(i)).setTemporada(Integer.parseInt((serie.get("temporada")).toString()));
@@ -70,11 +73,15 @@ public class AudiovisualesJSON {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return audiovisualesAux;
     }
 
-    private static void setActorJSON(TreeSet<Actores> actores, TreeSet<Actores> actoresArray, JsonArray actoresJSONArray) {
+    private static void setActorJSON(TreeSet<Actores> actoresArray, JsonArray actoresJSONArray) {
 
+        TreeSet<Actores> actores = ActoresTXT.bajarActores();
         ArrayList<String> actoresST = new ArrayList<String>(actoresJSONArray.size());
+
         for(JsonValue jsonV : actoresJSONArray) {
             actoresST.add(jsonV.toString().replace("\"", "").trim());
         }

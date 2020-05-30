@@ -13,7 +13,9 @@ public class AudiovisualesTXT {
 	
 	//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + duracion + anio)
 	//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
-	public static void leoDevuelvoArchivoAudiovisuales (ArrayList<Audiovisuales> audiovisuales, Set<Generos> generos) throws Exception {
+	public static ArrayList<Audiovisuales> leoDevuelvoArchivoAudiovisuales () throws Exception {
+
+		ArrayList<Audiovisuales> audiovisuales = new ArrayList<Audiovisuales>();
 		
 		try{
       
@@ -46,8 +48,9 @@ public class AudiovisualesTXT {
 					
 					audiovisuales.get(j).setCodigo(Integer.parseInt(audi.substring(2,6).replace(" ", "")));
 					audiovisuales.get(j).setNombre(audi.substring(6,56));
-					
-	
+
+					ArrayList<Generos> generos = GenerosTXT.bajarGeneros();
+
 	            	Generos g;
 	 				Iterator<Generos> gen = generos.iterator();
 	 				while (gen.hasNext()) {
@@ -73,6 +76,8 @@ public class AudiovisualesTXT {
 		} catch (FileNotFoundException e) {
 			System.out.println("No se pudo leer el archivo Audiovisuales.txt ");
 		}
+
+		return audiovisuales;
 	}
 	
 	public static void grabarAudiovisualesTXT(ArrayList<Audiovisuales> audiovisuales) {

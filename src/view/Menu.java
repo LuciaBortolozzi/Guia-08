@@ -1,5 +1,8 @@
 package view;
 
+import controller.AudiovisualesControlador;
+import model.Audiovisuales;
+
 public class Menu {
 
     public void menu(String arg){
@@ -14,7 +17,6 @@ public class Menu {
 
             switch (opcion){
                 case 0:
-
                     break;
                 case 1:
 
