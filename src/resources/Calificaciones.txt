@@ -1,3 +1,1 @@
-Estas  calificaciones  son ingresadas  manualmente  por  el  usuario  de  la  aplicación  a
-desarrollar, quedando almacenadas en el archivo Calificaciones.txt con sus datos separadas
-por “;” (punto y coma) incluyendo la fecha en formato dd/mm/aaaa de la calificación.
+1;4;LA MEJOR DE LA SAGA;30/05/2020;0124

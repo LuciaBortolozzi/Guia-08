@@ -1,6 +1,7 @@
 package model.DAO;
 
 import model.Suscriptores;
+import view.Validaciones;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,14 +34,14 @@ public class SuscriptoresTXT {
                 // Guardar objetos
                 for (String s : suscriptoresST) {
 
-                    int codigo              = Integer.parseInt(s.substring(0,10).trim());            // codigo
-                    String nombre           = s.substring(10,22).trim();                             // nombre
-                    String apellido         = s.substring(22,39).trim();                             // apellido
-                    long nroDoc             = Long.parseLong(s.substring(39,50).trim());             // nroDoc
-                    Calendar fechaDeNac     = convertirAFechaCalendar(s.substring(50,63).trim());    // fechaDeNac
-                    char sexo               = s.substring(63,65).trim().charAt(0);                   // sexo
+                    int codigo              = Integer.parseInt(s.substring(0,10).trim());                           // codigo
+                    String nombre           = s.substring(10,22).trim();                                            // nombre
+                    String apellido         = s.substring(22,39).trim();                                            // apellido
+                    long nroDoc             = Long.parseLong(s.substring(39,50).trim());                            // nroDoc
+                    Calendar fechaDeNac     = Validaciones.convertirAFechaCalendar(s.substring(50,63).trim());      // fechaDeNac
+                    char sexo               = s.substring(63,65).trim().charAt(0);                                  // sexo
 
-                    suscriptores.add(new Suscriptores( nroDoc, nombre, apellido, fechaDeNac, sexo));
+                    suscriptores.add(new Suscriptores( codigo, nroDoc, nombre, apellido, fechaDeNac, sexo));
                 }
 
                 leerArchivoSuscriptores.close();
@@ -51,21 +52,5 @@ public class SuscriptoresTXT {
         }
 
         return suscriptores;
-    }
-
-    public static Calendar convertirAFechaCalendar(String f) {
-        Calendar fecha = Calendar.getInstance();
-
-        //dd/mm/aaaa
-        String[] aux = f.split("/");
-        int day = Integer.parseInt(aux[0]);
-        int month = Integer.parseInt(aux[1]);
-        int year = Integer.parseInt(aux[2]);
-
-        fecha.set(Calendar.DAY_OF_MONTH, day);
-        fecha.set(Calendar.MONTH, (month - 1));
-        fecha.set(Calendar.YEAR, year);
-
-        return fecha;
     }
 }

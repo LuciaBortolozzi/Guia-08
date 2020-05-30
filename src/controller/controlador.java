@@ -18,8 +18,6 @@ public class controlador {
     ArrayList<Generos> generos = new ArrayList<Generos>();
     TreeSet<Suscriptores> suscriptores = new TreeSet<Suscriptores>();
 
-    CalificacionesControlador calificacionesControlador = new CalificacionesControlador();
-
     public void agregarActoresAMemoria() {
 
         actores = ActoresTXT.bajarActores();
@@ -45,6 +43,6 @@ public class controlador {
     }
 
     public void opcion1(){
-        calificacionesControlador.calificar(audiovisuales, suscriptores);
+        CalificacionesControlador.calificar(audiovisuales, suscriptores);
     }
 }

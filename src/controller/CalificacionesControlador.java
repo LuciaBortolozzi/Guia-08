@@ -16,7 +16,7 @@ public class CalificacionesControlador {
 
     CalificacionesTXT calificacionesTXT = new CalificacionesTXT();
 
-    public void calificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores){
+    public static void calificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores){
 
         // IMPORTANTE: usuario carga suscriptor + calificacion
         // para calificar: usuario ingresa por teclado nombre de peli y suscriptor
@@ -64,35 +64,5 @@ public class CalificacionesControlador {
                 }
             }
         }
-
-        /*// Audiovisuales o pelicula/serie?
-        // asumi que audiovisuales
-
-        int tipoAudiovisual = Validaciones.tipo("(1) si es pelicula o (2) si es serie: ");
-
-        if (tipoAudiovisual == 1){
-            Peliculas pelicula;
-            Iterator<Peliculas> itAudiovisuales = audiovisuales.iterator();
-
-            while (itAudiovisuales.hasNext()) {
-                pelicula = itAudiovisuales.next();
-
-                System.out.println(pelicula.getNombre());
-            }
-        } else {
-            Series serie;
-            Iterator<Series> itAudiovisuales = audiovisuales.iterator();
-
-            while (itAudiovisuales.hasNext()) {
-                serie = itAudiovisuales.next();
-
-                System.out.println(serie.getNombre());
-            }
-        }*/
-
-
-
-
-
     }
 }
