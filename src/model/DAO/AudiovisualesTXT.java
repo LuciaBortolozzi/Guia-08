@@ -23,7 +23,7 @@ public class AudiovisualesTXT {
 				
 				Scanner leerArchivo = new Scanner(archaudiovisual);
 				ArrayList<String> audiovisualST = new ArrayList<String>();
-	
+				
 				while (leerArchivo.hasNext()) {
 					String lineaActual = leerArchivo.nextLine();
 					audiovisualST.add(lineaActual);
