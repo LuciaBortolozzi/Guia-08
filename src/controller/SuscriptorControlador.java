@@ -2,6 +2,7 @@ package controller;
 
 
 import model.Audiovisuales;
+import model.DAO.SuscriptoresTXT;
 import model.Suscriptores;
 import view.Validaciones;
 
@@ -13,7 +14,9 @@ public class SuscriptorControlador {
 
     public static Suscriptores buscarSuscriptor(int codSuscriptor){
 
+        TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
         Suscriptores suscriptor;
+
         Iterator<Suscriptores> iteratorAudiovisuales = suscriptores.iterator();
         while (iteratorAudiovisuales.hasNext()) {
             suscriptor = iteratorAudiovisuales.next();
@@ -58,6 +61,13 @@ public class SuscriptorControlador {
 
         audiovisualesCtrl.mejorCalificacion();*/
 
+
+    }
+
+    public static void mayoresSinCalificar(){
+
+        /*Nombre y apellido de los suscriptores mayores de 60 años que nunca hayan calificado
+        una película.*/
 
     }
 }

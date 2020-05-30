@@ -39,7 +39,7 @@ public class controlador {
     }
 
 
-    public void opcion1(){
-        CalificacionesControlador.calificar(audiovisuales, suscriptores);
+    public void opcion1() throws Exception {
+        CalificacionesControlador.calificar();
     }
 }
