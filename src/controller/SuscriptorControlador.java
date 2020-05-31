@@ -58,20 +58,20 @@ public class SuscriptorControlador {
 
         int sumaEstrellas = 0;
         int cantidadCalificaciones = 0;
-        int promedio;
-        int promedioMayor = -1;
+        int promedioTemporada;
+        int mejorPromedio = -1;
         boolean menorA35;
 
         Audiovisuales mejorAudiovisual = audiovisuales.get(0);
 
         for (Audiovisuales audiovisual : audiovisuales) {
 
-            if (audiovisual instanceof Series && audiovisual.getFechaPubli().after(fechaAnterior)) {                     // Es serie y fue publicada en los ultimos 3 meses
+            if (audiovisual instanceof Series && audiovisual.getFechaPubli().after(fechaAnterior)) {                    // Es serie y fue publicada en los ultimos 3 meses
 
                 for (Calificaciones calificacion : audiovisual.getCalificaciones()) {
 
                     menorA35 = Validaciones.menor(calificacion.getSuscriptor().getFechaDeNac(), fechaActual, 35);
-                    if (menorA35) {                                                                                      // Suscriptor es menor de 35?
+                    if (menorA35) {                                                                                     // Suscriptor es menor de 35?
                         sumaEstrellas += calificacion.getEstrellas();
                         cantidadCalificaciones++;
                     }
@@ -79,10 +79,11 @@ public class SuscriptorControlador {
                 }
             }
             if (cantidadCalificaciones != 0) {
-                promedio = sumaEstrellas / cantidadCalificaciones;
-                if (promedio > promedioMayor) {
-                    promedioMayor = promedio;
-                    mejorAudiovisual = audiovisual;         // Esto funciona salvo que el mejor sea el Primer audiovisual, por eso inicializo mejorAudiovisual con 1er elemento
+                promedioTemporada = sumaEstrellas / cantidadCalificaciones;
+
+                if (promedioTemporada > mejorPromedio) {
+                    mejorPromedio = promedioTemporada;
+                    mejorAudiovisual = audiovisual;
                 }
             }
             sumaEstrellas = 0;
@@ -121,7 +122,7 @@ public class SuscriptorControlador {
         int sumaEstrellas = 0;
         int cantidadCalificaciones = 0;
         int promedio;
-        int promedioMayor = -1;
+        int mejorPromedio = -1;
 
         Audiovisuales mejorAudiovisual = audiovisuales.get(0);
 
@@ -144,8 +145,8 @@ public class SuscriptorControlador {
 
                 if (cantidadCalificaciones != 0) {
                     promedio = sumaEstrellas / cantidadCalificaciones;
-                    if (promedio > promedioMayor) {
-                        promedioMayor = promedio;
+                    if (promedio > mejorPromedio) {
+                        mejorPromedio = promedio;
                         mejorAudiovisual = audiovisual;
                     }
                 }
