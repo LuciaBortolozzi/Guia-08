@@ -111,18 +111,11 @@ public class AudiovisualesControlador {
 			
 		}
 		
-		
-		
-		
-		
-		
-		
 		return audiovisuales;
 	}
 	
-	public static Audiovisuales buscarAudiovisualPorNombre(String nombreAudiovisual) throws Exception {
+	public static Audiovisuales buscarAudiovisualPorNombreyFecha(String nombreAudiovisual, ArrayList<Audiovisuales> audiovisuales) throws Exception {
 
-    	ArrayList<Audiovisuales> audiovisuales = CalificacionesTXT.bajarCalificaciones();
         Audiovisuales audiovisual;
         Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
         while (iteratorAudiovisuales.hasNext()) {

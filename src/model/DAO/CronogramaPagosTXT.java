@@ -20,67 +20,65 @@ public class CronogramaPagosTXT {
         private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
         //Calificaciones.txt -> (identificador + ";" + fechaDePago + ";" + nombrePublicacion + ";" + fechaPublicacion + ";" + monto )
-        public static ArrayList<Audiovisuales> bajarPagos() throws Exception {
+        public static ArrayList<Audiovisuales> bajarCronogramas() throws Exception {
 
-            ArrayList<CronogramaPagos> cronogramaPagos = new ArrayList<CronogramaPagos>();
+            ArrayList<Audiovisuales> audiovisuales = CalificacionesTXT.bajarCalificaciones();
             Calendar fechaMesAnterior = Calendar.getInstance();
             fechaMesAnterior.add(Calendar.MONTH, -2);
-            Calendar fechaActual = Calendar.getInstance();
+            
+            Calendar fechaCronogramasViejos = Calendar.getInstance();
+            fechaCronogramasViejos.add(Calendar.MONTH, -12);//me remonto un año atrás
 
             try {
 
-                File archivoMesAnterior = new File( directorio + "CronogramaPagos" + fechaMesAnterior.get(Calendar.MONTH) + fechaMesAnterior.get(Calendar.YEAR) +".txt");
-                if (archivoMesAnterior.exists()) {
+            	for(int i = 0; i<12 ; i++) {
+            		
+            		File archivo = new File( directorio + "CronogramaPagos" + fechaCronogramasViejos.get(Calendar.MONTH) + fechaMesAnterior.get(Calendar.YEAR) +".txt");
+                    if (archivo.exists()) {
 
-                    Scanner leerArchivoCronogramaPagosMesAnterior = new Scanner(archivoMesAnterior);
-                    ArrayList<String> cronogramaPagosMesAnteriorST = new ArrayList<String>();
+                        Scanner leerArchivoCronogramaPagos = new Scanner(archivo);
+                        ArrayList<String> cronogramaPagosST = new ArrayList<String>();
 
-                    //Guardar contenido en String
-                    while (leerArchivoCronogramaPagosMesAnterior.hasNext()) {
-                        String lineaActualMES = leerArchivoCronogramaPagosMesAnterior.nextLine();
-                        cronogramaPagosMesAnteriorST.add(lineaActualMES);
-                    }
+                        //Guardar contenido en String
+                        while (leerArchivoCronogramaPagos.hasNext()) {
+                            String lineaActualMES = leerArchivoCronogramaPagos.nextLine();
+                            cronogramaPagosST.add(lineaActualMES);
+                        }
 
-                    // Guardar objetos
-                    for (String s : cronogramaPagosMesAnteriorST) {
+                        // Guardar objetos
+                        for (String s : cronogramaPagosST) {
 
-                        String[] cronogramaST = s.split(";");
+                            String[] cronogramaST = s.split(";");
 
-                        //01 para datos - 03 para totales
+                            //01 para datos - 03 para totales
 
-                        int identificador = Integer.parseInt(cronogramaST[0]);
-                        if(identificador == 1) {
+                            int identificador = Integer.parseInt(cronogramaST[0]);
+                            if(identificador == 1) {
 
-                            Calendar fechaPago = Validaciones.convertirAFechaCalendar(cronogramaST[1]);
-
-                            if(fechaPago.compareTo(fechaActual)>=0) {
-
-                                String nombrePublicacion = cronogramaST[2];
-                                Calendar fechaPublicacion = Validaciones.convertirAFechaCalendar(cronogramaST[3]);
-                                double monto = Double.parseDouble(cronogramaST[4]);
-
-                                Audiovisuales audiovisual = AudiovisualesControlador.buscarAudiovisualPorNombre(nombrePublicacion);
+	                            Calendar fechaPago = Validaciones.convertirAFechaCalendar(cronogramaST[1]);
+	                            String nombrePublicacion = cronogramaST[2];
+	                            Calendar fechaPublicacion = Validaciones.convertirAFechaCalendar(cronogramaST[3]);
+	                            double monto = Double.parseDouble(cronogramaST[4]);
+	
+	                            Audiovisuales audiovisual = AudiovisualesControlador.buscarAudiovisualPorNombreyFecha(nombrePublicacion, audiovisuales);
+	                        
+	                            if ( audiovisual != null){
+	                                audiovisual.setPagos(fechaPago, monto);
+	                            }
                             }
-
-
                         }
 
-
-
-                        if ( audiovisual != null){
-                            audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, SuscriptorControlador.buscarSuscriptor(codSuscriptor));
-                        }
+                        leerArchivoCronogramaPagos.close();
                     }
-
-                    leerArchivoCalificaciones.close();
-
-                }
+            	}
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
             return audiovisuales;
         }
 
+        //cambiar por grabarpagos
         public static void grabarCalificacionesTXT(ArrayList<Audiovisuales> audiovisuales) {
 
             try{

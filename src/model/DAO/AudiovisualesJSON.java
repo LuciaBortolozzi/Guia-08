@@ -1,20 +1,9 @@
 package model.DAO;
 
 import model.*;
-import pruebas.File;
-import pruebas.FileOutputStream;
-import pruebas.JsonArray;
-import pruebas.JsonArrayBuilder;
-import pruebas.JsonObject;
-import pruebas.JsonObjectBuilder;
-import pruebas.JsonWriter;
-
 import java.io.*;
 import java.util.*;
-
-
 import javax.json.*;
-import javax.json.stream.JsonParser;
 
 public class AudiovisualesJSON {
 
@@ -128,6 +117,9 @@ public class AudiovisualesJSON {
         }
     }
 
+    
+    //FUNCIONA??? NO LO SE RICK..
+    
     public static void grabarRecomendacionesSeriesJovenesJSON(Audiovisuales audiovisuales) throws Exception{
     	
     	File aJson = new File(directorio + "RecomendacionesSeriesJovenes.json");
@@ -139,8 +131,6 @@ public class AudiovisualesJSON {
             JsonObjectBuilder empresa = Json.createObjectBuilder();
      
             empresa.add("Empresa", "PeliSeri");
-            
-            JsonObjectBuilder serie = Json.createObjectBuilder();
             
             JsonObjectBuilder detalleSerie = Json.createObjectBuilder();
             
@@ -156,9 +146,9 @@ public class AudiovisualesJSON {
 					actores.add((JsonValue) a); //NO SE SI ESTO VA A FUNCIONAR
 				}
 				
-			JsonArray jsonArray = actores.build();
-			
-			detalleSerie.add("Actores", audiovisuales.getGenero().getDescripcion());
+			JsonObject actoresJson = (javax.json.JsonObject) actores.build();
+				
+			detalleSerie.add("Actores", actoresJson);
 			
 			detalleSerie.add("Sinopsos", audiovisuales.getSinopsis());
 			
@@ -167,73 +157,24 @@ public class AudiovisualesJSON {
 			//LUUUU ACÁ ME VAS A TENER QUE PASAR LA CANTIDAD DE EPISODIOS TAMBIEN
 			detalleSerie.add("Episodios", ((Series)audiovisuales).getEpisodio());
 			
+			int sumaEstrellas = 0;
+			int cantidadCalificaciones = 0;
+			for (Calificaciones calificacion : audiovisuales.getCalificaciones()) 
+			{
+               sumaEstrellas += calificacion.getEstrellas();
+               cantidadCalificaciones++;
+			}
+		   
+			int calificacion = sumaEstrellas/cantidadCalificaciones;
+			detalleSerie.add("Calificacion",calificacion);
 			
-			JsonObject JsonSerie = detalleSerie.build();
+			JsonObject JSerie = detalleSerie.build();
 			
-			empresa.add("Serie", detalleSerie);
+			empresa.add("Serie", JSerie);
+			
+			JsonObject JsonSerie = empresa.build();
             
-            for(Audiovisuales audi : audiovisuales) {
-
-                JsonObjectBuilder pasajesJson = Json.createObjectBuilder();
-                pasajesJson.add("Numero de Pasaje",reserva.getPasajes().get(i).getNroPasaje());
-                pasajesJson.add("Equipaje Extra", reserva.getPasajes().get(i).isEquipajeExtra());
-                pasajesJson.add("Tratamiento Preferencial", reserva.getPasajes().get(i).isTratamientoPref());
-
-                JsonObjectBuilder vuelosJson = Json.createObjectBuilder();
-
-                vuelosJson.add("Numero de Vuelo", reserva.getPasajes().get(i).getVuelo().getNumVuelo());
-                vuelosJson.add("Cantidad de Horas", reserva.getPasajes().get(i).getVuelo().getCantHoras());
-                vuelosJson.add("Partida", reserva.getPasajes().get(i).getVuelo().getPartida());
-                vuelosJson.add("Escalas", reserva.getPasajes().get(i).getVuelo().isEscalas());
-                vuelosJson.add("Asientos Disponibles", reserva.getPasajes().get(i).getVuelo().getCantAsientosDisp());
-                vuelosJson.add("Aerolinea", reserva.getPasajes().get(i).getVuelo().getPrecio().getAerolinea());
-                vuelosJson.add("Destino", reserva.getPasajes().get(i).getVuelo().getPrecio().getDestino());
-                vuelosJson.add("Franja Horaria", reserva.getPasajes().get(i).getVuelo().getPrecio().getFranjaHoraria());
-                vuelosJson.add("Costo", reserva.getPasajes().get(i).getVuelo().getPrecio().getCosto());
-                vuelosJson.add("Costo Adicional", reserva.getPasajes().get(i).getVuelo().getPrecio().getCostoAdicional());
-
-                JsonObject vuelosJsonCreado = vuelosJson.build();
-
-                pasajesJson.add("Vuelo", vuelosJsonCreado);
-
-                JsonObjectBuilder pasajerosJson = Json.createObjectBuilder();
-
-                pasajerosJson.add("Numero de Documento", reserva.getPasajes().get(i).getPasajero().getNroDoc());
-                pasajerosJson.add("Nombre", reserva.getPasajes().get(i).getPasajero().getNombre());
-                pasajerosJson.add("Fecha de Nacimiento", (JsonArrayBuilder) reserva.getPasajes().get(i).getPasajero().getFechaNac());
-                pasajerosJson.add("Sexo", reserva.getPasajes().get(i).getPasajero().getSexo());
-                pasajerosJson.add("Puntos", reserva.getPasajes().get(i).getPasajero().getPuntos());
-
-                JsonObject pasajerosJsonCreado = pasajerosJson.build();
-                pasajesJson.add("Pasajero", pasajerosJsonCreado);
-
-                JsonObject pasajesJsonCreado = pasajesJson.build();
-                pasajesArrayJson.add(pasajesJsonCreado);
-            }
-
-            JsonArray pasajesArrayJsonCreado = pasajesArrayJson.build();
-
-            reservaJson.add("Numero de Reserva", reserva.getNumReserva());
-
-            reservaJson.add("Operador", reserva.getOperador());
-            reservaJson.add("Cantidad de Pasajes Requeridos", reserva.getCantPasajesReq());
-            reservaJson.add("Precio Total", reserva.calculoReserva());
-            reservaJson.add("Pasajes", pasajesArrayJsonCreado);
-
-            JsonObjectBuilder pasajeroResponsableJson = Json.createObjectBuilder();
-            pasajeroResponsableJson.add("Numero de Documento", 2);
-            pasajeroResponsableJson.add("Nombre", reserva.getPasajeroResp().getNombre());
-            pasajeroResponsableJson.add("Fecha de Nacimiento", (JsonArrayBuilder) reserva.getPasajeroResp().getFechaNac());
-            pasajeroResponsableJson.add("Sexo", reserva.getPasajeroResp().getSexo());
-            pasajeroResponsableJson.add("Puntos", reserva.getPasajeroResp().getPuntos());
-
-            JsonObject pasajerosResponsableJsonCreado = pasajeroResponsableJson.build();
-
-            reservaJson.add("Pasajero Responsable", pasajerosResponsableJsonCreado);
-
-            JsonObject reservaJsonCreado = reservaJson.build();
-
-            wrtJson.writeObject(reservaJsonCreado);
+            wrtJson.writeObject(JsonSerie);
 
             wrtJson.close();
 
@@ -245,7 +186,77 @@ public class AudiovisualesJSON {
     	
     }
     
-    public static void grabarRecomendacionesPeliculasMayoresJSON() throws Exception{
+    public static void grabarRecomendacionesPeliculasMayoresJSON(ArrayList <Audiovisuales> audiovisuales) throws Exception{
+    	
+    	File aJson = new File(directorio + "RecomendacionesSeriesJovenes.json");
+        FileOutputStream fsOutJson = new FileOutputStream(aJson);
+        JsonWriter wrtJson = Json.createWriter(fsOutJson);
+
+        try {
+
+            JsonObjectBuilder empresa = Json.createObjectBuilder();
+     
+            empresa.add("Empresa", "PeliSeri");
+            
+            JsonArrayBuilder peliculas = Json.createArrayBuilder();
+            
+            for(Audiovisuales audi : audiovisuales) {
+            	
+            	JsonObjectBuilder detallePelicula = Json.createObjectBuilder();
+                
+            	detallePelicula.add("Nombre", audi.getNombre());
+                
+            	detallePelicula.add("Genero", audi.getGenero().getDescripcion());
+                
+                JsonArrayBuilder actores = Json.createArrayBuilder();
+                Actores a;
+				Iterator<Actores> act = audi.getActores().iterator();
+				while (act.hasNext()) {
+					a=act.next();
+					actores.add((JsonValue) a); //NO SE SI ESTO VA A FUNCIONAR
+				}
+				
+				JsonObject actoresJson = (javax.json.JsonObject) actores.build();
+				
+				detallePelicula.add("Actores", actoresJson);
+			
+				detallePelicula.add("Sinopsos", audi.getSinopsis());
+    			
+    			detallePelicula.add("Anio", ((Peliculas)audi).getAnioFilm());
+    			
+    			detallePelicula.add("Duracion", ((Peliculas)audi).getDuracion());
+    			
+    			int sumaEstrellas = 0;
+    			int cantidadCalificaciones = 0;
+    			for (Calificaciones calificacion : audi.getCalificaciones()) 
+    			{
+                   sumaEstrellas += calificacion.getEstrellas();
+                   cantidadCalificaciones++;
+    			}
+    		   
+    			int calificacion = sumaEstrellas/cantidadCalificaciones;
+    			detallePelicula.add("Calificacion",calificacion);
+    			
+    			JsonObject JPelicula = detallePelicula.build();
+    			
+    			peliculas.add(JPelicula);
+            }
+            
+            JsonObject JsonPeliculas = (javax.json.JsonObject) peliculas.build();
+			
+			empresa.add("Peliculas", JsonPeliculas);
+			
+			JsonObject JsonFinal = empresa.build();
+            
+            wrtJson.writeObject(JsonFinal);
+
+            wrtJson.close();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            fsOutJson.close();
+        }
     	
     	
     }
