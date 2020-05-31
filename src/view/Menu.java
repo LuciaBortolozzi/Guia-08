@@ -1,5 +1,6 @@
 package view;
 
+import controller.ActoresControlador;
 import controller.AudiovisualesControlador;
 import controller.SuscriptorControlador;
 import model.Audiovisuales;
@@ -10,9 +11,17 @@ public class Menu {
         do {
             Mostrar.mostrar("MENU");
 
-            Mostrar.mostrar("1. Ingresar .\n");
+            Mostrar.mostrar("0. Ingresar .\n");
 
-            Mostrar.mostrar("2. ");
+            Mostrar.mostrar("1. A todos los suscriptores jóvenes (menores de 35 años), se les recomienda la temporada " +
+                                    "completa de la serie con mejor calificación promedio durante los últimos 3 meses, evaluada " +
+                                    "por quienes cumplan con el mismo rango de edad, mediante la generación de un archivo " +
+                                    "Json. Este archivo incluye el nombre de la empresa, nombre de la serie, género, nómina de " +
+                                    "actores, sinopsis, temporada, cantidad de episodios y su calificación.\n");
+
+            Mostrar.mostrar("2. Para cada uno de los géneros existentes, la película con mejor calificación obtenida en el " +
+                                    "último mes es recomendada a todos los suscriptores mayores de 55 años, mediante otro " +
+                                    "archivo JSon con la estructura similar a la de las series.\n");
 
             Mostrar.mostrar("3. Para cada uno de los distintos géneros, nombre de la serie, cantidad total de temporadas " +
                                     "y cantidad de actores, ordenadas según la cantidad total de temporadas en forma " +
@@ -44,10 +53,10 @@ public class Menu {
                 case 0:
                     break;
                 case 1:
-
+                    SuscriptorControlador.recomendarMejorSerie();
                     break;
                 case 2:
-
+                    SuscriptorControlador.recomendarMejorPelicula();
                     break;
                 case 3:
                     break;
@@ -55,14 +64,18 @@ public class Menu {
                     SuscriptorControlador.mayoresSinCalificar();
                     break;
                 case 5:
+                    AudiovisualesControlador.peliculaAlAzar();
                     break;
                 case 6:
+                    AudiovisualesControlador.serieNoCalificadaPorHombresAdultos();
                     break;
                 case 7:
+                    ActoresControlador.actoresSiempreMismoGenero();
                     break;
                 case 8:
                     break;
                 case 9:
+                    ActoresControlador.actricesRecientes();
                     break;
                 case 10:
                     System.exit(0);

@@ -1,10 +1,7 @@
 package controller;
 
 
-import java.util.Iterator;
-import java.util.TreeSet;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.*;
 
 import model.*;
 import model.DAO.*;
@@ -32,7 +29,7 @@ public class AudiovisualesControlador {
 	public static ArrayList<Audiovisuales> ingresarModificarAudiovisual() throws Exception {
 
 		ArrayList<Audiovisuales> audiovisuales = AudiovisualesActoresTXT.leoDevuelvoArchivoAudiovisuales();
-		ArrayList<Audiovisuales> audiovisualesAux = AudiovisualesJSON.bajarAudiovisuales();
+		ArrayList<Audiovisuales> audiovisualesAux = AudiovisualesJSON.bajarAudiovisualesJSON();
 
 		Calendar fechaActual = Calendar.getInstance();
 		
@@ -137,6 +134,71 @@ public class AudiovisualesControlador {
         }
         return null;
     }
-	
+
+    public static void serieNoCalificadaPorHombresAdultos() throws Exception {
+		/*Código  y  nombre  de  serie,  temporada  y  episodio  de  aquellas  que  no  hayan  sido
+		calificadas por ningún suscriptor masculino adulto menor de 45 años.*/
+
+		ArrayList<Audiovisuales> audiovisuales = CalificacionesTXT.bajarCalificaciones();
+
+		Calendar fechaActual = Calendar.getInstance();
+		boolean menorA45;
+		boolean calificadaPorHombreAdulto;
+
+		for (Audiovisuales audiovisual : audiovisuales) {
+			calificadaPorHombreAdulto = false;
+
+			if (audiovisual instanceof Series){
+				for (Calificaciones calificacion : audiovisual.getCalificaciones()) {
+
+					menorA45 = Validaciones.menor(calificacion.getSuscriptor().getFechaDeNac(), fechaActual, 45);
+
+					if (menorA45 && calificacion.getSuscriptor().getSexo() == 'M') {
+						calificadaPorHombreAdulto = true;
+					}
+				}
+
+				if (!calificadaPorHombreAdulto){
+					Mostrar.mostrar(audiovisual.getNombre() + ((Series) audiovisual).getTemporada() + ((Series) audiovisual).getEpisodio());
+				}
+			}
+		}
+	}
+
+	public static void peliculaAlAzar() throws Exception {
+		/*Apellido y nombre de los actores (ordenados por ambos), duración de una película, fecha
+		de  publicación  y  evaluaciones  (fecha,  nombre  del  suscriptor  y  calificación)  de  una
+		película seleccionada al azar.*/
+
+		ArrayList<Audiovisuales> audiovisuales = CalificacionesTXT.bajarCalificaciones();
+		Actores actor;
+
+		Random rand = new Random();
+		Audiovisuales azar;
+		do {
+			azar = audiovisuales.get(rand.nextInt(audiovisuales.size()));
+		} while (azar instanceof Series);
+		TreeSet<Actores> actores = azar.getActores();
+
+		Iterator<Actores> iteratorActores = actores.iterator();
+		while (iteratorActores.hasNext()) {
+			actor = iteratorActores.next();
+
+			Mostrar.mostrar("Apellido: " + actor.getApellido());
+			Mostrar.mostrar("Nombre: " + actor.getNombre());
+		}
+
+		Mostrar.mostrar("Duracion de pelicula: " + ((Peliculas) azar).getDuracion());
+		Mostrar.mostrar("Fecha de publicacion: " + azar.getFechaPubli());
+
+		Mostrar.mostrar("Calificaciones");
+		for (Calificaciones calificacion: azar.getCalificaciones()
+			 ) {
+			Mostrar.mostrar("Fecha realizada: " + calificacion.getFechaRealizada());
+			Mostrar.mostrar("Nombre del suscriptor: " + calificacion.getSuscriptor().getNombre());
+			Mostrar.mostrar("Estrellas: " + calificacion.getEstrellas());
+		}
+	}
+
 	
 }
