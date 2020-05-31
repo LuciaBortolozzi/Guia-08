@@ -205,6 +205,11 @@ public class Validaciones {
         return fechaActual;
     }
 
+    public static Calendar seisAniosAntes(Calendar fechaActual) {
+        fechaActual.add(Calendar.YEAR, -6);
+        return fechaActual;
+    }
+
     public static Calendar convertirAFechaCalendar(String f) {
         Calendar fecha = Calendar.getInstance();
 

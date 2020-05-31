@@ -1,10 +1,9 @@
 package controller;
 
 
-import model.Audiovisuales;
-import model.Calificaciones;
+import model.*;
+import model.DAO.GenerosTXT;
 import model.DAO.SuscriptoresTXT;
-import model.Suscriptores;
 import view.Mostrar;
 import view.Validaciones;
 
@@ -31,7 +30,7 @@ public class SuscriptorControlador {
         return null;
     }
 
-    public static void recomendarMejoresSeries() throws Exception {
+    public static Audiovisuales recomendarMejorSerie() throws Exception {
 
         /*A todos los suscriptores jóvenes (menores de 35 años), se les recomienda la temporada
         completa de la serie con mejor calificación promedio durante los últimos 3 meses, evaluada
@@ -39,48 +38,70 @@ public class SuscriptorControlador {
         Json. Este archivo incluye el nombre de la empresa, nombre de la serie, género, nómina de
         actores, sinopsis, temporada, cantidad de episodios y su calificación.*/
 
-        TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
+        /*TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
         TreeSet<Suscriptores> suscriptoresARecomendar = new TreeSet<Suscriptores>();
-
-        Calendar fechaActual = Calendar.getInstance();
 
         Suscriptores suscriptor;
         Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
         while (iteratorSuscriptores.hasNext()) {
             suscriptor = iteratorSuscriptores.next();
-            if (Validaciones.menor(suscriptor.getFechaDeNac(), fechaActual, 35)){
+            menorA35 = Validaciones.menor(suscriptor.getFechaDeNac(), fechaActual, 35);
+            if (menorA35){
                 suscriptoresARecomendar.add(suscriptor);
             }
-        }
+        }*/
 
+        Calendar fechaActual = Calendar.getInstance();
         Calendar fechaAnterior = Validaciones.tresMesesAntes(fechaActual);
 
         ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();               // Modificar para sea despues de pagos!!!!
-        ArrayList<Audiovisuales> mejoresAudiovisuales = new ArrayList<Audiovisuales>();
-        int cantidadCalificacionesDeEpisodiosPorTemporada;
-        Audiovisuales audiovisual;
-        Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
-        while (iteratorAudiovisuales.hasNext()) {
-            audiovisual = iteratorAudiovisuales.next();
-            if (audiovisual.getFechaPubli().after(fechaAnterior)){
 
+        int sumaEstrellas = 0;
+        int cantidadCalificaciones = 0;
+        int promedio;
+        int promedioMayor = -1;
+        boolean menorA35;
+
+        Audiovisuales mejorAudiovisual = audiovisuales.get(0);
+
+        for (Audiovisuales audiovisual : audiovisuales) {
+
+            if (audiovisual instanceof Series && audiovisual.getFechaPubli().after(fechaAnterior)) {                     // Es serie y fue publicada en los ultimos 3 meses
+
+                for (Calificaciones calificacion : audiovisual.getCalificaciones()) {
+
+                    menorA35 = Validaciones.menor(calificacion.getSuscriptor().getFechaDeNac(), fechaActual, 35);
+                    if (menorA35) {                                                                                      // Suscriptor es menor de 35?
+                        sumaEstrellas += calificacion.getEstrellas();
+                        cantidadCalificaciones++;
+                    }
+
+                }
             }
-
+            if (cantidadCalificaciones != 0) {
+                promedio = sumaEstrellas / cantidadCalificaciones;
+                if (promedio > promedioMayor) {
+                    promedioMayor = promedio;
+                    mejorAudiovisual = audiovisual;         // Esto funciona salvo que el mejor sea el Primer audiovisual, por eso inicializo mejorAudiovisual con 1er elemento
+                }
+            }
+            sumaEstrellas = 0;
+            cantidadCalificaciones = 0;
         }
 
-
+        return mejorAudiovisual;
     }
 
-    public static void recomendarMejorPelicula() throws Exception {
+    public static Audiovisuales recomendarMejorPelicula() throws Exception {
 
         /*Para cada uno de los géneros existentes, la película con mejor calificación obtenida en el
         último mes es recomendada a todos los suscriptores mayores de 55 años, mediante otro
         archivo JSon con la estructura similar a la de las series.*/
 
-        TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
+/*        TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
         TreeSet<Suscriptores> suscriptoresARecomendar = new TreeSet<Suscriptores>();
 
-        Calendar fechaActual = Calendar.getInstance();
+
 
         Suscriptores suscriptor;
         Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
@@ -89,24 +110,51 @@ public class SuscriptorControlador {
             if (Validaciones.mayor(suscriptor.getFechaDeNac(), fechaActual, 55)){
                 suscriptoresARecomendar.add(suscriptor);
             }
-        }
+        }*/
 
+        Calendar fechaActual = Calendar.getInstance();
         Calendar fechaAnterior = Validaciones.ultimoMes(fechaActual);
 
         ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();               // Modificar para sea despues de pagos!!!!
-        ArrayList<Audiovisuales> mejoresAudiovisuales = new ArrayList<Audiovisuales>();
-        int cantidadCalificaciones;
-        Audiovisuales audiovisual;
-        Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
-        while (iteratorAudiovisuales.hasNext()) {
-            audiovisual = iteratorAudiovisuales.next();
-            if (audiovisual.getFechaPubli().after(fechaAnterior)){
+        ArrayList<Generos> generos = GenerosTXT.bajarGeneros();
 
+        int sumaEstrellas = 0;
+        int cantidadCalificaciones = 0;
+        int promedio;
+        int promedioMayor = -1;
+
+        Audiovisuales mejorAudiovisual = audiovisuales.get(0);
+
+        for (Generos genero: generos
+        ) {
+            for (Audiovisuales audiovisual : audiovisuales) {
+
+                if (audiovisual instanceof Peliculas                                                                    // Es pelicula y fue publicada en el ultimo mes
+                        && audiovisual.getFechaPubli().after(fechaAnterior)
+                        && genero.getCodigo() == audiovisual.getGenero().getCodigo()) {
+
+                    for (Calificaciones calificacion : audiovisual.getCalificaciones()) {
+
+                        sumaEstrellas += calificacion.getEstrellas();
+                        cantidadCalificaciones++;
+
+                    }
+
+                }
+
+                if (cantidadCalificaciones != 0) {
+                    promedio = sumaEstrellas / cantidadCalificaciones;
+                    if (promedio > promedioMayor) {
+                        promedioMayor = promedio;
+                        mejorAudiovisual = audiovisual;
+                    }
+                }
+                sumaEstrellas = 0;
+                cantidadCalificaciones = 0;
             }
-
         }
 
-
+        return mejorAudiovisual;
     }
 
     public static void mayoresSinCalificar() throws Exception {
@@ -124,21 +172,17 @@ public class SuscriptorControlador {
         while (iteratorSuscriptores.hasNext()) {
             suscriptor = iteratorSuscriptores.next();
             if (Validaciones.mayor(suscriptor.getFechaDeNac(), fechaActual,60)){
-                suscriptoresMayores.add(suscriptor);                                                                    // Colecto los mayores a 60
+                suscriptoresMayores.add(suscriptor);                                                                    // Colecto los mayores a 60 = no colecto los menores de 60
             }
         }
 
         ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();               // Modificar para sea despues de pagos!!!!
-        Audiovisuales audiovisual;
-        Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
-        while (iteratorAudiovisuales.hasNext()) {
-            audiovisual = iteratorAudiovisuales.next();
 
-            if (audiovisual.getCalificaciones() != null){                                                               // Si fue calificado, recorro las calificaciones
-                Calificaciones calificacion;
-                Iterator<Calificaciones> iteratorCalificaciones = audiovisual.getCalificaciones().iterator();
-                while (iteratorCalificaciones.hasNext()) {
-                    calificacion = iteratorCalificaciones.next();
+        for (Audiovisuales audiovisual : audiovisuales) {
+
+            if (audiovisual instanceof Peliculas && audiovisual.getCalificaciones() != null) {                           // Si fue calificado, recorro las calificaciones
+
+                for (Calificaciones calificacion : audiovisual.getCalificaciones()) {
                     suscriptoresMayores.remove(calificacion.getSuscriptor());                                           // Quito los mayores que hayan calificado
                 }
             }
