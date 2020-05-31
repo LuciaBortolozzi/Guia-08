@@ -238,7 +238,7 @@ public class Validaciones {
     public static boolean menor(Calendar fechaDeNac, Calendar fechaActual, int limite) {
         boolean menor = false;
         int edad = validarEdad(fechaDeNac, fechaActual);
-        if (edad < limite)
+        if (edad <= limite)
             menor = true;
         return menor;
     }
@@ -246,7 +246,7 @@ public class Validaciones {
     public static boolean mayor(Calendar fechaDeNac, Calendar fechaActual, int limite) {
         boolean mayor = false;
         int edad = validarEdad(fechaDeNac, fechaActual);
-        if (edad > limite)
+        if (edad >= limite)
             mayor = true;
         return mayor;
     }
