@@ -18,10 +18,10 @@ public class CalificacionesTXT {
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     //Calificaciones.txt -> ("\n" + codAudiovisual + ";"+ estrellas + ";" + motivo + ";" + dd/mm/aaaa + ";" + codSuscriptor)
-    public static ArrayList<Calificaciones> bajarCalificaciones() throws Exception {
+    public static ArrayList<Audiovisuales> bajarCalificaciones() throws Exception {
 
         ArrayList<Calificaciones> calificaciones = new ArrayList<Calificaciones>();
-
+        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();
         try {
             File archivo = new File ( directorio + "Calificaciones.txt");
             if (archivo.exists()) {
@@ -46,7 +46,8 @@ public class CalificacionesTXT {
                     Calendar fechaRealizada = Validaciones.convertirAFechaCalendar(calificacionST[3]);  // fechaRealizada
                     int codSuscriptor = Integer.parseInt(calificacionST[4]);                            // codSuscriptor
 
-                    Audiovisuales audiovisual = AudiovisualesControlador.buscarAudiovisual(codAudiovisual);
+                    
+                    Audiovisuales audiovisual = AudiovisualesControlador.buscarAudiovisual(codAudiovisual, audiovisuales);
                     if ( audiovisual != null){
                         audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, SuscriptorControlador.buscarSuscriptor(codSuscriptor));
                     }
@@ -58,7 +59,7 @@ public class CalificacionesTXT {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return calificaciones;
+        return audiovisuales;
     }
 
     public static void grabarCalificacionesTXT(ArrayList<Audiovisuales> audiovisuales) {

@@ -36,7 +36,18 @@ public class AudiovisualesJSON {
                     ((Peliculas) audiovisualesAux.get(i)).setNombre((pelicula.get("nombre").toString()));
                     ((Peliculas) audiovisualesAux.get(i)).setAnioFilm(Integer.parseInt((pelicula.get("anio")).toString()));
                     ((Peliculas) audiovisualesAux.get(i)).setSinopsis ((pelicula.get("sinopsis").toString()));
-                    //((Peliculas) audiovisuales.get(i)).setGenero((pelicula.get("genero").toString()));
+                    
+                    ArrayList<Generos> generos = GenerosTXT.bajarGeneros();
+
+	            	Generos g;
+	 				Iterator<Generos> gen = generos.iterator();
+	 				while (gen.hasNext()) {
+	 					g=gen.next();
+	 					if(g.getDescripcion().equals(pelicula.get("genero").toString().trim())) {
+	 						
+	 						((Peliculas) audiovisualesAux.get(i)).setGenero(g);
+	 					}
+	 				}
 
                     JsonArray actoresJSONArray = pelicula.getJsonArray("actores");
                     TreeSet<Actores> actoresArray = new TreeSet<Actores>();
@@ -53,7 +64,18 @@ public class AudiovisualesJSON {
                     JsonObject serie = (JsonObject) iteratorSeries.next();
                     audiovisualesAux.set(i, new Series());
                     ((Series) audiovisualesAux.get(i)).setNombre((serie.get("nombre").toString()));
-                    //((Series) audiovisuales.get(i)).setGenero((serie.get("genero").toString()));
+                    
+                    ArrayList<Generos> generos = GenerosTXT.bajarGeneros();
+
+	            	Generos g;
+	 				Iterator<Generos> gen = generos.iterator();
+	 				while (gen.hasNext()) {
+	 					g=gen.next();
+	 					if(g.getDescripcion().equals(serie.get("genero").toString().trim())) {
+	 						
+	 						((Series) audiovisualesAux.get(i)).setGenero(g);
+	 					}
+	 				}
 
                     JsonArray actoresJSONArray = serie.getJsonArray("actores");
                     TreeSet<Actores> actoresArray = new TreeSet<Actores>();

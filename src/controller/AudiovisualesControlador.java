@@ -2,18 +2,21 @@ package controller;
 
 
 import java.util.Iterator;
+import java.util.TreeSet;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import model.*;
 import model.DAO.*;
+import view.Mostrar;
+import view.Validaciones;
 
 
 public class AudiovisualesControlador {
 
-    public static Audiovisuales buscarAudiovisual(int codAudiovisual) throws Exception {
+    public static Audiovisuales buscarAudiovisual(int codAudiovisual, ArrayList<Audiovisuales> audiovisuales) throws Exception {
 
-    	ArrayList<Audiovisuales> audiovisuales = ingresarModificarAudiovisual();
+    	
         Audiovisuales audiovisual;
         Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
         while (iteratorAudiovisuales.hasNext()) {
@@ -56,13 +59,10 @@ public class AudiovisualesControlador {
 						((Series)audiAux).getTemporada() == ((Series)audiovisuales.get(i)).getTemporada() && 
 						((Series)audiAux).getEpisodio() == ((Series)audiovisuales.get(i)).getEpisodio()) 
 					{//MODIFICACION
-						audiovisuales.get(i).setNombre(audiAux.getNombre());
 						audiovisuales.get(i).setSinopsis(audiAux.getSinopsis());
 						//audiovisuales.get(i).setFechaPubli(fechaActual); VER SI LO CAMBIAMOS O NO
 						audiovisuales.get(i).setActores(audiAux.getActores());
 						audiovisuales.get(i).setGenero(audiAux.getGenero());
-						((Series)audiovisuales.get(i)).setTemporada(((Series)audiAux).getTemporada());
-						((Series)audiovisuales.get(i)).setEpisodio(((Series)audiAux).getEpisodio());
 						encontrado = true;
 					}
 					
@@ -70,7 +70,6 @@ public class AudiovisualesControlador {
 				{
 					if( audiAux.getNombre().replace(" ", "").toUpperCase().equals(audiovisuales.get(i).getNombre().replace(" ", "").toUpperCase())) 
 					{//MODIFICACION
-						audiovisuales.get(i).setNombre(audiAux.getNombre());
 						audiovisuales.get(i).setSinopsis(audiAux.getSinopsis());
 						//audiovisuales.get(i).setFechaPubli(fechaActual); VER SI LO CAMBIAMOS O NO
 						audiovisuales.get(i).setActores(audiAux.getActores());
@@ -106,5 +105,50 @@ public class AudiovisualesControlador {
 		}
 		return audiovisuales;
 	}
+	
+	
+	public static ArrayList<Audiovisuales> asignarPagos() throws Exception{
+		
+		
+		ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();
+		
+		Calendar fechaPublicacion = Calendar.getInstance();
+		Calendar fechaActual = Calendar.getInstance();
+		fechaActual.add(Calendar.MONTH, -1);
+		
+		for(Audiovisuales audi : audiovisuales) {
+			
+			if(audi.getFechaPubli().compareTo(fechaActual) >=0) {
+				
+				cantidad++;
+				precio = precio + res.calculoTotalReserva();
+			}
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		return audiovisuales;
+	}
+	
+	public static Audiovisuales buscarAudiovisualPorNombre(String nombreAudiovisual) throws Exception {
+
+    	ArrayList<Audiovisuales> audiovisuales = CalificacionesTXT.bajarCalificaciones();
+        Audiovisuales audiovisual;
+        Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
+        while (iteratorAudiovisuales.hasNext()) {
+            audiovisual = iteratorAudiovisuales.next();
+
+            if (audiovisual.getNombre().replace(" ", "").toUpperCase() == nombreAudiovisual.replace(" ", "").toUpperCase()){
+                return audiovisual;
+            }
+        }
+        return null;
+    }
+	
 	
 }
