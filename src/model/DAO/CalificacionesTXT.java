@@ -18,12 +18,12 @@ public class CalificacionesTXT {
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     //Calificaciones.txt -> ("\n" + codAudiovisual + ";"+ estrellas + ";" + motivo + ";" + dd/mm/aaaa + ";" + codSuscriptor)
-    public static ArrayList<Audiovisuales> bajarCalificaciones() throws Exception {
+    public static ArrayList<Audiovisuales> bajarCalificaciones(ArrayList<Audiovisuales> audiovisualesTXT, ArrayList<Audiovisuales> audiovisualesJSON) throws Exception {
 
         ArrayList<Calificaciones> calificaciones = new ArrayList<Calificaciones>();
-        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();
+        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual(audiovisualesTXT, audiovisualesJSON);
         try {
-            File archivo = new File ( directorio + "Calificaciones.txt");
+            File archivo = new File(directorio + "Calificaciones.txt");
             if (archivo.exists()) {
 
                 Scanner leerArchivoCalificaciones = new Scanner(archivo);
@@ -46,9 +46,9 @@ public class CalificacionesTXT {
                     Calendar fechaRealizada = Validaciones.convertirAFechaCalendar(calificacionST[3]);  // fechaRealizada
                     int codSuscriptor = Integer.parseInt(calificacionST[4]);                            // codSuscriptor
 
-                    
+
                     Audiovisuales audiovisual = AudiovisualesControlador.buscarAudiovisual(codAudiovisual, audiovisuales);
-                    if ( audiovisual != null){
+                    if (audiovisual != null) {
                         audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, SuscriptorControlador.buscarSuscriptor(codSuscriptor));
                     }
                 }
@@ -64,18 +64,18 @@ public class CalificacionesTXT {
 
     public static void grabarCalificacionesTXT(ArrayList<Audiovisuales> audiovisuales) {
 
-        try{
+        try {
             File fichero = new File(directorio + "Calificaciones.txt");
 
             if (fichero.exists()) {
                 PrintWriter archivoSalida = new PrintWriter(fichero);
 
-                for(Audiovisuales audiovisual: audiovisuales) {
+                for (Audiovisuales audiovisual : audiovisuales) {
 
-                    for (Calificaciones calificacion: audiovisual.getCalificaciones()){
+                    for (Calificaciones calificacion : audiovisual.getCalificaciones()) {
 
                         //Calificaciones.txt -> ("\n" + codAudiovisual + ";"+ estrellas + ";" + motivo + ";" + dd/mm/aaaa + ";" + codSuscriptor)
-                        archivoSalida.println( audiovisual.getCodigo() + ";"
+                        archivoSalida.println(audiovisual.getCodigo() + ";"
                                 + calificacion.getEstrellas() + ";"
                                 + calificacion.getMotivo() + ";"
                                 + calificacion.getFechaRealizada().get(Calendar.DAY_OF_MONTH)

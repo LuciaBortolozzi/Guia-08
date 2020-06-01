@@ -15,33 +15,30 @@ import java.util.TreeSet;
 
 public class CalificacionesControlador {
 
-    public static void calificar() throws Exception {
+    public static void calificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores) throws Exception {
 
         Mostrar.mostrar("Calificar");
 
         String nombreAudiovisual = Validaciones.ingresar("nombre del audiovisual: ", true);
         String nombreSuscriptor = Validaciones.ingresar("nombre del suscriptor: ", true);
 
-        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();
-        TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
-
         Audiovisuales audiovisual;
-        Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
         Suscriptores suscriptor;
-        Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
 
+        Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
         while (iteratorAudiovisuales.hasNext()) {
             audiovisual = iteratorAudiovisuales.next();
 
-            if (audiovisual.getNombre().equals(nombreAudiovisual)){             // Encontro audiovisual
+            if (audiovisual.getNombre().equals(nombreAudiovisual)) {             // Encontro audiovisual
 
+                Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
                 while (iteratorSuscriptores.hasNext()) {
                     suscriptor = iteratorSuscriptores.next();
 
-                    if (suscriptor.getNombre().equals(nombreSuscriptor)){       // Encontro suscriptor
+                    if (suscriptor.getNombre().equals(nombreSuscriptor)) {       // Encontro suscriptor
 
                         Mostrar.mostrar("Ingresar estrellas: ");
-                        int estrellas = Validaciones.limite(1,5);
+                        int estrellas = Validaciones.limite(1, 5);
 
                         String motivo = Validaciones.ingresar("motivo de la calificacion propuesta: ", true);
                         Calendar fechaRealizada = Calendar.getInstance();

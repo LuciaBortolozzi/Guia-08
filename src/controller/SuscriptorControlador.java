@@ -14,7 +14,7 @@ import java.util.TreeSet;
 
 public class SuscriptorControlador {
 
-    public static Suscriptores buscarSuscriptor(int codSuscriptor){
+    public static Suscriptores buscarSuscriptor(int codSuscriptor) {
 
         TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
         Suscriptores suscriptor;
@@ -23,14 +23,14 @@ public class SuscriptorControlador {
         while (iteratorAudiovisuales.hasNext()) {
             suscriptor = iteratorAudiovisuales.next();
 
-            if (suscriptor.getCodigo() == codSuscriptor){
+            if (suscriptor.getCodigo() == codSuscriptor) {
                 return suscriptor;
             }
         }
         return null;
     }
 
-    public static Audiovisuales recomendarMejorSerie() throws Exception {
+    public static Audiovisuales recomendarMejorSerie(ArrayList<Audiovisuales> audiovisuales) throws Exception {
 
         /*A todos los suscriptores jóvenes (menores de 35 años), se les recomienda la temporada
         completa de la serie con mejor calificación promedio durante los últimos 3 meses, evaluada
@@ -40,8 +40,6 @@ public class SuscriptorControlador {
 
         Calendar fechaActual = Calendar.getInstance();
         Calendar fechaAnterior = Validaciones.tresMesesAntes(fechaActual);
-
-        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();               // Modificar para sea despues de pagos!!!!
 
         int sumaEstrellas = 0;
         int cantidadCalificaciones = 0;
@@ -82,7 +80,7 @@ public class SuscriptorControlador {
         return mejorAudiovisual;
     }
 
-    public static Audiovisuales recomendarMejorPelicula() throws Exception {
+    public static Audiovisuales recomendarMejorPelicula(ArrayList<Audiovisuales> audiovisuales, ArrayList<Generos> generos) throws Exception {
 
         /*Para cada uno de los géneros existentes, la película con mejor calificación obtenida en el
         último mes es recomendada a todos los suscriptores mayores de 55 años, mediante otro
@@ -90,9 +88,6 @@ public class SuscriptorControlador {
 
         Calendar fechaActual = Calendar.getInstance();
         Calendar fechaAnterior = Validaciones.ultimoMes(fechaActual);
-
-        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();               // Modificar para sea despues de pagos!!!!
-        ArrayList<Generos> generos = GenerosTXT.bajarGeneros();
 
         int sumaEstrellas = 0;
         int cantidadCalificaciones = 0;
@@ -102,7 +97,7 @@ public class SuscriptorControlador {
 
         Audiovisuales mejorAudiovisual = audiovisuales.get(0);
 
-        for (Generos genero: generos
+        for (Generos genero : generos
         ) {
             for (Audiovisuales audiovisual : audiovisuales) {
 
@@ -137,12 +132,11 @@ public class SuscriptorControlador {
         return mejorAudiovisual;
     }
 
-    public static void mayoresSinCalificar() throws Exception {
+    public static void mayoresSinCalificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores) throws Exception {
 
         /*Nombre y apellido de los suscriptores mayores de 60 años que nunca hayan calificado
         una película.*/
 
-        TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
         TreeSet<Suscriptores> suscriptoresMayores = new TreeSet<Suscriptores>();
 
         Calendar fechaActual = Calendar.getInstance();
@@ -151,12 +145,10 @@ public class SuscriptorControlador {
         Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
         while (iteratorSuscriptores.hasNext()) {
             suscriptor = iteratorSuscriptores.next();
-            if (Validaciones.mayor(suscriptor.getFechaDeNac(), fechaActual,60)){
+            if (Validaciones.mayor(suscriptor.getFechaDeNac(), fechaActual, 60)) {
                 suscriptoresMayores.add(suscriptor);                                                                    // Colecto los mayores a 60 = no colecto los menores de 60
             }
         }
-
-        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();               // Modificar para sea despues de pagos!!!!
 
         for (Audiovisuales audiovisual : audiovisuales) {
 
@@ -171,7 +163,7 @@ public class SuscriptorControlador {
         mostrarSuscriptores(suscriptoresMayores);
     }
 
-    public static void mostrarSuscriptores(TreeSet<Suscriptores> suscriptores){
+    public static void mostrarSuscriptores(TreeSet<Suscriptores> suscriptores) {
         Suscriptores suscriptor;
         Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
         while (iteratorSuscriptores.hasNext()) {
