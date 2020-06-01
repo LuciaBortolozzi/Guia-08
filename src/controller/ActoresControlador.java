@@ -22,6 +22,7 @@ public class ActoresControlador {
         Actores actor;
         Generos genero;
         boolean primerGenero;
+        boolean distintoGenero;
         int cantidad = 0;
 
         Iterator<Actores> iteratorActores = actores.iterator();
@@ -29,6 +30,7 @@ public class ActoresControlador {
             actor = iteratorActores.next();
 
             primerGenero = true;
+            distintoGenero = false;
             genero = null;
 
             for (Audiovisuales audiovisual : audiovisuales
@@ -39,11 +41,14 @@ public class ActoresControlador {
                         primerGenero = false;
                     }
                     if (audiovisual.getGenero() != genero) {
+                        distintoGenero = true;
                         break;
                     }
                 }
             }
-            actoresMonotonos.add(actor);
+            if (!distintoGenero){
+                actoresMonotonos.add(actor);
+            }
         }
 
         if (!actoresMonotonos.isEmpty()) {
