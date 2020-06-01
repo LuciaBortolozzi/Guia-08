@@ -8,26 +8,37 @@ import java.util.TreeSet;
 
 public class controlador {
 
-    static TreeSet<Actores> actores = ActoresTXT.bajarActores();
     static ArrayList<Generos> generos = GenerosTXT.bajarGeneros();
     static TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
     // Arreglar lo de los audiovisuales
-
-    static ArrayList<Audiovisuales> audiovisualesJSON;
-
-    static {
-        try {
-            audiovisualesJSON = AudiovisualesJSON.bajarAudiovisualesJSON(generos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     static ArrayList<Audiovisuales> audiovisualesTXT;
 
     static {
         try {
-            audiovisualesTXT = AudiovisualesTXT.leoDevuelvoArchivoAudiovisuales(generos);
+            audiovisualesTXT = AudiovisualesTXT.bajarAudiovisualesTXT(generos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static TreeSet<Actores> actoresTXT = ActoresTXT.bajarActoresTXT();
+
+    static TreeSet<Actores> actoresJSON;
+
+    static {
+        try {
+            actoresJSON = AudiovisualesActoresTXT.bajarAudiovisualesActoresTXT(audiovisualesTXT, actoresTXT);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static ArrayList<Audiovisuales> audiovisualesJSON;
+
+    static {
+        try {
+            audiovisualesJSON = AudiovisualesJSON.bajarAudiovisualesJSON(audiovisualesTXT, actoresTXT, generos);
         } catch (Exception e) {
             e.printStackTrace();
         }

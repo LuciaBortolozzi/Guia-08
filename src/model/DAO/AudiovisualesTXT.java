@@ -13,7 +13,7 @@ public class AudiovisualesTXT {
 	
 	//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + duracion + anio)
 	//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
-	public static ArrayList<Audiovisuales> leoDevuelvoArchivoAudiovisuales (ArrayList<Generos> generos) throws Exception {
+	public static ArrayList<Audiovisuales> bajarAudiovisualesTXT(ArrayList<Generos> generos) throws Exception {
 
 		ArrayList<Audiovisuales> audiovisuales = new ArrayList<Audiovisuales>();
 		

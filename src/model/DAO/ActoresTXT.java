@@ -11,7 +11,7 @@ public class ActoresTXT {
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     //Actores.txt -> ("\n" + nombre + "/t"+ apellido + "/t" + sexo)
-    public static TreeSet<Actores> bajarActores() {
+    public static TreeSet<Actores> bajarActoresTXT() {
 
         TreeSet<Actores> actores = new TreeSet<Actores>();
 
