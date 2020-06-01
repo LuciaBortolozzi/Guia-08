@@ -2,6 +2,7 @@ package controller;
 
 
 import model.*;
+import model.DAO.AudiovisualesJSON;
 import model.DAO.GenerosTXT;
 import model.DAO.SuscriptoresTXT;
 import view.Mostrar;
@@ -41,7 +42,7 @@ public class SuscriptorControlador {
         Calendar fechaActual = Calendar.getInstance();
         Calendar fechaAnterior = Validaciones.tresMesesAntes(fechaActual);
 
-        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();               // Modificar para sea despues de pagos!!!!
+        ArrayList<Audiovisuales> audiovisuales = AudiovisualesJSON.bajarAudiovisualesJSON();                              // Modificar para sea despues de pagos!!!!
 
         int sumaEstrellas = 0;
         int cantidadCalificaciones = 0;
@@ -91,7 +92,7 @@ public class SuscriptorControlador {
         Calendar fechaActual = Calendar.getInstance();
         Calendar fechaAnterior = Validaciones.ultimoMes(fechaActual);
 
-        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();               // Modificar para sea despues de pagos!!!!
+        ArrayList<Audiovisuales> audiovisuales = AudiovisualesJSON.bajarAudiovisualesJSON();                           // Modificar para sea despues de pagos!!!!
         ArrayList<Generos> generos = GenerosTXT.bajarGeneros();
 
         int sumaEstrellas = 0;
@@ -156,7 +157,7 @@ public class SuscriptorControlador {
             }
         }
 
-        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();               // Modificar para sea despues de pagos!!!!
+        ArrayList<Audiovisuales> audiovisuales = AudiovisualesJSON.bajarAudiovisualesJSON();                            // Modificar para sea despues de pagos!!!!
 
         for (Audiovisuales audiovisual : audiovisuales) {
 

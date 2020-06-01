@@ -21,7 +21,7 @@ public class CalificacionesTXT {
     public static ArrayList<Audiovisuales> bajarCalificaciones() throws Exception {
 
         ArrayList<Calificaciones> calificaciones = new ArrayList<Calificaciones>();
-        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();
+        ArrayList<Audiovisuales> audiovisuales = AudiovisualesJSON.bajarAudiovisualesJSON();
         try {
             File archivo = new File ( directorio + "Calificaciones.txt");
             if (archivo.exists()) {

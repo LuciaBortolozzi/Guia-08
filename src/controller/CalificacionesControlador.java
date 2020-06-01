@@ -1,6 +1,7 @@
 package controller;
 
 import model.Audiovisuales;
+import model.DAO.AudiovisualesJSON;
 import model.DAO.CalificacionesTXT;
 import model.DAO.SuscriptoresTXT;
 import model.Suscriptores;
@@ -22,7 +23,7 @@ public class CalificacionesControlador {
         String nombreAudiovisual = Validaciones.ingresar("nombre del audiovisual: ", true);
         String nombreSuscriptor = Validaciones.ingresar("nombre del suscriptor: ", true);
 
-        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();
+        ArrayList<Audiovisuales> audiovisuales = AudiovisualesJSON.bajarAudiovisualesJSON();
         TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
 
         Audiovisuales audiovisual;
