@@ -31,8 +31,8 @@ public class GenerosTXT {
                 // Guardar objetos
                 for (String s : generosST) {
 
-                    int codigo              = Integer.parseInt(s.substring(0,8).trim());              // codigo
-                    String descripcion      = s.substring(8,24).trim();                               // descripcion
+                    int codigo              = Integer.parseInt(s.substring(0,7).trim());              // codigo
+                    String descripcion      = s.substring(7,24).trim();                               // descripcion
 
                     generos.add(new Generos(codigo, descripcion));
                 }
