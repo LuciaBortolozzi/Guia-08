@@ -62,7 +62,7 @@ public class CronogramaPagosTXT {
 	                            Audiovisuales audiovisual = AudiovisualesControlador.buscarAudiovisualPorNombreyFecha(nombrePublicacion, audiovisuales);
 	                        
 	                            if ( audiovisual != null){
-	                                audiovisual.setPagos(fechaPago, monto);
+	                                audiovisual.setCronogramaPagos(fechaPago, monto);
 	                            }
                             }
                         }
