@@ -80,4 +80,18 @@ public class ActoresControlador {
             }
         }
     }
+
+    public static Actores buscarActor(String nombreActor, String apellidoActor, TreeSet<Actores> actoresTXT) {
+    	//VER SI NO HAY QUE HACER UN NEW ACA ABAJO
+    	Actores actor;
+        Iterator<Actores> iteratorActores = actoresTXT.iterator();
+        while (iteratorActores.hasNext()) {
+        	actor = iteratorActores.next();
+
+            if (actor.getApellido().equals(apellidoActor) && actor.getNombre().equals(nombreActor)) {
+                return actor;
+            }
+        }
+        return null;
+    }
 }

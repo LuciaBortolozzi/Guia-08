@@ -8,7 +8,40 @@ import model.DAO.*;
 import view.*;
 
 public class AudiovisualesControlador {
+/*
+	public static ArrayList<Audiovisuales> agregarActoresEnAudiovisualesTXT (ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Actores> audiovisualesActoresTXT, TreeSet<Actores> actoresTXT){
+		
+	    for (String audiAct : audiovisualActoresST) {
+            TreeSet<Actores> actoresArray = new TreeSet<Actores>();
+            String[] audiActST = audiAct.split("\t");                    // Revisarr
+            for (Audiovisuales audi : audiovisuales) {
+                if (Integer.parseInt(audiActST[0]) == audi.getCodigo()) {
+                    for (int i = 1; i < 10; i++) {
+                        if (audiActST[i] == null) {
 
+                            break;
+                        } else {
+                            Actores a;
+                            Iterator<Actores> act = actores.iterator();
+                            while (act.hasNext()) {
+                                a = act.next();
+                                String concatenoNombreApellido = a.getNombre() + a.getApellido();
+                                if (concatenoNombreApellido.replace(" ", "").equals(audiActST[i].replace(" ", ""))) {
+                                    actoresArray.add(a);
+                                }
+                            }
+                        }
+                    }
+
+                    audi.setActores(actoresArray);
+                }
+            }
+        }
+		
+		
+		return audiovisualesTXT;
+	}
+	*/
     public static Audiovisuales buscarAudiovisual(int codAudiovisual, ArrayList<Audiovisuales> audiovisuales) throws Exception {
 
         Audiovisuales audiovisual;
@@ -23,7 +56,7 @@ public class AudiovisualesControlador {
         return null;
     }
 
-    //ACÁ LE VOY A TENER QUE PASAR AUDIOVISUALES POR PARAMETRO PORQUE ELLA QUIERE HACERLO COMO OPCION DE MENU
+    //ACÃ� LE VOY A TENER QUE PASAR AUDIOVISUALES POR PARAMETRO PORQUE ELLA QUIERE HACERLO COMO OPCION DE MENU
     public static ArrayList<Audiovisuales> asignarPagos(ArrayList<Audiovisuales> audiovisuales) throws Exception {
 
         Calendar fechaPublicacionActual = Calendar.getInstance();
@@ -32,7 +65,7 @@ public class AudiovisualesControlador {
         Calendar fechaProximoPago = Calendar.getInstance();
         ArrayList<Audiovisuales> audiovisualesAuxiliar = new ArrayList<Audiovisuales>();
 
-        double montoDerPelicula = Validaciones.validarDouble("monto de los derechos de películas");
+        double montoDerPelicula = Validaciones.validarDouble("monto de los derechos de pelÃ­culas");
 
         double montoDerSeries = Validaciones.validarDouble("monto de los derechos de series");
 

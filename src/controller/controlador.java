@@ -24,16 +24,18 @@ public class controlador {
 
     static TreeSet<Actores> actoresTXT = ActoresTXT.bajarActoresTXT();
 
-    static TreeSet<Actores> actoresJSON;
-
     static {
         try {
-            actoresJSON = AudiovisualesActoresTXT.bajarAudiovisualesActoresTXT(audiovisualesTXT, actoresTXT);
+        	audiovisualesTXT = AudiovisualesActoresTXT.bajarAudiovisualesActoresTXT(audiovisualesTXT, actoresTXT);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    /*
+    static { //BORRAR EL STATIC PARA VER LA EXPLICACION DEL ERROR
+    audiovisualesTXT = AudiovisualesControlador.agregarActoresEnAudiovisualesTXT(audiovisualesTXT, audiovisualesActoresTXT, actoresTXT);
+    }
+*/
     static ArrayList<Audiovisuales> audiovisualesJSON;
 
     static {

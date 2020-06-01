@@ -3,7 +3,11 @@ package model.DAO;
 import java.io.*;
 import java.util.*;
 
+import controller.ActoresControlador;
+import controller.AudiovisualesControlador;
+import controller.SuscriptorControlador;
 import model.*;
+import view.Validaciones;
 
 public class AudiovisualesActoresTXT {
 
@@ -14,8 +18,10 @@ public class AudiovisualesActoresTXT {
 
 
     CORREGIR!!!!
-    public static TreeSet<Actores> bajarAudiovisualesActoresTXT(ArrayList<Audiovisuales> audiovisuales, TreeSet<Actores> actores) throws Exception {
+    public static ArrayList<Audiovisuales> bajarAudiovisualesActoresTXT(ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Actores> actoresTXT) throws Exception {
 
+    	TreeSet<Actores> actores = new TreeSet<Actores>();
+    	
         try {
 
             File archaudiovisualActores = new File(directorio + "AudiovisualesActores.txt");
@@ -29,33 +35,60 @@ public class AudiovisualesActoresTXT {
                     String lineaActual = leerArchivo.nextLine();
                     audiovisualActoresST.add(lineaActual);
                 }
+                
+                boolean primeraVez = true;
+                int cod = 0;
+                Audiovisuales audiovisual;
+                Actores actor;
+                // Guardar objetos
+                for (String s : audiovisualActoresST) {
 
-                for (String audiAct : audiovisualActoresST) {
-                    TreeSet<Actores> actoresArray = new TreeSet<Actores>();
-                    String[] audiActST = audiAct.split("\t");                    // Revisarr
-                    for (Audiovisuales audi : audiovisuales) {
-                        if (Integer.parseInt(audiActST[0]) == audi.getCodigo()) {
-                            for (int i = 1; i < 10; i++) {
-                                if (audiActST[i] == null) {
+                    String[] audiovisualST = s.split("\t");
 
-                                    break;
-                                } else {
-                                    Actores a;
-                                    Iterator<Actores> act = actores.iterator();
-                                    while (act.hasNext()) {
-                                        a = act.next();
-                                        String concatenoNombreApellido = a.getNombre() + a.getApellido();
-                                        if (concatenoNombreApellido.replace(" ", "").equals(audiActST[i].replace(" ", ""))) {
-                                            actoresArray.add(a);
-                                        }
-                                    }
-                                }
+                    int codAudiovisual = Integer.parseInt(audiovisualST[0]);                            // codAudiovisual
+                    String nombreActor = audiovisualST[1].trim(); 										//nombreActor
+                    String apellidoActor = audiovisualST[2].trim(); 									//apellidoActor
+
+                    if(primeraVez) {
+                    	audiovisual = AudiovisualesControlador.buscarAudiovisual(codAudiovisual, audiovisualesTXT);
+                    	cod = codAudiovisual;
+                    	primeraVez = false;
+                    }
+                    
+                    if (audiovisual != null) {
+	                    if(cod == codAudiovisual) {
+	                    	
+	                        actor = ActoresControlador.buscarActor(nombreActor, apellidoActor, actoresTXT);
+	                       
+                        	if (actor != null) {
+                        		actores.add(actor);
                             }
-
-                            audi.setActores(actoresArray);
-                        }
+	                         
+	                        
+	                    } else {
+	                    	
+	                    	audiovisual.setActores(actores);
+	                    	actores = null;
+	                    	audiovisual = AudiovisualesControlador.buscarAudiovisual(codAudiovisual, audiovisualesTXT);
+	                    	
+	                    	if (audiovisual != null) {
+	                    	
+		                    	cod = codAudiovisual;
+		                    	
+		                    	if(cod == codAudiovisual) {
+			                    	
+			                        actor = ActoresControlador.buscarActor(nombreActor, apellidoActor, actoresTXT);
+			                       
+		                        	if (actor != null) {
+		                        		actores.add(actor);
+		                            }
+			                    }
+	                    	}
+	                    }
                     }
                 }
+
+                audiovisual.setActores(actores);
 
                 leerArchivo.close();
             }
@@ -64,10 +97,11 @@ public class AudiovisualesActoresTXT {
             System.out.println("No se pudo leer el archivo AudiovisualesActores.txt ");
         }
 
-        return audiovisuales;
+        return audiovisualesTXT;
     }
 
-    public static void grabarAudiovisualesTXT(ArrayList<Audiovisuales> audiovisuales) {
+
+	public static void grabarAudiovisualesTXT(ArrayList<Audiovisuales> audiovisuales) {
 
         try {
             File fichero = new File(directorio + "AudiovisualesActores.txt");
