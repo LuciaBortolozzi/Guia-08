@@ -14,41 +14,52 @@ import java.util.TreeSet;
 
 public class ActoresControlador {
 
-    public static void actoresSiempreMismoGenero() throws Exception {
+    public static void actoresSiempreMismoGenero(ArrayList<Audiovisuales> audiovisuales, TreeSet<Actores> actores) throws Exception {
         /*Cantidad de actores que solamente participan de series o películas de un mismo género.*/
 
-        ArrayList<Audiovisuales> audiovisuales = CalificacionesTXT.bajarCalificaciones();                               // Modificar para sea despues de pagos!!!!
-        ArrayList<Generos> generos = GenerosTXT.bajarGeneros();
-        TreeSet<Actores> actores = ActoresTXT.bajarActores();
         TreeSet<Actores> actoresMonotonos = new TreeSet<>();
 
-        Actores actor = null;
-        boolean cambioGenero;
+        Actores actor;
+        Generos genero;
+        boolean primerGenero;
         int cantidad = 0;
 
-        for (Generos genero: generos
-             ) {
-            cambioGenero = false;
-            for (Audiovisuales audiovisual : audiovisuales) {
-                if (audiovisual.getGenero().getCodigo() == genero.getCodigo()){
-                    Iterator<Actores> iteratorActores = actores.iterator();
-                    while (iteratorActores.hasNext()) {
-                        actor = iteratorActores.next();
-                        actoresMonotonos.add(actor);
+        Iterator<Actores> iteratorActores = actores.iterator();
+        while (iteratorActores.hasNext()) {
+            actor = iteratorActores.next();
+
+            primerGenero = true;
+            genero = null;
+
+            for (Audiovisuales audiovisual : audiovisuales
+            ) {
+                if (audiovisual.getActores().contains(actor)) {
+                    if (primerGenero) {
+                        genero = audiovisual.getGenero();
+                        primerGenero = false;
                     }
-                } else {
-                    cambioGenero = true;
-                    actoresMonotonos.remove(actor);
+                    if (audiovisual.getGenero() != genero) {
+                        break;
+                    }
                 }
             }
+            actoresMonotonos.add(actor);
         }
+
+        if (!actoresMonotonos.isEmpty()) {
+            iteratorActores = actoresMonotonos.iterator();
+            while (iteratorActores.hasNext()) {
+                actor = iteratorActores.next();
+                cantidad++;
+            }
+        }
+
+        Mostrar.mostrar("Cantidad de actores que solamente participan de series o películas de un mismo género: " + cantidad);
     }
 
-    public static void actricesRecientes() throws Exception {
+    public static void actricesRecientes(ArrayList<Audiovisuales> audiovisuales, TreeSet<Actores> actores) throws Exception {
         /*Apellido y nombre de las actrices que hayan filmado una película en los últimos 2 anios.*/
 
-        ArrayList<Audiovisuales> audiovisuales = CalificacionesTXT.bajarCalificaciones();                               // Modificar para sea despues de pagos!!!!
-        TreeSet<Actores> actores = ActoresTXT.bajarActores();
         Actores actor;
 
         Calendar fechaActual = Calendar.getInstance();
@@ -56,13 +67,13 @@ public class ActoresControlador {
 
 
         for (Audiovisuales audiovisual : audiovisuales) {
-            if (audiovisual instanceof Peliculas && ((Peliculas) audiovisual).getAnioFilm() > seisAniosAntes.get(Calendar.YEAR)){
+            if (audiovisual instanceof Peliculas && ((Peliculas) audiovisual).getAnioFilm() > seisAniosAntes.get(Calendar.YEAR)) {
 
                 Iterator<Actores> iteratorActores = actores.iterator();
                 while (iteratorActores.hasNext()) {
                     actor = iteratorActores.next();
 
-                    if (actor.getSexo() == 'F'){
+                    if (actor.getSexo() == 'F') {
                         Mostrar.mostrar(actor.getApellido() + actor.getNombre());
                     }
                 }

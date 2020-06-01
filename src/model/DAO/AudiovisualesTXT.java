@@ -13,7 +13,7 @@ public class AudiovisualesTXT {
 	
 	//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + duracion + anio)
 	//Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
-	public static ArrayList<Audiovisuales> leoDevuelvoArchivoAudiovisuales () throws Exception {
+	public static ArrayList<Audiovisuales> leoDevuelvoArchivoAudiovisuales (ArrayList<Generos> generos) throws Exception {
 
 		ArrayList<Audiovisuales> audiovisuales = new ArrayList<Audiovisuales>();
 		
@@ -49,12 +49,10 @@ public class AudiovisualesTXT {
 					audiovisuales.get(j).setCodigo(Integer.parseInt(audi.substring(2,6).replace(" ", "")));
 					audiovisuales.get(j).setNombre(audi.substring(6,56));
 
-					ArrayList<Generos> generos = GenerosTXT.bajarGeneros();
-
 	            	Generos g;
 	 				Iterator<Generos> gen = generos.iterator();
 	 				while (gen.hasNext()) {
-	 					g=gen.next();
+	 					g = gen.next();
 	 					if(g.getDescripcion().equals(audi.substring(56,59).trim())) {
 	 						
 	 						audiovisuales.get(j).setGenero(g);
@@ -87,8 +85,8 @@ public class AudiovisualesTXT {
 			
 			if (fichero.exists()) {
 				PrintWriter archivoSalida = new PrintWriter(fichero);
-				
-				for(Audiovisuales audi: audiovisuales) {
+
+				for (Audiovisuales audi : audiovisuales) {
 		
 					if(audi instanceof Peliculas) {
 						

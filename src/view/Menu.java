@@ -3,6 +3,7 @@ package view;
 import controller.ActoresControlador;
 import controller.AudiovisualesControlador;
 import controller.SuscriptorControlador;
+import controller.controlador;
 import model.Audiovisuales;
 
 public class Menu {
@@ -11,7 +12,7 @@ public class Menu {
         do {
             Mostrar.mostrar("MENU");
 
-            Mostrar.mostrar("0. Ingresar .\n");
+            Mostrar.mostrar("0. Calificar.\n");
 
             Mostrar.mostrar("1. A todos los suscriptores jóvenes (menores de 35 años), se les recomienda la temporada " +
                                     "completa de la serie con mejor calificación promedio durante los últimos 3 meses, evaluada " +
@@ -51,31 +52,32 @@ public class Menu {
 
             switch (opcion){
                 case 0:
+                    controlador.opcion0();
                     break;
                 case 1:
-                    SuscriptorControlador.recomendarMejorSerie();
+                    controlador.opcion1();
                     break;
                 case 2:
-                    SuscriptorControlador.recomendarMejorPelicula();
+                    controlador.opcion2();
                     break;
                 case 3:
                     break;
                 case 4:
-                    SuscriptorControlador.mayoresSinCalificar();
+                    controlador.opcion4();
                     break;
                 case 5:
-                    AudiovisualesControlador.peliculaAlAzar();
+                    controlador.opcion5();
                     break;
                 case 6:
-                    AudiovisualesControlador.serieNoCalificadaPorHombresAdultos();
+                    controlador.opcion6();
                     break;
                 case 7:
-                    ActoresControlador.actoresSiempreMismoGenero();
+                    controlador.opcion7();
                     break;
                 case 8:
                     break;
                 case 9:
-                    ActoresControlador.actricesRecientes();
+                    controlador.opcion9();
                     break;
                 case 10:
                     System.exit(0);
