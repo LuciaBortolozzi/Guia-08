@@ -220,8 +220,8 @@ public class Validaciones {
         return fechaActual;
     }
 
-    public static Calendar seisAniosAntes(Calendar fechaActual) {
-        fechaActual.add(Calendar.YEAR, -6);
+    public static Calendar dosAniosAntes(Calendar fechaActual) {
+        fechaActual.add(Calendar.YEAR, -2);
         return fechaActual;
     }
 

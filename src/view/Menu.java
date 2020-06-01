@@ -43,7 +43,7 @@ public class Menu {
                                     "de derechos de publicación supere en un 10% el valor ingresado como argumento de la" +
                                     "publicación y todas sus calificaciones del último año sean menores a 3 estrellas.\n");
 
-            Mostrar.mostrar("9. Apellido y nombre de las actrices que hayan filmado una película en los últimos 6 meses.\n");
+            Mostrar.mostrar("9. Apellido y nombre de las actrices que hayan filmado una película en los últimos 2 anios.\n");
 
             Mostrar.mostrar("10. Salir del menu");
 

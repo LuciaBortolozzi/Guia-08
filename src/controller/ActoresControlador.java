@@ -45,14 +45,14 @@ public class ActoresControlador {
     }
 
     public static void actricesRecientes() throws Exception {
-        /*Apellido y nombre de las actrices que hayan filmado una película en los últimos 6 anios.*/
+        /*Apellido y nombre de las actrices que hayan filmado una película en los últimos 2 anios.*/
 
         ArrayList<Audiovisuales> audiovisuales = CalificacionesTXT.bajarCalificaciones();                               // Modificar para sea despues de pagos!!!!
         TreeSet<Actores> actores = ActoresTXT.bajarActores();
         Actores actor;
 
         Calendar fechaActual = Calendar.getInstance();
-        Calendar seisAniosAntes = Validaciones.seisAniosAntes(fechaActual);
+        Calendar seisAniosAntes = Validaciones.dosAniosAntes(fechaActual);
 
 
         for (Audiovisuales audiovisual : audiovisuales) {
