@@ -41,8 +41,25 @@ public class Series extends Audiovisuales {
         this.episodio = episodio;
     }
 
-    @Override
-    public double calculoMontoTotal() {
-        return 0;
-    }
+	@Override
+	public double calculoMontoTotalPeliculas() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double calculoMontoTotalSeriesMasDoce() {
+		
+		double monto = cronogramaPagos.getMonto() * DER_SERIE;
+    	
+        return monto;
+	}
+
+	@Override
+	public double calculoMontoTotalSeriesMenosDoce() {
+		
+		double monto = cronogramaPagos.getMonto() * DER_MINISERIE;
+    	
+        return monto;
+	}
 }

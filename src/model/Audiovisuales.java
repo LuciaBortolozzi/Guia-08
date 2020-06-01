@@ -95,7 +95,7 @@ public abstract class Audiovisuales implements ICalculable{
         return cronogramaPagos;
     }
 
-    public void setCronogramaPagos(int indice, Calendar fechaDePago, double monto) {
+    public void setCronogramaPagos(Calendar fechaDePago, double monto) {
         cronogramaPagos.setFechaDePago(fechaDePago);
         cronogramaPagos.setMonto(monto);
     }

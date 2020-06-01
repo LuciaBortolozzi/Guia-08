@@ -42,7 +42,23 @@ public class Peliculas extends Audiovisuales {
     }
 
     @Override
-    public double calculoMontoTotal() {
-        return 0;
+    public double calculoMontoTotalPeliculas() {
+    	
+    	double monto = cronogramaPagos.getMonto() * DER_PELICULA;
+    	
+        return monto;
     }
+
+	@Override
+	public double calculoMontoTotalSeriesMasDoce() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double calculoMontoTotalSeriesMenosDoce() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+    
 }

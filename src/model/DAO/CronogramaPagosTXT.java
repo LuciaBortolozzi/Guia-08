@@ -32,7 +32,7 @@ public class CronogramaPagosTXT {
 
             	for(int i = 0; i<11 ; i++) {
             		
-            		File archivo = new File( directorio + "CronogramaPagos" + fechaAnterior + fechaMesAnterior.get(Calendar.YEAR) +".txt");
+            		File archivo = new File( directorio + "CronogramaPagos" + fechaAnterior.get(Calendar.MONTH) + fechaMesAnterior.get(Calendar.YEAR) +".txt");
                     if (archivo.exists()) {
 
                         Scanner leerArchivoCronogramaPagos = new Scanner(archivo);
@@ -78,39 +78,42 @@ public class CronogramaPagosTXT {
             return audiovisuales;
         }
 
-        //cambiar por grabarpagos
-        public static void grabarCalificacionesTXT(ArrayList<Audiovisuales> audiovisuales) {
+   
+        public static void grabarCronogramaPagosTXT(ArrayList<Audiovisuales> audiovisualesAux, int cantidadPublicaciones, double totalAbonar) {
+        	Calendar fechaActual = Calendar.getInstance();
+            try
+            {
+                File fichero = new File( directorio + "CronogramaPagos" + fechaActual.get(Calendar.MONTH) + fechaActual.get(Calendar.YEAR) +".txt");
 
-            try{
-                File fichero = new File(directorio + "Calificaciones.txt");
-
-                if (fichero.exists()) {
+                if (fichero.exists()) 
+                {
                     PrintWriter archivoSalida = new PrintWriter(fichero);
+                    String identificador = "01";
+                    String identificadorTotal = "03";
+                    for(Audiovisuales audiovisual: audiovisualesAux) 
+                    {
+                    	
+                    	//Calificaciones.txt -> (identificador + ";" + fechaDePago + ";" + nombrePublicacion + ";" + fechaPublicacion + ";" + monto )
+	                    archivoSalida.println( identificador + ";"
+	                    		+ audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.DAY_OF_MONTH) + "/"
+	                    		+ audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.MONTH) + "/"
+	                    		+ audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.YEAR) + ";"
+	                            + audiovisual.getNombre() + ";"
+	                            + audiovisual.getFechaPubli().get(Calendar.DAY_OF_MONTH) + "/"
+	                            + audiovisual.getFechaPubli().get(Calendar.MONTH) + "/"
+	                            + audiovisual.getFechaPubli().get(Calendar.YEAR) + ";"
+	                            + audiovisual.getCronogramaPagos().getMonto());
 
-                    for(Audiovisuales audiovisual: audiovisuales) {
-
-                        for (Calificaciones calificacion: audiovisual.getCalificaciones()){
-
-                            //Calificaciones.txt -> ("\n" + codAudiovisual + ";"+ estrellas + ";" + motivo + ";" + dd/mm/aaaa + ";" + codSuscriptor)
-                            archivoSalida.println( audiovisual.getCodigo() + ";"
-                                    + calificacion.getEstrellas() + ";"
-                                    + calificacion.getMotivo() + ";"
-                                    + calificacion.getFechaRealizada().get(Calendar.DAY_OF_MONTH)
-                                    + "/"
-                                    + (calificacion.getFechaRealizada().get(Calendar.MONTH) + 1)
-                                    + "/"
-                                    + calificacion.getFechaRealizada().get(Calendar.YEAR) + ";"
-                                    + calificacion.getSuscriptor().getCodigo()
-
-                            );
-                        }
-                    }
-
+                            
+                     }
+                  //Calificaciones.txt -> (identificadorTotal + ";" + cantidadPublicaciones + ";" + totalAbonar)
+                    archivoSalida.println( identificadorTotal + ";" + cantidadPublicaciones + ";" + totalAbonar);
+                    
                     archivoSalida.close();
-                }
+                 }
 
             } catch (Exception e) {
-                System.out.println("No se puede grabar el archivo de Calificaciones.txt");
+                System.out.println("No se puede grabar el archivo de CronogramaPagosmmdd.txt");
             }
         }
 

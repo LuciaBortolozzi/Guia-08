@@ -90,12 +90,15 @@ public class AudiovisualesControlador {
 	}
 	
 	//ACÁ LE VOY A TENER QUE PASAR AUDIOVISUALES POR PARAMETRO PORQUE ELLA QUIERE HACERLO COMO OPCION DE MENU
-	public static void asignarPagos(ArrayList<Audiovisuales> audiovisuales) throws Exception{
+	public static ArrayList<Audiovisuales> asignarPagos() throws Exception{
+		
+		ArrayList<Audiovisuales> audiovisuales = AudiovisualesJSON.bajarAudiovisualesJSON();
 		
 		Calendar fechaPublicacionActual = Calendar.getInstance();
 		Calendar fechaActual = Calendar.getInstance();
 		Validaciones.OnceMesesAntes(fechaActual); 
 		Calendar fechaProximoPago = Calendar.getInstance();
+		ArrayList<Audiovisuales> audiovisualesAuxiliar = new ArrayList<Audiovisuales>();
 		
 		double montoDerPelicula = Validaciones.validarDouble("monto de los derechos de películas");
 		
@@ -104,35 +107,92 @@ public class AudiovisualesControlador {
 		boolean primeroDelMes = true;
 		int cantidadPublicaciones = 0;
 		double totalAbonar = 0;
-		for(Audiovisuales audi : audiovisuales) {
-			
+		for(Audiovisuales audi : audiovisuales) 
+		{
 			if(audi.getFechaPubli().get(Calendar.MONTH)==fechaPublicacionActual.get(Calendar.MONTH)
-				&& audi.getFechaPubli().get(Calendar.YEAR)==fechaPublicacionActual.get(Calendar.YEAR)) {
-				
-				if(primeroDelMes) {
-					
+				&& audi.getFechaPubli().get(Calendar.YEAR)==fechaPublicacionActual.get(Calendar.YEAR)) 
+			{
+				if(primeroDelMes)
+				{
 					fechaProximoPago = Validaciones.UnMesDespues(fechaProximoPago);
 					primeroDelMes = false;
-				}else {
 					
+				}else
+				{
 					fechaProximoPago = Validaciones.UnaSemanaDespues(fechaProximoPago);
 				}
 					
-				if(audi instanceof Peliculas) {
+				if(audi instanceof Peliculas)
+				{
+					audi.setCronogramaPagos(fechaProximoPago, montoDerPelicula);
 					
-					audi.setPagos(fechaProximoPago, montoDerPelicula);
-				}else if(audi instanceof Series) {
-					
-					audi.setPagos(fechaProximoPago, montoDerSeries);
+				}else if(audi instanceof Series)
+				{
+					audi.setCronogramaPagos(fechaProximoPago, montoDerSeries);
 				}
 				
 				cantidadPublicaciones++;
-				totalAbonar = totalAbonar + audi.getPagos()
+				totalAbonar = totalAbonar + audi.getCronogramaPagos().getMonto();
+				
+			}else if(audi.getFechaPubli().compareTo(fechaActual) >= 0)
+			{
+				if(primeroDelMes) 
+				{
+					fechaProximoPago = Validaciones.UnMesDespues(fechaProximoPago);
+					primeroDelMes = false;
+				}else 
+				{
+					fechaProximoPago = Validaciones.UnaSemanaDespues(fechaProximoPago);
+				}
+					
+				if(audi instanceof Peliculas) //MODIFICAR LOS MONTOS
+				{
+					montoDerPelicula = ((Peliculas)audi).calculoMontoTotalPeliculas();
+					audi.setCronogramaPagos(fechaProximoPago, montoDerPelicula);
+					
+				}else if(audi instanceof Series)
+				{
+					int cantidadEpisodios = ContarEpisodiosTemporada(audiovisuales,audi);
+					
+					if(cantidadEpisodios>12) 
+					{
+						montoDerSeries = ((Series)audi).calculoMontoTotalSeriesMasDoce();
+					}else
+					{
+						montoDerSeries = ((Series)audi).calculoMontoTotalSeriesMenosDoce();
+					}	
+					
+					audi.setCronogramaPagos(fechaProximoPago, montoDerSeries);
+				}
+				
+				cantidadPublicaciones++;
+				totalAbonar = totalAbonar + audi.getCronogramaPagos().getMonto();
 			}
 			
+			audiovisualesAuxiliar.add(audi);
 		}
 		
+		CronogramaPagosTXT.grabarCronogramaPagosTXT(audiovisualesAuxiliar, cantidadPublicaciones, totalAbonar);
+		
 		return audiovisuales;
+	}
+	
+	public static int ContarEpisodiosTemporada(ArrayList<Audiovisuales>audiovisuales,Audiovisuales audi) {
+		
+		int cantidadEpisodios = 0;
+		
+		for(Audiovisuales audiovisual : audiovisuales) 
+		{
+			if(audiovisual instanceof Series) 
+			{
+				if(  audiovisual.getNombre().replace(" ", "").toUpperCase().equals(audi.getNombre().replace(" ", "").toUpperCase())
+						&& ((Series)audiovisual).getTemporada() == ((Series)audi).getTemporada())
+				{
+					cantidadEpisodios++;
+				}
+			}
+		}
+		return cantidadEpisodios;
 	}
 	
 	public static Audiovisuales buscarAudiovisualPorNombreyFecha(String nombreAudiovisual, ArrayList<Audiovisuales> audiovisuales) throws Exception {

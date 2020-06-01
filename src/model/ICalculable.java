@@ -7,5 +7,7 @@ public interface ICalculable {
     double DER_MINISERIE = 0.45;
 
     //metodos public abstract
-    double calculoMontoTotal();
+    double calculoMontoTotalPeliculas();
+    double calculoMontoTotalSeriesMasDoce();
+    double calculoMontoTotalSeriesMenosDoce();
 }
