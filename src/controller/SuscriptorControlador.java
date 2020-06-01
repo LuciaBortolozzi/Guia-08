@@ -38,19 +38,6 @@ public class SuscriptorControlador {
         Json. Este archivo incluye el nombre de la empresa, nombre de la serie, género, nómina de
         actores, sinopsis, temporada, cantidad de episodios y su calificación.*/
 
-        /*TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
-        TreeSet<Suscriptores> suscriptoresARecomendar = new TreeSet<Suscriptores>();
-
-        Suscriptores suscriptor;
-        Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
-        while (iteratorSuscriptores.hasNext()) {
-            suscriptor = iteratorSuscriptores.next();
-            menorA35 = Validaciones.menor(suscriptor.getFechaDeNac(), fechaActual, 35);
-            if (menorA35){
-                suscriptoresARecomendar.add(suscriptor);
-            }
-        }*/
-
         Calendar fechaActual = Calendar.getInstance();
         Calendar fechaAnterior = Validaciones.tresMesesAntes(fechaActual);
 
@@ -63,6 +50,8 @@ public class SuscriptorControlador {
         boolean menorA35;
 
         Audiovisuales mejorAudiovisual = audiovisuales.get(0);
+
+        // Primero recorrer audiovisuales para saber cantidad de episodios por temporada
 
         for (Audiovisuales audiovisual : audiovisuales) {
 
@@ -99,20 +88,6 @@ public class SuscriptorControlador {
         último mes es recomendada a todos los suscriptores mayores de 55 años, mediante otro
         archivo JSon con la estructura similar a la de las series.*/
 
-/*        TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
-        TreeSet<Suscriptores> suscriptoresARecomendar = new TreeSet<Suscriptores>();
-
-
-
-        Suscriptores suscriptor;
-        Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
-        while (iteratorSuscriptores.hasNext()) {
-            suscriptor = iteratorSuscriptores.next();
-            if (Validaciones.mayor(suscriptor.getFechaDeNac(), fechaActual, 55)){
-                suscriptoresARecomendar.add(suscriptor);
-            }
-        }*/
-
         Calendar fechaActual = Calendar.getInstance();
         Calendar fechaAnterior = Validaciones.ultimoMes(fechaActual);
 
@@ -123,6 +98,7 @@ public class SuscriptorControlador {
         int cantidadCalificaciones = 0;
         int promedio;
         int mejorPromedio = -1;
+        boolean mayorA55;
 
         Audiovisuales mejorAudiovisual = audiovisuales.get(0);
 
@@ -136,8 +112,11 @@ public class SuscriptorControlador {
 
                     for (Calificaciones calificacion : audiovisual.getCalificaciones()) {
 
-                        sumaEstrellas += calificacion.getEstrellas();
-                        cantidadCalificaciones++;
+                        mayorA55 = Validaciones.mayor(calificacion.getSuscriptor().getFechaDeNac(), fechaActual, 55);
+                        if (mayorA55) {                                                                                     // Suscriptor es mayor de 55?
+                            sumaEstrellas += calificacion.getEstrellas();
+                            cantidadCalificaciones++;
+                        }
 
                     }
 

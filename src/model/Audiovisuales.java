@@ -12,9 +12,10 @@ public abstract class Audiovisuales implements ICalculable{
     protected Calendar fechaPubli;
     protected TreeSet<Actores> actores;
     protected ArrayList<Calificaciones> calificaciones = new ArrayList<Calificaciones>();
-    protected ArrayList<CronogramaPagos> pagos = new ArrayList<CronogramaPagos>();
+    protected CronogramaPagos cronogramaPagos;
 
     public Audiovisuales() {
+        this.cronogramaPagos = new CronogramaPagos();
     }
 
     public Audiovisuales(int codigo, String nombre, Generos genero, String sinopsis, Calendar fechaPubli, TreeSet<Actores> actores) {
@@ -24,6 +25,7 @@ public abstract class Audiovisuales implements ICalculable{
         this.sinopsis = sinopsis;
         this.fechaPubli = fechaPubli;
         this.actores = actores;
+        this.cronogramaPagos = new CronogramaPagos();
     }
 
     public int getCodigo() {
@@ -89,16 +91,12 @@ public abstract class Audiovisuales implements ICalculable{
         calificaciones.get(indice).setSuscriptor(suscriptor);
     }
 
-    public ArrayList<CronogramaPagos> getPagos() {
-        return pagos;
+    public CronogramaPagos getCronogramaPagos() {
+        return cronogramaPagos;
     }
 
-    public void setPagos(Calendar fechaDePago, double monto) {
-        pagos.add(new CronogramaPagos(fechaDePago, monto));
-    }
-
-    public void setPagos(int indice, Calendar fechaDePago, double monto) {
-        pagos.get(indice).setFechaDePago(fechaDePago);
-        pagos.get(indice).setMonto(monto);
+    public void setCronogramaPagos(int indice, Calendar fechaDePago, double monto) {
+        cronogramaPagos.setFechaDePago(fechaDePago);
+        cronogramaPagos.setMonto(monto);
     }
 }
