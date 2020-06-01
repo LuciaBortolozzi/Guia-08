@@ -26,14 +26,13 @@ public class CronogramaPagosTXT {
             Calendar fechaMesAnterior = Calendar.getInstance();
             fechaMesAnterior.add(Calendar.MONTH, -2);
             
-            Calendar fechaCronogramasViejos = Calendar.getInstance();
-            fechaCronogramasViejos.add(Calendar.MONTH, -12);//me remonto un año atrás
-
+            Calendar fechaActual = Calendar.getInstance();
+            Calendar fechaAnterior = Validaciones.ultimoMes(fechaActual);
             try {
 
-            	for(int i = 0; i<12 ; i++) {
+            	for(int i = 0; i<11 ; i++) {
             		
-            		File archivo = new File( directorio + "CronogramaPagos" + fechaCronogramasViejos.get(Calendar.MONTH) + fechaMesAnterior.get(Calendar.YEAR) +".txt");
+            		File archivo = new File( directorio + "CronogramaPagos" + fechaAnterior + fechaMesAnterior.get(Calendar.YEAR) +".txt");
                     if (archivo.exists()) {
 
                         Scanner leerArchivoCronogramaPagos = new Scanner(archivo);
@@ -70,6 +69,7 @@ public class CronogramaPagosTXT {
 
                         leerArchivoCronogramaPagos.close();
                     }
+                    fechaAnterior = Validaciones.ultimoMes(fechaAnterior);
             	}
                 
             } catch (IOException e) {

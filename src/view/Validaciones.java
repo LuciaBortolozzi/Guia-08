@@ -199,6 +199,21 @@ public class Validaciones {
         fechaActual.add(Calendar.MONTH, -3);
         return fechaActual;
     }
+    
+    public static Calendar OnceMesesAntes(Calendar fechaActual) {
+        fechaActual.add(Calendar.MONTH, -10);
+        return fechaActual;
+    }
+    
+    public static Calendar UnMesDespues(Calendar fechaActual) {
+        fechaActual.add(Calendar.MONTH, +1);
+        return fechaActual;
+    }
+    
+    public static Calendar UnaSemanaDespues(Calendar fechaActual) {
+        fechaActual.add(Calendar.DAY_OF_MONTH, +7);
+        return fechaActual;
+    }
 
     public static Calendar unAnioAntes(Calendar fechaActual) {
         fechaActual.add(Calendar.YEAR, -1);

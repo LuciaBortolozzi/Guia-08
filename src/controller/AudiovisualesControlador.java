@@ -5,9 +5,7 @@ import java.util.*;
 
 import model.*;
 import model.DAO.*;
-import view.Mostrar;
-import view.Validaciones;
-
+import view.*;
 
 public class AudiovisualesControlador {
 
@@ -91,22 +89,45 @@ public class AudiovisualesControlador {
 		return audiovisuales;
 	}
 	
-	
-	public static ArrayList<Audiovisuales> asignarPagos() throws Exception{
+	//ACÁ LE VOY A TENER QUE PASAR AUDIOVISUALES POR PARAMETRO PORQUE ELLA QUIERE HACERLO COMO OPCION DE MENU
+	public static void asignarPagos(ArrayList<Audiovisuales> audiovisuales) throws Exception{
 		
-		
-		ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual();
-		
-		Calendar fechaPublicacion = Calendar.getInstance();
+		Calendar fechaPublicacionActual = Calendar.getInstance();
 		Calendar fechaActual = Calendar.getInstance();
-		fechaActual.add(Calendar.MONTH, -1);
+		Validaciones.OnceMesesAntes(fechaActual); 
+		Calendar fechaProximoPago = Calendar.getInstance();
 		
+		double montoDerPelicula = Validaciones.validarDouble("monto de los derechos de películas");
+		
+		double montoDerSeries = Validaciones.validarDouble("monto de los derechos de series");
+
+		boolean primeroDelMes = true;
+		int cantidadPublicaciones = 0;
+		double totalAbonar = 0;
 		for(Audiovisuales audi : audiovisuales) {
 			
-			if(audi.getFechaPubli().compareTo(fechaActual) >=0) {
+			if(audi.getFechaPubli().get(Calendar.MONTH)==fechaPublicacionActual.get(Calendar.MONTH)
+				&& audi.getFechaPubli().get(Calendar.YEAR)==fechaPublicacionActual.get(Calendar.YEAR)) {
 				
-				cantidad++;
-				precio = precio + res.calculoTotalReserva();
+				if(primeroDelMes) {
+					
+					fechaProximoPago = Validaciones.UnMesDespues(fechaProximoPago);
+					primeroDelMes = false;
+				}else {
+					
+					fechaProximoPago = Validaciones.UnaSemanaDespues(fechaProximoPago);
+				}
+					
+				if(audi instanceof Peliculas) {
+					
+					audi.setPagos(fechaProximoPago, montoDerPelicula);
+				}else if(audi instanceof Series) {
+					
+					audi.setPagos(fechaProximoPago, montoDerSeries);
+				}
+				
+				cantidadPublicaciones++;
+				totalAbonar = totalAbonar + audi.getPagos()
 			}
 			
 		}
