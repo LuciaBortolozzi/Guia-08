@@ -77,7 +77,7 @@ public class AudiovisualesControlador {
         return audiovisuales;
     }
 
-    //AC¡ LE VOY A TENER QUE PASAR AUDIOVISUALES POR PARAMETRO PORQUE ELLA QUIERE HACERLO COMO OPCION DE MENU
+    //AC√Å LE VOY A TENER QUE PASAR AUDIOVISUALES POR PARAMETRO PORQUE ELLA QUIERE HACERLO COMO OPCION DE MENU
     public static ArrayList<Audiovisuales> asignarPagos(ArrayList<Audiovisuales> audiovisuales) throws Exception {
 
         Calendar fechaPublicacionActual = Calendar.getInstance();
@@ -86,7 +86,7 @@ public class AudiovisualesControlador {
         Calendar fechaProximoPago = Calendar.getInstance();
         ArrayList<Audiovisuales> audiovisualesAuxiliar = new ArrayList<Audiovisuales>();
 
-        double montoDerPelicula = Validaciones.validarDouble("monto de los derechos de pelÌculas");
+        double montoDerPelicula = Validaciones.validarDouble("monto de los derechos de pel√≠culas");
 
         double montoDerSeries = Validaciones.validarDouble("monto de los derechos de series");
 
@@ -241,6 +241,4 @@ public class AudiovisualesControlador {
             Mostrar.mostrar("Estrellas: " + calificacion.getEstrellas());
         }
     }
-
-
 }

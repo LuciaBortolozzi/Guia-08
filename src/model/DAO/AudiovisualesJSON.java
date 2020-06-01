@@ -151,7 +151,7 @@ public class AudiovisualesJSON {
 
             detalleSerie.add("Temporada", ((Series) audiovisuales).getTemporada());
 
-            //LUUUU AC¡ ME VAS A TENER QUE PASAR LA CANTIDAD DE EPISODIOS TAMBIEN
+            //LUUUU AC√Å ME VAS A TENER QUE PASAR LA CANTIDAD DE EPISODIOS TAMBIEN
             detalleSerie.add("Episodios", ((Series) audiovisuales).getEpisodio());
 
             int sumaEstrellas = 0;
