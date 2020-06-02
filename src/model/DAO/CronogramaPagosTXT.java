@@ -20,7 +20,7 @@ public class CronogramaPagosTXT {
     public static ArrayList<Audiovisuales> bajarCronogramas(ArrayList<Audiovisuales> audiovisuales) throws Exception {
 
         Calendar fechaMesAnterior = Calendar.getInstance();
-        fechaMesAnterior.add(Calendar.MONTH, -2);
+        fechaMesAnterior = Validaciones.dosMesesAntes(fechaMesAnterior);
 
         Calendar fechaActual = Calendar.getInstance();
         Calendar fechaAnterior = Validaciones.ultimoMes(fechaActual);

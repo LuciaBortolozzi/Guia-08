@@ -11,7 +11,7 @@ import view.Validaciones;
 
 public class AudiovisualesActoresTXT {
 
-    private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
 //    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     //AudiovisualesActores.txt -> (codigoAudiovisual + "/t" + nombreApellido + "/t" + nombreApellido + ...)
@@ -42,9 +42,9 @@ public class AudiovisualesActoresTXT {
 
                     String[] audiovisualST = s.split("\t");
 
-                    int codAudiovisual = Integer.parseInt(audiovisualST[0]);                            // codAudiovisual
-                    String nombreActor = audiovisualST[1].trim(); 										//nombreActor
-                    String apellidoActor = audiovisualST[2].trim(); 									//apellidoActor
+                    int codAudiovisual = Integer.parseInt(audiovisualST[0].trim());                     // codAudiovisual
+                    String nombreActor = audiovisualST[1].trim(); 										// nombreActor
+                    String apellidoActor = audiovisualST[2].trim(); 									// apellidoActor
 
                     if(primeraVez) {
                     	audiovisual = AudiovisualesControlador.buscarAudiovisual(codAudiovisual, audiovisualesTXT);
