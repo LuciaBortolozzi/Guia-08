@@ -12,8 +12,8 @@ import java.util.TreeSet;
 
 public class SuscriptoresTXT {
 
-//    private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
-    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
+//    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     public static TreeSet<Suscriptores> bajarSuscriptores() {
 
@@ -34,12 +34,12 @@ public class SuscriptoresTXT {
                 // Guardar objetos
                 for (String s : suscriptoresST) {
 
-                    int codigo              = Integer.parseInt(s.substring(0,10).trim());                           // codigo
-                    String nombre           = s.substring(10,22).trim();                                            // nombre
-                    String apellido         = s.substring(22,39).trim();                                            // apellido
-                    long nroDoc             = Long.parseLong(s.substring(39,50).trim());                            // nroDoc
-                    Calendar fechaDeNac     = Validaciones.convertirAFechaCalendar(s.substring(50,63).trim());      // fechaDeNac
-                    char sexo               = s.substring(63,65).trim().charAt(0);                                  // sexo
+                    int codigo              = Integer.parseInt(s.substring(0,9).trim());                           // codigo
+                    String nombre           = s.substring(9,21).trim();                                            // nombre
+                    String apellido         = s.substring(21,38).trim();                                            // apellido
+                    long nroDoc             = Long.parseLong(s.substring(38,49).trim());                            // nroDoc
+                    Calendar fechaDeNac     = Validaciones.convertirAFechaCalendar(s.substring(49,62).trim());      // fechaDeNac
+                    char sexo               = s.substring(62,64).trim().charAt(0);                                  // sexo
 
                     suscriptores.add(new Suscriptores( codigo, nroDoc, nombre, apellido, fechaDeNac, sexo));
                 }

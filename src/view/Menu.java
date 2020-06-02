@@ -42,7 +42,7 @@ public class Menu {
 
             Mostrar.mostrar("8. Nombre y género de las publicaciones cuyo monto abonado en concepto de renovación" +
                                     "de derechos de publicación supere en un 10% el valor ingresado como argumento de la" +
-                                    "publicación y todas sus calificaciones del último año sean menores a 3 estrellas.\n");
+                                    "aplicacion y todas sus calificaciones del último año sean menores a 3 estrellas.\n");
 
             Mostrar.mostrar("9. Apellido y nombre de las actrices que hayan filmado una película en los últimos 2 anios.\n");
 

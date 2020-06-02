@@ -7,14 +7,13 @@ import java.io.IOException;
 import java.util.*;
 
 public class ActoresTXT {
-    //private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
-    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
+//    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     //Actores.txt -> ("\n" + nombre + "/t"+ apellido + "/t" + sexo)
     public static TreeSet<Actores> bajarActoresTXT() {
 
         TreeSet<Actores> actores = new TreeSet<Actores>();
-
         try {
             File archivo = new File ( directorio + "Actores.txt");
             if (archivo.exists()){
