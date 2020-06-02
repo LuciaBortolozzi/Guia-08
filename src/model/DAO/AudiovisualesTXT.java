@@ -47,15 +47,17 @@ public class AudiovisualesTXT {
                     }
                     audiovisuales.get(i).setCodigo(Integer.parseInt(audi.substring(2, 6).trim()));
                     audiovisuales.get(i).setNombre(audi.substring(6, 56).trim());
-                    Generos g;
+
+                    Generos genero;
                     Iterator<Generos> gen = generos.iterator();
                     while (gen.hasNext()) {
-                        g = gen.next();
-                        if (g.getCodigo() == Integer.parseInt(audi.substring(56, 59).trim())) {
-                            audiovisuales.get(i).setGenero(g);
+                        genero = gen.next();
+                        if (genero.getCodigo() == Integer.parseInt(audi.substring(56, 59).trim())) {
+                            audiovisuales.get(i).setGenero(genero);
                             break;
                         }
                     }
+                    
                     audiovisuales.get(i).setSinopsis(audi.substring(59, 109).trim());
                     Calendar fechaPublicacion = Calendar.getInstance();
                     fechaPublicacion.set(Calendar.DAY_OF_MONTH, Integer.parseInt(audi.substring(109, 111)));
