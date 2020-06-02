@@ -75,6 +75,7 @@ public class Menu {
                     controlador.opcion7();
                     break;
                 case 8:
+                	controlador.opcion8(arg);
                     break;
                 case 9:
                     controlador.opcion9();

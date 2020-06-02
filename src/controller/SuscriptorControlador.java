@@ -38,6 +38,7 @@ public class SuscriptorControlador {
         Json. Este archivo incluye el nombre de la empresa, nombre de la serie, género, nómina de
         actores, sinopsis, temporada, cantidad de episodios y su calificación.*/
 
+    	ArrayList<Series> arraySeries = new ArrayList<Series>();
         Calendar fechaActual = Calendar.getInstance();
         Calendar fechaAnterior = Validaciones.tresMesesAntes(fechaActual);
 
@@ -52,10 +53,18 @@ public class SuscriptorControlador {
         // Primero recorrer audiovisuales para saber cantidad de episodios por temporada
 
         for (Audiovisuales audiovisual : audiovisuales) {
+        	
+        	if(audiovisual instanceof Series) {
+        		
+        		arraySeries.add((Series)audiovisual);
+        	}
+        }
+        
+        for (Series serie : arraySeries) {
 
-            if (audiovisual instanceof Series && audiovisual.getFechaPubli().after(fechaAnterior)) {                    // Es serie y fue publicada en los ultimos 3 meses
+            if (serie.getFechaPubli().after(fechaAnterior)) {                    // Es serie y fue publicada en los ultimos 3 meses
 
-                for (Calificaciones calificacion : audiovisual.getCalificaciones()) {
+                for (Calificaciones calificacion : serie.getCalificaciones()) {
 
                     menorA35 = Validaciones.menor(calificacion.getSuscriptor().getFechaDeNac(), fechaActual, 35);
                     if (menorA35) {                                                                                     // Suscriptor es menor de 35?
@@ -70,7 +79,7 @@ public class SuscriptorControlador {
 
                 if (promedioTemporada > mejorPromedio) {
                     mejorPromedio = promedioTemporada;
-                    mejorAudiovisual = audiovisual;
+                    mejorAudiovisual = serie;
                 }
             }
             sumaEstrellas = 0;

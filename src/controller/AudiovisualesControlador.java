@@ -220,4 +220,41 @@ public class AudiovisualesControlador {
             Mostrar.mostrar("Estrellas: " + calificacion.getEstrellas());
         }
     }
+
+    public static void superanAgumento(ArrayList<Audiovisuales> audiovisuales, String arg) {
+    	
+    	Calendar fechaActual = Calendar.getInstance();
+    	double argumento = Double.parseDouble(arg);
+    	for(Audiovisuales audi : audiovisuales) {
+    		boolean cumple = true;
+    		double difPorcentaje = calculoPorcentaje(audi.getCronogramaPagos().getMonto(),argumento);
+    		
+    		if( difPorcentaje > 10) {
+    			
+    			for(Calificaciones cal : audi.getCalificaciones()) {
+    				
+    				if(cal.getEstrellas()>=3 || cal.getFechaRealizada().get(Calendar.YEAR) != fechaActual.get(Calendar.YEAR)) {
+    					
+    					cumple = false;
+    					break;
+    				}
+    			}
+    			
+    			if(cumple) {
+    				
+    				Mostrar.mostrar("Nombre de la publicacion:" + audi.getNombre());
+    				Mostrar.mostrar("Genero:" + audi.getGenero().getDescripcion());
+    			}
+    		}	
+    	}	
+    }
+    
+    public static double calculoPorcentaje(double monto, double argumento) {
+    	
+    	double porcentajeMonto = (monto * 100)/argumento;
+    	
+    	double difPorcentaje = porcentajeMonto - 100;
+    	
+    	return difPorcentaje;
+    }
 }

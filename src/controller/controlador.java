@@ -92,7 +92,9 @@ public class controlador {
         ActoresControlador.actoresSiempreMismoGenero(audiovisualesTXT, actoresTXT);
     }
 
-    public static void opcion8(){}
+    public static void opcion8(String arg){
+    	AudiovisualesControlador.superanAgumento(audiovisualesTXT, arg);
+    }
 
     public static void opcion9() throws Exception {
         ActoresControlador.actricesRecientes(audiovisualesTXT, actoresTXT);
