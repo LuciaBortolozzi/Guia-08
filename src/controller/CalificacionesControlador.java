@@ -20,6 +20,7 @@ public class CalificacionesControlador {
 
         Mostrar.mostrar("Calificar");
 
+        // Corregir
         String nombreAudiovisual = Validaciones.ingresar("nombre del audiovisual: ", true);
         String nombreSuscriptor = Validaciones.ingresar("nombre del suscriptor: ", true);
 

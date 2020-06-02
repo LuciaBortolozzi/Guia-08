@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class ActoresTXT {
-    private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
 //    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     //Actores.txt -> ("\n" + nombre + "/t"+ apellido + "/t" + sexo)

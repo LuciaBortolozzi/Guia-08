@@ -25,17 +25,13 @@ public class controlador {
     static TreeSet<Actores> actoresTXT = ActoresTXT.bajarActoresTXT();
 
     static {
-        try {//realmente... es necesario devolver el arraylist????? #MISTERIO
+        try {
         	audiovisualesTXT = AudiovisualesActoresTXT.bajarAudiovisualesActoresTXT(audiovisualesTXT, actoresTXT);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    /*
-    static { //BORRAR EL STATIC PARA VER LA EXPLICACION DEL ERROR
-    audiovisualesTXT = AudiovisualesControlador.agregarActoresEnAudiovisualesTXT(audiovisualesTXT, audiovisualesActoresTXT, actoresTXT);
-    }
-*/
+
     static ArrayList<Audiovisuales> audiovisualesJSON;
 
     static {
