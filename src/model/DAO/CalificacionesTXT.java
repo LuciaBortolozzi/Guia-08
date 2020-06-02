@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 public class CalificacionesTXT {
 
@@ -18,10 +19,8 @@ public class CalificacionesTXT {
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     //Calificaciones.txt -> ("\n" + codAudiovisual + ";"+ estrellas + ";" + motivo + ";" + dd/mm/aaaa + ";" + codSuscriptor)
-    public static ArrayList<Audiovisuales> bajarCalificaciones(ArrayList<Audiovisuales> audiovisualesTXT, ArrayList<Audiovisuales> audiovisualesJSON) throws Exception {
+    public static ArrayList<Audiovisuales> bajarCalificaciones(ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Suscriptores> suscriptores) throws Exception {
 
-        ArrayList<Calificaciones> calificaciones = new ArrayList<Calificaciones>();
-        ArrayList<Audiovisuales> audiovisuales = AudiovisualesControlador.ingresarModificarAudiovisual(audiovisualesTXT, audiovisualesJSON);
 
         try {
             File archivo = new File(directorio + "Calificaciones.txt");
@@ -48,9 +47,9 @@ public class CalificacionesTXT {
                     int codSuscriptor = Integer.parseInt(calificacionST[4]);                            // codSuscriptor
 
 
-                    Audiovisuales audiovisual = AudiovisualesControlador.buscarAudiovisual(codAudiovisual, audiovisuales);
+                    Audiovisuales audiovisual = AudiovisualesControlador.buscarAudiovisual(codAudiovisual, audiovisualesTXT);
                     if (audiovisual != null) {
-                        audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, SuscriptorControlador.buscarSuscriptor(codSuscriptor));
+                        audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, SuscriptorControlador.buscarSuscriptor(codSuscriptor, suscriptores));
                     }
                 }
 
@@ -60,7 +59,7 @@ public class CalificacionesTXT {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return audiovisuales;
+        return audiovisualesTXT;
     }
 
     public static void grabarCalificacionesTXT(ArrayList<Audiovisuales> audiovisuales) {

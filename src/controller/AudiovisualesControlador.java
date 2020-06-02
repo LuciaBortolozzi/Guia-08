@@ -57,7 +57,7 @@ public class AudiovisualesControlador {
     }
 
     //ACÃ� LE VOY A TENER QUE PASAR AUDIOVISUALES POR PARAMETRO PORQUE ELLA QUIERE HACERLO COMO OPCION DE MENU
-    public static ArrayList<Audiovisuales> asignarPagos(ArrayList<Audiovisuales> audiovisuales) throws Exception {
+    public static ArrayList<Audiovisuales> asignarPagos(ArrayList<Audiovisuales> audiovisualesTXT) throws Exception {
 
         Calendar fechaPublicacionActual = Calendar.getInstance();
         Calendar fechaActual = Calendar.getInstance();
@@ -72,7 +72,7 @@ public class AudiovisualesControlador {
         boolean primeroDelMes = true;
         int cantidadPublicaciones = 0;
         double totalAbonar = 0;
-        for (Audiovisuales audi : audiovisuales) {
+        for (Audiovisuales audi : audiovisualesTXT) {
             if (audi.getFechaPubli().get(Calendar.MONTH) == fechaPublicacionActual.get(Calendar.MONTH)
                     && audi.getFechaPubli().get(Calendar.YEAR) == fechaPublicacionActual.get(Calendar.YEAR)) {
                 if (primeroDelMes) {
@@ -107,7 +107,7 @@ public class AudiovisualesControlador {
                     audi.setCronogramaPagos(fechaProximoPago, montoDerPelicula);
 
                 } else if (audi instanceof Series) {
-                    int cantidadEpisodios = ContarEpisodiosTemporada(audiovisuales, audi);
+                    int cantidadEpisodios = ContarEpisodiosTemporada(audiovisualesTXT, audi);
 
                     if (cantidadEpisodios > 12) {
                         montoDerSeries = audi.calculoMontoTotalSeriesMasDoce();
@@ -127,7 +127,7 @@ public class AudiovisualesControlador {
 
         CronogramaPagosTXT.grabarCronogramaPagosTXT(audiovisualesAuxiliar, cantidadPublicaciones, totalAbonar);
 
-        return audiovisuales;
+        return audiovisualesTXT;
     }
 
     public static int ContarEpisodiosTemporada(ArrayList<Audiovisuales> audiovisuales, Audiovisuales audi) {

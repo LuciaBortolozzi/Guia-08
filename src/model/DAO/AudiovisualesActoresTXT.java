@@ -15,9 +15,6 @@ public class AudiovisualesActoresTXT {
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     //AudiovisualesActores.txt -> (codigoAudiovisual + "/t" + nombreApellido + "/t" + nombreApellido + ...)
-
-
-    CORREGIR!!!!
     public static ArrayList<Audiovisuales> bajarAudiovisualesActoresTXT(ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Actores> actoresTXT) throws Exception {
 
     	TreeSet<Actores> actores = new TreeSet<Actores>();
@@ -38,7 +35,7 @@ public class AudiovisualesActoresTXT {
                 
                 boolean primeraVez = true;
                 int cod = 0;
-                Audiovisuales audiovisual;
+                Audiovisuales audiovisual = null;
                 Actores actor;
                 // Guardar objetos
                 for (String s : audiovisualActoresST) {

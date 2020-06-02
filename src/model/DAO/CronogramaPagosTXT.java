@@ -15,8 +15,7 @@ public class CronogramaPagosTXT {
 
     //private static final String directorio = "D:\\\\IdeaProjects\\\\Java\\\\Guia-08\\\\src\\\\resources\\";
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
-
-    CORREGIR!!!!
+    
     //Calificaciones.txt -> (identificador + ";" + fechaDePago + ";" + nombrePublicacion + ";" + fechaPublicacion + ";" + monto )
     public static ArrayList<Audiovisuales> bajarCronogramas(ArrayList<Audiovisuales> audiovisuales) throws Exception {
 

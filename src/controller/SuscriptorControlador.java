@@ -15,9 +15,8 @@ import java.util.TreeSet;
 
 public class SuscriptorControlador {
 
-    public static Suscriptores buscarSuscriptor(int codSuscriptor) {
+    public static Suscriptores buscarSuscriptor(int codSuscriptor, TreeSet<Suscriptores> suscriptores) {
 
-        TreeSet<Suscriptores> suscriptores = SuscriptoresTXT.bajarSuscriptores();
         Suscriptores suscriptor;
 
         Iterator<Suscriptores> iteratorAudiovisuales = suscriptores.iterator();

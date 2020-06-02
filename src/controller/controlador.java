@@ -25,7 +25,7 @@ public class controlador {
     static TreeSet<Actores> actoresTXT = ActoresTXT.bajarActoresTXT();
 
     static {
-        try {
+        try {//realmente... es necesario devolver el arraylist????? #MISTERIO
         	audiovisualesTXT = AudiovisualesActoresTXT.bajarAudiovisualesActoresTXT(audiovisualesTXT, actoresTXT);
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,55 +46,64 @@ public class controlador {
         }
     }
 
-    static ArrayList<Audiovisuales> audiovisuales;
-
     static {
         try {
-            audiovisuales = CalificacionesTXT.bajarCalificaciones(audiovisualesTXT, audiovisualesJSON);
+        	audiovisualesTXT = CalificacionesTXT.bajarCalificaciones(audiovisualesTXT, suscriptores);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    // Falta el de asignar pagos
+
+    static {
+        try {
+        	audiovisualesTXT = CronogramaPagosTXT.bajarCronogramas(audiovisualesTXT);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public controlador() throws Exception {
     }
 
 
     public static void opcion0() throws Exception {
-        CalificacionesControlador.calificar(audiovisuales, suscriptores);
+        CalificacionesControlador.calificar(audiovisualesTXT, suscriptores);
     }
 
     public static void opcion1() throws Exception {
-        SuscriptorControlador.recomendarMejorSerie(audiovisuales);
+        SuscriptorControlador.recomendarMejorSerie(audiovisualesTXT);
     }
 
     public static void opcion2() throws Exception {
-        SuscriptorControlador.recomendarMejorPelicula(audiovisuales, generos);
+        SuscriptorControlador.recomendarMejorPelicula(audiovisualesTXT, generos);
     }
 
     public static void opcion3(){}
 
     public static void opcion4() throws Exception {
-        SuscriptorControlador.mayoresSinCalificar(audiovisuales, suscriptores);
+        SuscriptorControlador.mayoresSinCalificar(audiovisualesTXT, suscriptores);
     }
 
     public static void opcion5() throws Exception {
-        AudiovisualesControlador.peliculaAlAzar(audiovisuales);
+        AudiovisualesControlador.peliculaAlAzar(audiovisualesTXT);
     }
 
     public static void opcion6() throws Exception {
-        AudiovisualesControlador.serieNoCalificadaPorHombresAdultos(audiovisuales);
+        AudiovisualesControlador.serieNoCalificadaPorHombresAdultos(audiovisualesTXT);
     }
 
     public static void opcion7() throws Exception {
-        ActoresControlador.actoresSiempreMismoGenero(audiovisuales, actores);
+        ActoresControlador.actoresSiempreMismoGenero(audiovisualesTXT, actoresTXT);
     }
 
     public static void opcion8(){}
 
     public static void opcion9() throws Exception {
-        ActoresControlador.actricesRecientes(audiovisuales, actores);
+        ActoresControlador.actricesRecientes(audiovisualesTXT, actoresTXT);
+    }
+    
+    public static void opcion10() throws Exception {
+        AudiovisualesControlador.asignarPagos(audiovisualesTXT);
     }
 
 }
