@@ -3,7 +3,7 @@ package model;
 import java.util.Calendar;
 import java.util.TreeSet;
 
-public class Series extends Audiovisuales implements Comparable<Series>{
+public class Series extends Audiovisuales{
     private int temporada;
     private int episodio;
 
@@ -63,8 +63,15 @@ public class Series extends Audiovisuales implements Comparable<Series>{
         return monto;
 	}
 
-    @Override
+  /*  @Override
     public int compareTo(Series s) {
         return s.temporada - this.temporada;
+    }*/
+	/*
+	@Override
+    public int compareTo(Series s) {
+        int lastCmp = s.temporada - this.temporada;                     // Primer parametro
+        return (lastCmp != 0 ? lastCmp : nombre.compareTo(s.nombre));   // Segundo parametro
     }
+    */
 }

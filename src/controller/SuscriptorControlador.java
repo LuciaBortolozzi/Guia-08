@@ -8,10 +8,9 @@ import model.DAO.SuscriptoresTXT;
 import view.Mostrar;
 import view.Validaciones;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.TreeSet;
+import java.util.*;
+
+
 
 public class SuscriptorControlador {
 
@@ -32,98 +31,78 @@ public class SuscriptorControlador {
 
     public static Audiovisuales recomendarMejorSerie(ArrayList<Audiovisuales> audiovisuales) throws Exception {
 
-        /*A todos los suscriptores jóvenes (menores de 35 años), se les recomienda la temporada
-        completa de la serie con mejor calificación promedio durante los últimos 3 meses, evaluada
-        por quienes cumplan con el mismo rango de edad, mediante la generación de un archivo
-        Json. Este archivo incluye el nombre de la empresa, nombre de la serie, género, nómina de
-        actores, sinopsis, temporada, cantidad de episodios y su calificación.*/
-
-    	ArrayList<Series> arraySeries = new ArrayList<Series>();
         Calendar fechaActual = Calendar.getInstance();
         Calendar fechaAnterior = Validaciones.tresMesesAntes(fechaActual);
 
-        int sumaEstrellas = 0;
-        int cantidadCalificaciones = 0;
         int promedioTemporada;
         int mejorPromedio = -1;
         boolean menorA35;
 
-        Audiovisuales mejorAudiovisual = audiovisuales.get(0);
-
-        // Primero recorrer audiovisuales para saber cantidad de episodios por temporada
-
-        for (Audiovisuales audiovisual : audiovisuales) {
+        Audiovisuales mejorAudiovisual = null;
+        
+        for (Audiovisuales audi : audiovisuales) {
         	
-        	if(audiovisual instanceof Series) {
-        		
-        		arraySeries.add((Series)audiovisual);
+        	int sumaEstrellas = 0;
+            int cantidadCalificaciones = 0;
+            
+        	if(audi instanceof Series) {
+        		for (Audiovisuales au : audiovisuales) {
+        			if(audi instanceof Series) {
+	            		if(((Series)au).getTemporada() == ((Series)audi).getTemporada() && ((Series)au).getNombre().equals(((Series)audi).getNombre())) {
+	            			
+	    	                for (Calificaciones calificacion : au.getCalificaciones()) {
+	
+	    	                    menorA35 = Validaciones.menor(calificacion.getSuscriptor().getFechaDeNac(), fechaActual, 35);
+	    	                    
+	    	                    if (menorA35 && calificacion.getFechaRealizada().after(fechaAnterior)) {                                                                                     // Suscriptor es menor de 35?
+	    	                        sumaEstrellas += calificacion.getEstrellas();
+	    	                        cantidadCalificaciones++;
+	    	                    }	
+	    	                } 
+	            		}
+        			}
+            	}
+        		if (cantidadCalificaciones != 0) {
+	        		promedioTemporada = sumaEstrellas/ cantidadCalificaciones;
+	        		 if (promedioTemporada > mejorPromedio) {
+	                     mejorPromedio = promedioTemporada;
+	                     mejorAudiovisual = audi;
+	                 }
+        		}
         	}
         }
-        
-        for (Series serie : arraySeries) {
-
-            if (serie.getFechaPubli().after(fechaAnterior)) {                    // Es serie y fue publicada en los ultimos 3 meses
-
-                for (Calificaciones calificacion : serie.getCalificaciones()) {
-
-                    menorA35 = Validaciones.menor(calificacion.getSuscriptor().getFechaDeNac(), fechaActual, 35);
-                    if (menorA35) {                                                                                     // Suscriptor es menor de 35?
-                        sumaEstrellas += calificacion.getEstrellas();
-                        cantidadCalificaciones++;
-                    }
-
-                }
-            }
-            if (cantidadCalificaciones != 0) {
-                promedioTemporada = sumaEstrellas / cantidadCalificaciones;
-
-                if (promedioTemporada > mejorPromedio) {
-                    mejorPromedio = promedioTemporada;
-                    mejorAudiovisual = serie;
-                }
-            }
-            sumaEstrellas = 0;
-            cantidadCalificaciones = 0;
-        }
-
         return mejorAudiovisual;
     }
+    
+    public static ArrayList<Audiovisuales> recomendarMejorPelicula(ArrayList<Audiovisuales> audiovisuales, ArrayList<Generos> generos) throws Exception {
 
-    public static Audiovisuales recomendarMejorPelicula(ArrayList<Audiovisuales> audiovisuales, ArrayList<Generos> generos) throws Exception {
-
-        /*Para cada uno de los géneros existentes, la película con mejor calificación obtenida en el
-        último mes es recomendada a todos los suscriptores mayores de 55 años, mediante otro
-        archivo JSon con la estructura similar a la de las series.*/
-
+    	ArrayList<Audiovisuales> audiovisualesAux = new ArrayList<Audiovisuales>();
         Calendar fechaActual = Calendar.getInstance();
         Calendar fechaAnterior = Validaciones.ultimoMes(fechaActual);
 
-        int sumaEstrellas = 0;
-        int cantidadCalificaciones = 0;
+        
         int promedio;
         int mejorPromedio = -1;
         boolean mayorA55;
 
-        Audiovisuales mejorAudiovisual = audiovisuales.get(0);
+        Audiovisuales mejorAudiovisual = null;
 
-        for (Generos genero : generos
-        ) {
+        for (Generos genero : generos) {
+        	
             for (Audiovisuales audiovisual : audiovisuales) {
-
-                if (audiovisual instanceof Peliculas                                                                    // Es pelicula y fue publicada en el ultimo mes
-                        && audiovisual.getFechaPubli().after(fechaAnterior)
-                        && genero.getCodigo() == audiovisual.getGenero().getCodigo()) {
+            	int sumaEstrellas = 0;
+                int cantidadCalificaciones = 0;
+                if (audiovisual instanceof Peliculas && genero.getCodigo() == audiovisual.getGenero().getCodigo()) {
 
                     for (Calificaciones calificacion : audiovisual.getCalificaciones()) {
 
                         mayorA55 = Validaciones.mayor(calificacion.getSuscriptor().getFechaDeNac(), fechaActual, 55);
-                        if (mayorA55) {                                                                                     // Suscriptor es mayor de 55?
+                        
+                        if (mayorA55 && calificacion.getFechaRealizada().after(fechaAnterior) ) {                                                                                     // Suscriptor es mayor de 55?
                             sumaEstrellas += calificacion.getEstrellas();
                             cantidadCalificaciones++;
                         }
-
                     }
-
                 }
 
                 if (cantidadCalificaciones != 0) {
@@ -136,15 +115,43 @@ public class SuscriptorControlador {
                 sumaEstrellas = 0;
                 cantidadCalificaciones = 0;
             }
+            audiovisualesAux.add(mejorAudiovisual);
         }
 
-        return mejorAudiovisual;
+        return audiovisualesAux;
+    }
+    
+    public static void infoSeries(ArrayList<Audiovisuales> audiovisuales, ArrayList<Generos> generos) {
+    	//Para cada uno de los distintos géneros, nombre de la serie, 
+    	//cantidad total de temporadas y cantidad de actores, 
+    	//ordenadas según la cantidad total de temporadas en forma descendente.
+    	/*
+    	ArrayList<Series> seriesAux = new ArrayList<Series>();
+    	
+    	for(Audiovisuales audi : audiovisuales) {
+    		if(audi instanceof Series) {
+    			
+    			seriesAux.add((Series)audi);
+    		}
+    	}
+    	
+    	Collections.sort(seriesAux);
+    	for(Generos gen : generos) {
+    		
+    		for(Series ser : seriesAux) {
+    			
+    			
+    		}
+    		
+    	}
+    	*/
+    	
     }
 
     public static void mayoresSinCalificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores) throws Exception {
 
-        /*Nombre y apellido de los suscriptores mayores de 60 años que nunca hayan calificado
-        una película.*/
+        /*Nombre y apellido de los suscriptores mayores de 60 aÃ±os que nunca hayan calificado
+        una pelÃ­cula.*/
 
         TreeSet<Suscriptores> suscriptoresMayores = new TreeSet<Suscriptores>();
 
