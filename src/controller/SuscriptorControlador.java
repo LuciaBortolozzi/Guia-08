@@ -125,7 +125,7 @@ public class SuscriptorControlador {
     	//Para cada uno de los distintos géneros, nombre de la serie, 
     	//cantidad total de temporadas y cantidad de actores, 
     	//ordenadas según la cantidad total de temporadas en forma descendente.
-    	/*
+    	
     	ArrayList<Series> seriesAux = new ArrayList<Series>();
     	
     	for(Audiovisuales audi : audiovisuales) {
@@ -138,13 +138,25 @@ public class SuscriptorControlador {
     	Collections.sort(seriesAux);
     	for(Generos gen : generos) {
     		
+    		int codigoSerie  = seriesAux.get(0).getCodigo();
     		for(Series ser : seriesAux) {
+    			
+    			if(codigoSerie == ser.getCodigo()) {
+    				
+    				if(gen.getCodigo()==(ser.getGenero().getCodigo())) {
+        				
+        				
+        			}
+    				
+    			}
+    			
+    			
     			
     			
     		}
     		
     	}
-    	*/
+    	
     	
     }
 
