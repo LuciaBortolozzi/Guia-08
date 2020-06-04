@@ -132,37 +132,48 @@ public class SuscriptorControlador {
     	//ordenadas según la cantidad total de temporadas en forma descendente.
     	
     	ArrayList<Series> seriesAux = new ArrayList<Series>();
+    	ArrayList<Series> seriesNoRepetidas = new ArrayList<Series>();
+    	TreeSet<Actores> actor = new TreeSet<Actores>();
     	
-    	for(Audiovisuales audi : audiovisuales) {
-    		if(audi instanceof Series) {
-    			
-    			seriesAux.add((Series)audi);
-    		}
-    	}
-    	
-    	Collections.sort(seriesAux);
     	for(Generos gen : generos) {
+    		Mostrar.mostrar("GENERO: " + gen.getDescripcion());
+    		seriesAux.clear();
+    		for(Audiovisuales audi : audiovisuales) {
+        		if(audi instanceof Series && audi.getGenero().getCodigo() == gen.getCodigo()) {
+        			
+        			seriesAux.add((Series)audi);
+        		}
+        	}
+    		Collections.sort(seriesAux);
     		
-    		int codigoSerie  = seriesAux.get(0).getCodigo();
+    		seriesNoRepetidas.clear();
+    		
+    		int codigoSerie = -1;
     		for(Series ser : seriesAux) {
     			
-    			if(codigoSerie == ser.getCodigo()) {
+    			if(codigoSerie != ser.getCodigo()) {
     				
-    				if(gen.getCodigo()==(ser.getGenero().getCodigo())) {
-        				
-        				
-        			}
-    				
+    				seriesNoRepetidas.add(ser);
+    				codigoSerie = ser.getCodigo();
     			}
-    			
-    			
-    			
-    			
     		}
+    		Collections.sort(seriesNoRepetidas);
     		
-    	}
-    	
-    	
+    		for(Series ser : seriesNoRepetidas) {
+    			Mostrar.mostrar("Serie: " + ser.getNombre());
+    			Mostrar.mostrar("Cantidad de temporadas : " + ser.getTemporada());
+    			//Al estar ordenado, nos trae la temporada más alta, por ende, es la cantidad de temporadas que posee la serie
+    			actor.clear();
+	    		for(Audiovisuales audi : audiovisuales) {
+	    			
+	    			if(audi instanceof Series && ser.getCodigo()==audi.getCodigo()) {
+	    				
+	    				actor.addAll(audi.getActores());
+	    			}	
+	    		}
+	    		Mostrar.mostrar("Cantidad de actores : " + actor.size());
+    		}	
+    	}	
     }
 
     public static void mayoresSinCalificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores) {
