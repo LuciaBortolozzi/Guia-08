@@ -8,8 +8,9 @@ import model.DAO.*;
 import view.*;
 
 public class AudiovisualesControlador {
-/*
-	public static ArrayList<Audiovisuales> agregarActoresEnAudiovisualesTXT (ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Actores> audiovisualesActoresTXT, TreeSet<Actores> actoresTXT){
+	
+
+/*	public static ArrayList<Audiovisuales> agregarActoresEnAudiovisualesTXT (ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Actores> audiovisualesActoresTXT, TreeSet<Actores> actoresTXT){
 		
 	    for (String audiAct : audiovisualActoresST) {
             TreeSet<Actores> actoresArray = new TreeSet<Actores>();
@@ -56,25 +57,29 @@ public class AudiovisualesControlador {
         return null;
     }
 
-    //ACÃ� LE VOY A TENER QUE PASAR AUDIOVISUALES POR PARAMETRO PORQUE ELLA QUIERE HACERLO COMO OPCION DE MENU
     public static ArrayList<Audiovisuales> asignarPagos(ArrayList<Audiovisuales> audiovisualesTXT) throws Exception {
 
-        Calendar fechaPublicacionActual = Calendar.getInstance();
         Calendar fechaActual = Calendar.getInstance();
-        Validaciones.OnceMesesAntes(fechaActual);
+        Calendar fechaHace1mes = Calendar.getInstance();
+        Validaciones.ultimoMes(fechaHace1mes);
         Calendar fechaProximoPago = Calendar.getInstance();
+        Calendar fechaActualHace1anio = Calendar.getInstance();
+        Validaciones.unAnioAntes(fechaActualHace1anio);
+        Calendar fechaHace1mesHace1anio = Calendar.getInstance();
+        Validaciones.ultimoMes(fechaHace1mesHace1anio);
+        Validaciones.unAnioAntes(fechaHace1mesHace1anio);
         ArrayList<Audiovisuales> audiovisualesAuxiliar = new ArrayList<Audiovisuales>();
 
-        double montoDerPelicula = Validaciones.validarDouble("monto de los derechos de pelÃ­culas");
+        double montoDerPelicula = Validaciones.validarDouble("monto de los derechos de peliculas");
 
         double montoDerSeries = Validaciones.validarDouble("monto de los derechos de series");
 
         boolean primeroDelMes = true;
         int cantidadPublicaciones = 0;
         double totalAbonar = 0;
+        
         for (Audiovisuales audi : audiovisualesTXT) {
-            if (audi.getFechaPubli().get(Calendar.MONTH) == fechaPublicacionActual.get(Calendar.MONTH)
-                    && audi.getFechaPubli().get(Calendar.YEAR) == fechaPublicacionActual.get(Calendar.YEAR)) {
+            if (audi.getFechaPubli().after(fechaHace1mes) && audi.getFechaPubli().before(fechaActual)) {
                 if (primeroDelMes) {
                     fechaProximoPago = Validaciones.UnMesDespues(fechaProximoPago);
                     primeroDelMes = false;
@@ -93,7 +98,7 @@ public class AudiovisualesControlador {
                 cantidadPublicaciones++;
                 totalAbonar = totalAbonar + audi.getCronogramaPagos().getMonto();
 
-            } else if (audi.getFechaPubli().compareTo(fechaActual) >= 0) {
+            } else if (audi.getFechaPubli().after(fechaHace1mesHace1anio) && audi.getFechaPubli().before(fechaActualHace1anio)) {
                 if (primeroDelMes) {
                     fechaProximoPago = Validaciones.UnMesDespues(fechaProximoPago);
                     primeroDelMes = false;

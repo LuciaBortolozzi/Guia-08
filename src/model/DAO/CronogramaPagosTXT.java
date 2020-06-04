@@ -16,6 +16,7 @@ public class CronogramaPagosTXT {
     private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
 //    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
     
+    /* AL FINAL ESTA FUNCIÓN NO ES NECESARIA, LA DEJO PARA NO TENER QUE LLORAR
     //Calificaciones.txt -> (identificador + ";" + fechaDePago + ";" + nombrePublicacion + ";" + fechaPublicacion + ";" + monto )
     public static ArrayList<Audiovisuales> bajarCronogramas(ArrayList<Audiovisuales> audiovisuales) throws Exception {
 
@@ -72,9 +73,8 @@ public class CronogramaPagosTXT {
             e.printStackTrace();
         }
         return audiovisuales;
-    }
-
-
+    }*/
+    
     public static void grabarCronogramaPagosTXT(ArrayList<Audiovisuales> audiovisualesAux, int cantidadPublicaciones, double totalAbonar) {
         Calendar fechaActual = Calendar.getInstance();
         try {

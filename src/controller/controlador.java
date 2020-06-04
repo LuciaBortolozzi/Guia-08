@@ -50,13 +50,14 @@ public class controlador {
         }
     }
 
+    /* YA NO VA A SER NECESARIO HACER ESTO.. SO SAD
     static {
         try {
         	audiovisualesTXT = CronogramaPagosTXT.bajarCronogramas(audiovisualesTXT);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public controlador() throws Exception {
     }
