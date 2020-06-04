@@ -8,42 +8,8 @@ import model.DAO.*;
 import view.*;
 
 public class AudiovisualesControlador {
-	
 
-/*	public static ArrayList<Audiovisuales> agregarActoresEnAudiovisualesTXT (ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Actores> audiovisualesActoresTXT, TreeSet<Actores> actoresTXT){
-		
-	    for (String audiAct : audiovisualActoresST) {
-            TreeSet<Actores> actoresArray = new TreeSet<Actores>();
-            String[] audiActST = audiAct.split("\t");                    // Revisarr
-            for (Audiovisuales audi : audiovisuales) {
-                if (Integer.parseInt(audiActST[0]) == audi.getCodigo()) {
-                    for (int i = 1; i < 10; i++) {
-                        if (audiActST[i] == null) {
-
-                            break;
-                        } else {
-                            Actores a;
-                            Iterator<Actores> act = actores.iterator();
-                            while (act.hasNext()) {
-                                a = act.next();
-                                String concatenoNombreApellido = a.getNombre() + a.getApellido();
-                                if (concatenoNombreApellido.replace(" ", "").equals(audiActST[i].replace(" ", ""))) {
-                                    actoresArray.add(a);
-                                }
-                            }
-                        }
-                    }
-
-                    audi.setActores(actoresArray);
-                }
-            }
-        }
-		
-		
-		return audiovisualesTXT;
-	}
-	*/
-    public static Audiovisuales buscarAudiovisual(int codAudiovisual, ArrayList<Audiovisuales> audiovisuales) throws Exception {
+    public static Audiovisuales buscarAudiovisual(int codAudiovisual, ArrayList<Audiovisuales> audiovisuales) {
 
         Audiovisuales audiovisual;
         Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
@@ -57,7 +23,7 @@ public class AudiovisualesControlador {
         return null;
     }
 
-    public static ArrayList<Audiovisuales> asignarPagos(ArrayList<Audiovisuales> audiovisualesTXT) throws Exception {
+    public static ArrayList<Audiovisuales> asignarPagos(ArrayList<Audiovisuales> audiovisualesTXT) {
 
         Calendar fechaActual = Calendar.getInstance();
         Calendar fechaHace1mes = Calendar.getInstance();
@@ -150,21 +116,7 @@ public class AudiovisualesControlador {
         return cantidadEpisodios;
     }
 
-    public static Audiovisuales buscarAudiovisualPorNombreyFecha(String nombreAudiovisual, ArrayList<Audiovisuales> audiovisuales) throws Exception {
-
-        Audiovisuales audiovisual;
-        Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
-        while (iteratorAudiovisuales.hasNext()) {
-            audiovisual = iteratorAudiovisuales.next();
-
-            if (audiovisual.getNombre().replace(" ", "").toUpperCase() == nombreAudiovisual.replace(" ", "").toUpperCase()) {
-                return audiovisual;
-            }
-        }
-        return null;
-    }
-
-    public static void serieNoCalificadaPorHombresAdultos(ArrayList<Audiovisuales> audiovisuales) throws Exception {
+    public static void serieNoCalificadaPorHombresAdultos(ArrayList<Audiovisuales> audiovisuales) {
 		/*Codigo  y  nombre  de  serie,  temporada  y  episodio  de  aquellas  que  no  hayan  sido
 		calificadas por ningun suscriptor masculino adulto menor de 45 anios.*/
 
@@ -192,7 +144,7 @@ public class AudiovisualesControlador {
         }
     }
 
-    public static void peliculaAlAzar(ArrayList<Audiovisuales> audiovisuales) throws Exception {
+    public static void peliculaAlAzar(ArrayList<Audiovisuales> audiovisuales) {
 		/*Apellido y nombre de los actores (ordenados por ambos), duracion de una pelicula, fecha
 		de  publicacion  y  evaluaciones  (fecha,  nombre  del  suscriptor  y  calificacion)  de  una
 		pelicula seleccionada al azar.*/
@@ -262,4 +214,52 @@ public class AudiovisualesControlador {
     	
     	return difPorcentaje;
     }
+
+    /*public static Audiovisuales buscarAudiovisualPorNombreyFecha(String nombreAudiovisual, ArrayList<Audiovisuales> audiovisuales) {
+
+        Audiovisuales audiovisual;
+        Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
+        while (iteratorAudiovisuales.hasNext()) {
+            audiovisual = iteratorAudiovisuales.next();
+
+            if (audiovisual.getNombre().replace(" ", "").toUpperCase() == nombreAudiovisual.replace(" ", "").toUpperCase()) {
+                return audiovisual;
+            }
+        }
+        return null;
+    }*/
+
+    /*	public static ArrayList<Audiovisuales> agregarActoresEnAudiovisualesTXT (ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Actores> audiovisualesActoresTXT, TreeSet<Actores> actoresTXT){
+
+	    for (String audiAct : audiovisualActoresST) {
+            TreeSet<Actores> actoresArray = new TreeSet<Actores>();
+            String[] audiActST = audiAct.split("\t");                    // Revisarr
+            for (Audiovisuales audi : audiovisuales) {
+                if (Integer.parseInt(audiActST[0]) == audi.getCodigo()) {
+                    for (int i = 1; i < 10; i++) {
+                        if (audiActST[i] == null) {
+
+                            break;
+                        } else {
+                            Actores a;
+                            Iterator<Actores> act = actores.iterator();
+                            while (act.hasNext()) {
+                                a = act.next();
+                                String concatenoNombreApellido = a.getNombre() + a.getApellido();
+                                if (concatenoNombreApellido.replace(" ", "").equals(audiActST[i].replace(" ", ""))) {
+                                    actoresArray.add(a);
+                                }
+                            }
+                        }
+                    }
+
+                    audi.setActores(actoresArray);
+                }
+            }
+        }
+
+
+		return audiovisualesTXT;
+	}
+	*/
 }

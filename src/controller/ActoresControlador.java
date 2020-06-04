@@ -14,7 +14,7 @@ import java.util.TreeSet;
 
 public class ActoresControlador {
 
-    public static void actoresSiempreMismoGenero(ArrayList<Audiovisuales> audiovisuales, TreeSet<Actores> actores) throws Exception {
+    public static void actoresSiempreMismoGenero(ArrayList<Audiovisuales> audiovisuales, TreeSet<Actores> actores) {
         /*Cantidad de actores que solamente participan de series o películas de un mismo género.*/
 
         TreeSet<Actores> actoresMonotonos = new TreeSet<>();
@@ -62,7 +62,7 @@ public class ActoresControlador {
         Mostrar.mostrar("Cantidad de actores que solamente participan de series o películas de un mismo género: " + cantidad);
     }
 
-    public static void actricesRecientes(ArrayList<Audiovisuales> audiovisuales, TreeSet<Actores> actores) throws Exception {
+    public static void actricesRecientes(ArrayList<Audiovisuales> audiovisuales, TreeSet<Actores> actores) {
         /*Apellido y nombre de las actrices que hayan filmado una película en los últimos 2 anios.*/
 
         Actores actor;

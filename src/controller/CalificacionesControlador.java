@@ -16,7 +16,7 @@ import java.util.TreeSet;
 
 public class CalificacionesControlador {
 
-    public static void calificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores) throws Exception {
+    public static void calificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores) {
 
         Mostrar.mostrar("Calificar");
 

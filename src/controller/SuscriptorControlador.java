@@ -1,16 +1,11 @@
 package controller;
 
-
 import model.*;
 import model.DAO.AudiovisualesJSON;
-import model.DAO.GenerosTXT;
-import model.DAO.SuscriptoresTXT;
 import view.Mostrar;
 import view.Validaciones;
 
 import java.util.*;
-
-
 
 public class SuscriptorControlador {
 
@@ -29,10 +24,11 @@ public class SuscriptorControlador {
         return null;
     }
 
-    public static Audiovisuales recomendarMejorSerie(ArrayList<Audiovisuales> audiovisuales) throws Exception {
+    public static void recomendarMejorSerie(ArrayList<Audiovisuales> audiovisuales) {
 
         Calendar fechaActual = Calendar.getInstance();
-        Calendar fechaAnterior = Validaciones.tresMesesAntes(fechaActual);
+        Calendar fechaAnterior = Calendar.getInstance();
+        Validaciones.tresMesesAntes(fechaAnterior);
 
         int promedioTemporada;
         int mejorPromedio = -1;
@@ -47,7 +43,7 @@ public class SuscriptorControlador {
             
         	if(audi instanceof Series) {
         		for (Audiovisuales au : audiovisuales) {
-        			if(audi instanceof Series) {
+        			if(au instanceof Series) {
 	            		if(((Series)au).getTemporada() == ((Series)audi).getTemporada() && ((Series)au).getNombre().equals(((Series)audi).getNombre())) {
 	            			
 	    	                for (Calificaciones calificacion : au.getCalificaciones()) {
@@ -71,14 +67,20 @@ public class SuscriptorControlador {
         		}
         	}
         }
-        return mejorAudiovisual;
+        if (mejorAudiovisual != null){
+            AudiovisualesJSON.grabarRecomendacionesSeriesJovenesJSON(mejorAudiovisual);
+        } else {
+            Mostrar.mostrar("No hay serie a recomendar");
+        }
+
     }
     
-    public static ArrayList<Audiovisuales> recomendarMejorPelicula(ArrayList<Audiovisuales> audiovisuales, ArrayList<Generos> generos) throws Exception {
+    public static void recomendarMejorPelicula(ArrayList<Audiovisuales> audiovisuales, ArrayList<Generos> generos) {
 
     	ArrayList<Audiovisuales> audiovisualesAux = new ArrayList<Audiovisuales>();
         Calendar fechaActual = Calendar.getInstance();
-        Calendar fechaAnterior = Validaciones.ultimoMes(fechaActual);
+        Calendar fechaAnterior = Calendar.getInstance();
+        Validaciones.ultimoMes(fechaAnterior);
 
         
         int promedio;
@@ -112,13 +114,16 @@ public class SuscriptorControlador {
                         mejorAudiovisual = audiovisual;
                     }
                 }
-                sumaEstrellas = 0;
-                cantidadCalificaciones = 0;
             }
             audiovisualesAux.add(mejorAudiovisual);
         }
 
-        return audiovisualesAux;
+        if (!audiovisualesAux.isEmpty()){
+            AudiovisualesJSON.grabarRecomendacionesPeliculasMayoresJSON(audiovisualesAux);
+        } else {
+            Mostrar.mostrar("No hay peliculas a recomendar");
+        }
+
     }
     
     public static void infoSeries(ArrayList<Audiovisuales> audiovisuales, ArrayList<Generos> generos) {
@@ -160,7 +165,7 @@ public class SuscriptorControlador {
     	
     }
 
-    public static void mayoresSinCalificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores) throws Exception {
+    public static void mayoresSinCalificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores) {
 
         /*Nombre y apellido de los suscriptores mayores de 60 aÃ±os que nunca hayan calificado
         una pelÃ­cula.*/
