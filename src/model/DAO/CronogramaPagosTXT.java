@@ -15,8 +15,43 @@ public class CronogramaPagosTXT {
 
     private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
 //    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
-    
-    /* AL FINAL ESTA FUNCIÓN NO ES NECESARIA, LA DEJO PARA NO TENER QUE LLORAR
+
+    public static void grabarCronogramaPagosTXT(ArrayList<Audiovisuales> audiovisualesAux, int cantidadPublicaciones, double totalAbonar) {
+        Calendar fechaActual = Calendar.getInstance();
+        try {
+            File fichero = new File(directorio + "CronogramaPagos" + fechaActual.get(Calendar.MONTH) + fechaActual.get(Calendar.YEAR) + ".txt");
+
+            if (fichero.exists()) {
+                PrintWriter archivoSalida = new PrintWriter(fichero);
+                String identificador = "01";
+                String identificadorTotal = "03";
+                for (Audiovisuales audiovisual : audiovisualesAux) {
+
+                    //Calificaciones.txt -> (identificador + ";" + fechaDePago + ";" + nombrePublicacion + ";" + fechaPublicacion + ";" + monto )
+                    archivoSalida.println(identificador + ";"
+                            + audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.DAY_OF_MONTH) + "/"
+                            + audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.MONTH) + "/"
+                            + audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.YEAR) + ";"
+                            + audiovisual.getNombre() + ";"
+                            + audiovisual.getFechaPubli().get(Calendar.DAY_OF_MONTH) + "/"
+                            + audiovisual.getFechaPubli().get(Calendar.MONTH) + "/"
+                            + audiovisual.getFechaPubli().get(Calendar.YEAR) + ";"
+                            + audiovisual.getCronogramaPagos().getMonto());
+
+
+                }
+                //Calificaciones.txt -> (identificadorTotal + ";" + cantidadPublicaciones + ";" + totalAbonar)
+                archivoSalida.println(identificadorTotal + ";" + cantidadPublicaciones + ";" + totalAbonar);
+
+                archivoSalida.close();
+            }
+
+        } catch (IOException e) {
+            System.out.println("No se puede grabar el archivo de CronogramaPagosmmdd.txt");
+        }
+    }
+
+        /* AL FINAL ESTA FUNCIÓN NO ES NECESARIA, LA DEJO PARA NO TENER QUE LLORAR
     //Calificaciones.txt -> (identificador + ";" + fechaDePago + ";" + nombrePublicacion + ";" + fechaPublicacion + ";" + monto )
     public static ArrayList<Audiovisuales> bajarCronogramas(ArrayList<Audiovisuales> audiovisuales) throws Exception {
 
@@ -74,41 +109,6 @@ public class CronogramaPagosTXT {
         }
         return audiovisuales;
     }*/
-    
-    public static void grabarCronogramaPagosTXT(ArrayList<Audiovisuales> audiovisualesAux, int cantidadPublicaciones, double totalAbonar) {
-        Calendar fechaActual = Calendar.getInstance();
-        try {
-            File fichero = new File(directorio + "CronogramaPagos" + fechaActual.get(Calendar.MONTH) + fechaActual.get(Calendar.YEAR) + ".txt");
-
-            if (fichero.exists()) {
-                PrintWriter archivoSalida = new PrintWriter(fichero);
-                String identificador = "01";
-                String identificadorTotal = "03";
-                for (Audiovisuales audiovisual : audiovisualesAux) {
-
-                    //Calificaciones.txt -> (identificador + ";" + fechaDePago + ";" + nombrePublicacion + ";" + fechaPublicacion + ";" + monto )
-                    archivoSalida.println(identificador + ";"
-                            + audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.DAY_OF_MONTH) + "/"
-                            + audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.MONTH) + "/"
-                            + audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.YEAR) + ";"
-                            + audiovisual.getNombre() + ";"
-                            + audiovisual.getFechaPubli().get(Calendar.DAY_OF_MONTH) + "/"
-                            + audiovisual.getFechaPubli().get(Calendar.MONTH) + "/"
-                            + audiovisual.getFechaPubli().get(Calendar.YEAR) + ";"
-                            + audiovisual.getCronogramaPagos().getMonto());
-
-
-                }
-                //Calificaciones.txt -> (identificadorTotal + ";" + cantidadPublicaciones + ";" + totalAbonar)
-                archivoSalida.println(identificadorTotal + ";" + cantidadPublicaciones + ";" + totalAbonar);
-
-                archivoSalida.close();
-            }
-
-        } catch (Exception e) {
-            System.out.println("No se puede grabar el archivo de CronogramaPagosmmdd.txt");
-        }
-    }
 
 }
 

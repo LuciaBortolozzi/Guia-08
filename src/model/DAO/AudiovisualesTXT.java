@@ -13,7 +13,7 @@ public class AudiovisualesTXT {
 
     //Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + duracion + anio)
     //Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
-    public static ArrayList<Audiovisuales> bajarAudiovisualesTXT(ArrayList<Generos> generos) throws Exception {
+    public static ArrayList<Audiovisuales> bajarAudiovisualesTXT(ArrayList<Generos> generos) {
 
         ArrayList<Audiovisuales> audiovisuales = new ArrayList<Audiovisuales>();
 
@@ -129,7 +129,7 @@ public class AudiovisualesTXT {
                 archivoSalida.close();
             }
 
-        } catch (Exception e3) {
+        } catch (IOException e3) {
             System.out.println("No se puede grabar el archivo de Audiovisuales.txt");
         }
     }

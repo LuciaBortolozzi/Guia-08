@@ -19,7 +19,7 @@ public class CalificacionesTXT {
 //    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     //Calificaciones.txt -> ("\n" + codAudiovisual + ";"+ estrellas + ";" + motivo + ";" + dd/mm/aaaa + ";" + codSuscriptor)
-    public static ArrayList<Audiovisuales> bajarCalificaciones(ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Suscriptores> suscriptores) throws Exception {
+    public static ArrayList<Audiovisuales> bajarCalificaciones(ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Suscriptores> suscriptores) {
 
 
         try {

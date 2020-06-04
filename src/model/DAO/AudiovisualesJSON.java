@@ -11,7 +11,7 @@ public class AudiovisualesJSON {
     private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
 //    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
-    public static ArrayList<Audiovisuales> bajarAudiovisualesJSON(ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Actores> actoresTXT, ArrayList<Generos> generos) throws Exception {
+    public static ArrayList<Audiovisuales> bajarAudiovisualesJSON(ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Actores> actoresTXT, ArrayList<Generos> generos) {
 
         Calendar fechaActual = Calendar.getInstance();
         File aJson;
@@ -164,16 +164,13 @@ public class AudiovisualesJSON {
         }
     }
 
-
-    //FUNCIONA??? NO LO SE RICK..
-
-    public static void grabarRecomendacionesSeriesJovenesJSON(Audiovisuales audiovisuales) throws Exception {
-
-        File aJson = new File(directorio + "RecomendacionesSeriesJovenes.json");
-        FileOutputStream fsOutJson = new FileOutputStream(aJson);
-        JsonWriter wrtJson = Json.createWriter(fsOutJson);
+    public static void grabarRecomendacionesSeriesJovenesJSON(Audiovisuales audiovisuales) {
 
         try {
+
+            File aJson = new File(directorio + "RecomendacionesSeriesJovenes.json");
+            FileOutputStream fsOutJson = new FileOutputStream(aJson);
+            JsonWriter wrtJson = Json.createWriter(fsOutJson);
 
             JsonObjectBuilder empresa = Json.createObjectBuilder();
 
@@ -190,14 +187,14 @@ public class AudiovisualesJSON {
             Iterator<Actores> act = audiovisuales.getActores().iterator();
             while (act.hasNext()) {
                 a = act.next();
-                actores.add((JsonValue) a); //NO SE SI ESTO VA A FUNCIONAR
+                actores.add((JsonValue) a);
             }
 
             JsonObject actoresJson = (javax.json.JsonObject) actores.build();
 
             detalleSerie.add("Actores", actoresJson);
 
-            detalleSerie.add("Sinopsos", audiovisuales.getSinopsis());
+            detalleSerie.add("Sinopsis", audiovisuales.getSinopsis());
 
             detalleSerie.add("Temporada", ((Series) audiovisuales).getTemporada());
 
@@ -224,21 +221,20 @@ public class AudiovisualesJSON {
 
             wrtJson.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
             fsOutJson.close();
-        }
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void grabarRecomendacionesPeliculasMayoresJSON(ArrayList<Audiovisuales> audiovisuales) throws Exception {
-
-        File aJson = new File(directorio + "RecomendacionesSeriesJovenes.json");
-        FileOutputStream fsOutJson = new FileOutputStream(aJson);
-        JsonWriter wrtJson = Json.createWriter(fsOutJson);
+    public static void grabarRecomendacionesPeliculasMayoresJSON(ArrayList<Audiovisuales> audiovisuales) {
 
         try {
+
+            File aJson = new File(directorio + "RecomendacionesSeriesJovenes.json");
+            FileOutputStream fsOutJson = new FileOutputStream(aJson);
+            JsonWriter wrtJson = Json.createWriter(fsOutJson);
 
             JsonObjectBuilder empresa = Json.createObjectBuilder();
 
@@ -259,14 +255,14 @@ public class AudiovisualesJSON {
                 Iterator<Actores> act = audi.getActores().iterator();
                 while (act.hasNext()) {
                     a = act.next();
-                    actores.add((JsonValue) a); //NO SE SI ESTO VA A FUNCIONAR
+                    actores.add((JsonValue) a);
                 }
 
                 JsonObject actoresJson = (javax.json.JsonObject) actores.build();
 
                 detallePelicula.add("Actores", actoresJson);
 
-                detallePelicula.add("Sinopsos", audi.getSinopsis());
+                detallePelicula.add("Sinopsis", audi.getSinopsis());
 
                 detallePelicula.add("Anio", ((Peliculas) audi).getAnioFilm());
 
@@ -297,10 +293,10 @@ public class AudiovisualesJSON {
 
             wrtJson.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
             fsOutJson.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
