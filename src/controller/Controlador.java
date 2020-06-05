@@ -60,7 +60,7 @@ public class Controlador {
     }
 
     public static void opcion4(){
-
+    	SuscriptorControlador.infoSeries(audiovisualesTXT, generos);
     }
 
     public static void opcion5() {
