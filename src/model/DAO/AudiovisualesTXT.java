@@ -86,7 +86,7 @@ public class AudiovisualesTXT {
                 PrintWriter archivoSalida = new PrintWriter(fichero);
 
                 for (Audiovisuales audi : audiovisuales) {
-
+                
                     if (audi instanceof Peliculas) {
 
 
@@ -110,7 +110,7 @@ public class AudiovisualesTXT {
 
                         //Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
                         archivoSalida.println(String.format("%2s", "07")
-                                + String.format("%4s", audi.getCodigo()
+                                + String.format("%4s", audi.getCodigo())
                                 + String.format("%50s", audi.getNombre())
                                 + String.format("%3s", audi.getGenero().getCodigo())
                                 + String.format("%50s", audi.getSinopsis())
@@ -120,8 +120,7 @@ public class AudiovisualesTXT {
                                 + "/"
                                 + String.format("%2s", audi.getFechaPubli().get(Calendar.YEAR))
                                 + String.format("%4s", ((Series) audi).getTemporada())
-                                + String.format("%4s", ((Series) audi).getEpisodio()))
-                        );
+                                + String.format("%4s", ((Series) audi).getEpisodio()));
 
                     }
                 }

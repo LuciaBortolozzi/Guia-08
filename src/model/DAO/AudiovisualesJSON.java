@@ -32,8 +32,8 @@ public class AudiovisualesJSON {
 
                     for (int i = 0; i < audiovisualesTXT.size(); i++) {
                         if (audiovisualesTXT.get(i) instanceof Peliculas) {
-                            if ((pelicula.get("nombre").toString()).replace(" ", "").toUpperCase().equals(audiovisualesTXT.get(i).getNombre().replace(" ", "").toUpperCase())) {//MODIFICACION
-                                audiovisualesTXT.get(i).setSinopsis((pelicula.get("sinopsis").toString()));
+                            if ((pelicula.get("nombre").toString()).replace(" ", "").replace("\"", "").toUpperCase().equals(audiovisualesTXT.get(i).getNombre().replace(" ", "").toUpperCase())) {//MODIFICACION
+                                audiovisualesTXT.get(i).setSinopsis((pelicula.get("sinopsis").toString().replace("\"", "")));
                                 audiovisualesTXT.get(i).setFechaPubli(fechaActual);
 
                                 JsonArray actoresJSONArray = pelicula.getJsonArray("actores");
@@ -54,8 +54,9 @@ public class AudiovisualesJSON {
                         //NUEVA PELICULA
 
                         audiovisualesTXT.add(new Peliculas());
-                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setNombre((pelicula.get("nombre").toString()));
-                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setSinopsis((pelicula.get("sinopsis").toString()));
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setNombre((pelicula.get("nombre").toString().replace("\"", "")));
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setCodigo(audiovisualesTXT.size());
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setSinopsis((pelicula.get("sinopsis").toString().replace("\"", "")));
                         audiovisualesTXT.get(audiovisualesTXT.size() - 1).setFechaPubli(fechaActual);
 
                         JsonArray actoresJSONArray = pelicula.getJsonArray("actores");
@@ -80,7 +81,7 @@ public class AudiovisualesJSON {
 
                     for (int i = 0; i < audiovisualesTXT.size(); i++) {
                         if (audiovisualesTXT.get(i) instanceof Peliculas) {
-                            if ((serie.get("nombre").toString()).replace(" ", "").toUpperCase().equals(audiovisualesTXT.get(i).getNombre().replace(" ", "").toUpperCase()) &&
+                            if ((serie.get("nombre").toString()).replace(" ", "").replace("\"", "").toUpperCase().equals(audiovisualesTXT.get(i).getNombre().replace(" ", "").toUpperCase()) &&
                                     Integer.parseInt((serie.get("temporada")).toString()) == ((Series) audiovisualesTXT.get(i)).getTemporada() &&
                                     Integer.parseInt((serie.get("episodio")).toString()) == ((Series) audiovisualesTXT.get(i)).getEpisodio()) {//MODIFICACION
                                 audiovisualesTXT.get(i).setSinopsis((serie.get("sinopsis").toString()));
@@ -104,8 +105,9 @@ public class AudiovisualesJSON {
                         //NUEVA SERIE
 
                         audiovisualesTXT.add(new Series());
-                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setNombre((serie.get("nombre").toString()));
-                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setSinopsis((serie.get("sinopsis").toString()));
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setNombre((serie.get("nombre").toString().replace("\"", "")));
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setCodigo(audiovisualesTXT.size());
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setSinopsis((serie.get("sinopsis").toString().replace("\"", "")));
                         audiovisualesTXT.get(audiovisualesTXT.size() - 1).setFechaPubli(fechaActual);
 
                         JsonArray actoresJSONArray = serie.getJsonArray("actores");
@@ -122,6 +124,7 @@ public class AudiovisualesJSON {
 
                 rdrJson.close();
                 fsInJson.close();
+                
             }
 
         } catch (IOException e) {
@@ -136,7 +139,8 @@ public class AudiovisualesJSON {
         Iterator<Generos> gen = generos.iterator();
         while (gen.hasNext()) {
             genero = gen.next();
-            if (genero.getDescripcion().equals(pelicula.get("genero").toString().toUpperCase().trim())) {
+           
+            if (genero.getDescripcion().equals(pelicula.get("genero").toString().toUpperCase().trim().replace("\"", ""))) {
 
                 audiovisualesTXT.get(i).setGenero(genero);
             }
@@ -198,7 +202,6 @@ public class AudiovisualesJSON {
 
             detalleSerie.add("Temporada", ((Series) audiovisuales).getTemporada());
 
-            //LUUUU ACÁ ME VAS A TENER QUE PASAR LA CANTIDAD DE EPISODIOS TAMBIEN
             detalleSerie.add("Episodios", ((Series) audiovisuales).getEpisodio());
 
             int sumaEstrellas = 0;

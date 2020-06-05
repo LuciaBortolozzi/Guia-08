@@ -45,7 +45,7 @@ public class AudiovisualesActoresTXT {
                     int codAudiovisual = Integer.parseInt(audiovisualST[0].trim());                     // codAudiovisual
                     String nombreActor = audiovisualST[1].trim(); 										// nombreActor
                     String apellidoActor = audiovisualST[2].trim(); 									// apellidoActor
-
+                 
                     if(primeraVez) {
                     	audiovisual = AudiovisualesControlador.buscarAudiovisual(codAudiovisual, audiovisualesTXT);
                     	cod = codAudiovisual;
@@ -56,7 +56,7 @@ public class AudiovisualesActoresTXT {
 	                    if(cod == codAudiovisual) {
 	                    	
 	                        actor = ActoresControlador.buscarActor(nombreActor, apellidoActor, actoresTXT);
-	                       
+	                  
                         	if (actor != null) {
                         		actores.add(actor);
                             }
@@ -65,7 +65,7 @@ public class AudiovisualesActoresTXT {
 	                    } else {
 	                    	
 	                    	audiovisual.setActores(actores);
-	                    	actores = null;
+	                    	 actores.clear(); 
 	                    	audiovisual = AudiovisualesControlador.buscarAudiovisual(codAudiovisual, audiovisualesTXT);
 	                    	
 	                    	if (audiovisual != null) {
@@ -77,6 +77,7 @@ public class AudiovisualesActoresTXT {
 			                        actor = ActoresControlador.buscarActor(nombreActor, apellidoActor, actoresTXT);
 			                       
 		                        	if (actor != null) {
+		                        		
 		                        		actores.add(actor);
 		                            }
 			                    }
@@ -84,9 +85,9 @@ public class AudiovisualesActoresTXT {
 	                    }
                     }
                 }
-
+                if (audiovisual != null) {
                 audiovisual.setActores(actores);
-
+                }
                 leerArchivo.close();
             }
 
@@ -112,15 +113,18 @@ public class AudiovisualesActoresTXT {
                     Iterator<Actores> actoresIterator = (audi.getActores()).iterator();
                     while (actoresIterator.hasNext()) {
                         a = actoresIterator.next();
-                        actores = actores + a.getNombre() + " " + a.getApellido() + "/t";
+                       
+                        //AudiovisualesActores.txt -> (codigoAudiovisual + "/t" + nombreApellido + "/t" + nombreApellido)
+                        archivoSalida.println(String.format("%4s", audi.getCodigo())
+                                + "\t"
+                                + a.getApellido()
+                                + "\t"
+                                + a.getNombre()
+                        );
 
                     }
 
-                    //AudiovisualesActores.txt -> (codigoAudiovisual + "/t" + nombreApellido + "/t" + nombreApellido + ...)
-                    archivoSalida.println(String.format("%4s", audi.getCodigo())
-                            + "/t"
-                            + actores
-                    );
+                    
 
                 }
 
