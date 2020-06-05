@@ -1,36 +1,8 @@
-   1	Allen	Karen
-   1	Ford	Harrison
-   2	Connery	Sean
-   2	Doody	Alison
-   2	Elliott	Denholm
-   2	Ford	Harrison
-   3	Alexander	Jason
-   3	LouisDreyfus	Julia
-   3	Richards	Michael
-   3	Seinfeld	Jerry
-   4	Capshaw	Kate
-   4	Ford	Harrison
-   5	Alexander	Jason
-   5	LouisDreyfus	Julia
-   5	Richards	Michael
-   5	Seinfeld	Jerry
-   6	Alexander	Jason
-   6	LouisDreyfus	Julia
-   6	Richards	Michael
-   6	Seinfeld	Jerry
-   7	Alexander	Jason
-   7	LouisDreyfus	Julia
-   7	Richards	Michael
-   7	Seinfeld	Jerry
-   8	Alexander	Jason
-   8	LouisDreyfus	Julia
-   8	Richards	Michael
-   8	Seinfeld	Jerry
-   9	Alexander	Jason
-   9	LouisDreyfus	Julia
-   9	Richards	Michael
-   9	Seinfeld	Jerry
-  10	Alexander	Jason
-  10	LouisDreyfus	Julia
-  10	Richards	Michael
-  10	Seinfeld	Jerry
+1	Harrison	Ford
+1	Karen	Allen
+2	Harrison	Ford
+2	Kate	Capshaw
+3	Jerry	Seinfeld
+3	Julia	LouisDreyfus
+3	Jason	Alexander
+3	Michael	Richards

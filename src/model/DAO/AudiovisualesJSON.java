@@ -8,8 +8,8 @@ import javax.json.*;
 
 public class AudiovisualesJSON {
 
-  //  private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
-    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
+//    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     public static ArrayList<Audiovisuales> bajarAudiovisualesJSON(ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Actores> actoresTXT, ArrayList<Generos> generos) {
 
@@ -32,7 +32,8 @@ public class AudiovisualesJSON {
 
                     for (int i = 0; i < audiovisualesTXT.size(); i++) {
                         if (audiovisualesTXT.get(i) instanceof Peliculas) {
-                            if ((pelicula.get("nombre").toString()).replace(" ", "").replace("\"", "").toUpperCase().equals(audiovisualesTXT.get(i).getNombre().replace(" ", "").toUpperCase())) {//MODIFICACION
+                            //MODIFICACION
+                            if ((pelicula.get("nombre").toString()).replace(" ", "").replace("\"", "").toUpperCase().equals(audiovisualesTXT.get(i).getNombre().replace(" ", "").toUpperCase())) {
                                 audiovisualesTXT.get(i).setSinopsis((pelicula.get("sinopsis").toString().replace("\"", "")));
                                 audiovisualesTXT.get(i).setFechaPubli(fechaActual);
 
@@ -80,10 +81,11 @@ public class AudiovisualesJSON {
                     boolean encontrado = false;
 
                     for (int i = 0; i < audiovisualesTXT.size(); i++) {
-                        if (audiovisualesTXT.get(i) instanceof Peliculas) {
+                        //MODIFICACION
+                        if (audiovisualesTXT.get(i) instanceof Series) {
                             if ((serie.get("nombre").toString()).replace(" ", "").replace("\"", "").toUpperCase().equals(audiovisualesTXT.get(i).getNombre().replace(" ", "").toUpperCase()) &&
                                     Integer.parseInt((serie.get("temporada")).toString()) == ((Series) audiovisualesTXT.get(i)).getTemporada() &&
-                                    Integer.parseInt((serie.get("episodio")).toString()) == ((Series) audiovisualesTXT.get(i)).getEpisodio()) {//MODIFICACION
+                                    Integer.parseInt((serie.get("episodio")).toString()) == ((Series) audiovisualesTXT.get(i)).getEpisodio()) {
                                 audiovisualesTXT.get(i).setSinopsis((serie.get("sinopsis").toString()));
                                 audiovisualesTXT.get(i).setFechaPubli(fechaActual);
 

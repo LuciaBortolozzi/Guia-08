@@ -181,7 +181,7 @@ public class Validaciones {
         if(toUpper) {
             return texto.toUpperCase();
         } else {
-            return texto;
+            return texto.toLowerCase();
         }
     }
 

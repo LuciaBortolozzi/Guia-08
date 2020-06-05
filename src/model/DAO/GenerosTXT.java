@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 public class GenerosTXT {
     
-//    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
-    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
+//    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     //Generos.txt -> ("\n" + codigo + "    "+ descripcion)
     public static ArrayList<Generos> bajarGeneros() {

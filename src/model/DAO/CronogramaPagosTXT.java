@@ -13,8 +13,8 @@ import java.util.Scanner;
 
 public class CronogramaPagosTXT {
 
- //   private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
-    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
+//    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     public static void grabarCronogramaPagosTXT(ArrayList<Audiovisuales> audiovisualesAux, int cantidadPublicaciones, double totalAbonar) {
         Calendar fechaActual = Calendar.getInstance();

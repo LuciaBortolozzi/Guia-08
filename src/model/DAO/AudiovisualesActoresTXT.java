@@ -11,8 +11,8 @@ import view.Validaciones;
 
 public class AudiovisualesActoresTXT {
 
- //   private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
-    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
+//    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     //AudiovisualesActores.txt -> (codigoAudiovisual + "/t" + nombreApellido + "/t" + nombreApellido + ...)
     public static ArrayList<Audiovisuales> bajarAudiovisualesActoresTXT(ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Actores> actoresTXT) {
@@ -90,11 +90,9 @@ public class AudiovisualesActoresTXT {
                 }
                 leerArchivo.close();
             }
-
         } catch (FileNotFoundException e) {
             System.out.println("No se pudo leer el archivo AudiovisualesActores.txt ");
         }
-
         return audiovisualesTXT;
     }
 
@@ -121,13 +119,8 @@ public class AudiovisualesActoresTXT {
                                 + "\t"
                                 + a.getNombre()
                         );
-
                     }
-
-                    
-
                 }
-
                 archivoSalida.close();
             }
 

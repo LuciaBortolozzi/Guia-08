@@ -4,6 +4,8 @@ import model.Audiovisuales;
 import model.DAO.AudiovisualesJSON;
 import model.DAO.CalificacionesTXT;
 import model.DAO.SuscriptoresTXT;
+import model.Peliculas;
+import model.Series;
 import model.Suscriptores;
 
 import view.Mostrar;
@@ -33,22 +35,49 @@ public class CalificacionesControlador {
 
             if (audiovisual.getNombre().equals(nombreAudiovisual)) {             // Encontro audiovisual
 
-                Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
-                while (iteratorSuscriptores.hasNext()) {
-                    suscriptor = iteratorSuscriptores.next();
+                if (audiovisual instanceof Series) {
+                    int temporada = Validaciones.validarInt("temporada: ");
+                    int episodio = Validaciones.validarInt("episodio: ");
 
-                    if (suscriptor.getNombre().equals(nombreSuscriptor)) {       // Encontro suscriptor
+                    if (((Series) audiovisual).getTemporada() == temporada && ((Series) audiovisual).getEpisodio() == episodio) {
 
-                        Mostrar.mostrar("Ingresar estrellas: ");
-                        int estrellas = Validaciones.limite(1, 5);
+                        Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
+                        while (iteratorSuscriptores.hasNext()) {
+                            suscriptor = iteratorSuscriptores.next();
 
-                        String motivo = Validaciones.ingresar("motivo de la calificacion propuesta: ", true);
-                        Calendar fechaRealizada = Calendar.getInstance();
+                            if (suscriptor.getNombre().equals(nombreSuscriptor)) {       // Encontro suscriptor
 
-                        audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, suscriptor);
+                                Mostrar.mostrar("Ingresar estrellas: ");
+                                int estrellas = Validaciones.limite(1, 5);
+
+                                String motivo = Validaciones.ingresar("motivo de la calificacion propuesta: ", true);
+                                Calendar fechaRealizada = Calendar.getInstance();
+
+                                audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, suscriptor);
+                            }
+                        }
                     }
+                } else {
 
+                    Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
+                    while (iteratorSuscriptores.hasNext()) {
+                        suscriptor = iteratorSuscriptores.next();
+
+                        if (suscriptor.getNombre().equals(nombreSuscriptor)) {       // Encontro suscriptor
+
+                            Mostrar.mostrar("Ingresar estrellas: ");
+                            int estrellas = Validaciones.limite(1, 5);
+
+                            String motivo = Validaciones.ingresar("motivo de la calificacion propuesta: ", true);
+                            Calendar fechaRealizada = Calendar.getInstance();
+
+                            audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, suscriptor);
+                        }
+
+                    }
                 }
+
+
             }
         }
 
