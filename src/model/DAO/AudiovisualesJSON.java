@@ -55,7 +55,7 @@ public class AudiovisualesJSON {
                         //NUEVA PELICULA
 
                         audiovisualesTXT.add(new Peliculas());
-                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setNombre((pelicula.get("nombre").toString().replace("\"", "")));
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setNombre((pelicula.get("nombre").toString().replace("\"", "").toUpperCase()));
                         audiovisualesTXT.get(audiovisualesTXT.size() - 1).setCodigo(audiovisualesTXT.size());
                         audiovisualesTXT.get(audiovisualesTXT.size() - 1).setSinopsis((pelicula.get("sinopsis").toString().replace("\"", "")));
                         audiovisualesTXT.get(audiovisualesTXT.size() - 1).setFechaPubli(fechaActual);
@@ -107,7 +107,7 @@ public class AudiovisualesJSON {
                         //NUEVA SERIE
 
                         audiovisualesTXT.add(new Series());
-                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setNombre((serie.get("nombre").toString().replace("\"", "")));
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setNombre((serie.get("nombre").toString().replace("\"", "").toUpperCase()));
                         audiovisualesTXT.get(audiovisualesTXT.size() - 1).setCodigo(audiovisualesTXT.size());
                         audiovisualesTXT.get(audiovisualesTXT.size() - 1).setSinopsis((serie.get("sinopsis").toString().replace("\"", "")));
                         audiovisualesTXT.get(audiovisualesTXT.size() - 1).setFechaPubli(fechaActual);
@@ -162,8 +162,8 @@ public class AudiovisualesJSON {
             Iterator<Actores> actorIterator = actoresTXT.iterator();
             while (actorIterator.hasNext()) {
                 actor = actorIterator.next();
-                String concatenaNombreApellido = actor.getNombre() + actor.getApellido();
-                if (concatenaNombreApellido.replace(" ", "").equals(a.replace("\"", "").replace(" ", ""))) {
+                String concatenaNombreApellido = actor.getNombre().toUpperCase() + actor.getApellido().toUpperCase();
+                if (concatenaNombreApellido.replace(" ", "").equals(a.replace("\"", "").replace(" ", "").toUpperCase())) {
                     actoresArray.add(actor);
                 }
             }
@@ -184,7 +184,7 @@ public class AudiovisualesJSON {
 
             JsonObjectBuilder detalleSerie = Json.createObjectBuilder();
 
-            detalleSerie.add("Nombre", audiovisuales.getNombre());
+            detalleSerie.add("Nombre", audiovisuales.getNombre().toUpperCase());
 
             detalleSerie.add("Genero", audiovisuales.getGenero().getDescripcion());
 
@@ -251,7 +251,7 @@ public class AudiovisualesJSON {
 
                 JsonObjectBuilder detallePelicula = Json.createObjectBuilder();
 
-                detallePelicula.add("Nombre", audi.getNombre());
+                detallePelicula.add("Nombre", audi.getNombre().toUpperCase());
 
                 detallePelicula.add("Genero", audi.getGenero().getDescripcion());
 

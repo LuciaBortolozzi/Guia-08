@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class ActoresTXT {
-    
+
     private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
 //    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
@@ -32,9 +32,9 @@ public class ActoresTXT {
 
                     String[] actorST = s.split("\t");
 
-                    String nombre = actorST[0];
-                    String apellido = actorST[1];
-                    char sexo = actorST[2].charAt(0);
+                    String nombre = actorST[0].toUpperCase();
+                    String apellido = actorST[1].toUpperCase();
+                    char sexo = actorST[2].toUpperCase().charAt(0);
 
                     actores.add(new Actores(nombre, apellido, sexo));
                 }

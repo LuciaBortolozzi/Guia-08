@@ -27,7 +27,7 @@ public class CronogramaPagosTXT {
                 String identificadorTotal = "03";
                 for (Audiovisuales audiovisual : audiovisualesAux) {
 
-                    //Calificaciones.txt -> (identificador + ";" + fechaDePago + ";" + nombrePublicacion + ";" + fechaPublicacion + ";" + monto )
+                    //CronogramaPagos.txt -> (identificador + ";" + fechaDePago + ";" + nombrePublicacion + ";" + fechaPublicacion + ";" + monto )
                     archivoSalida.println(identificador + ";"
                             + audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.DAY_OF_MONTH) + "/"
                             + audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.MONTH) + "/"
@@ -40,7 +40,7 @@ public class CronogramaPagosTXT {
 
 
                 }
-                //Calificaciones.txt -> (identificadorTotal + ";" + cantidadPublicaciones + ";" + totalAbonar)
+                //CronogramaPagos.txt -> (identificadorTotal + ";" + cantidadPublicaciones + ";" + totalAbonar)
                 archivoSalida.println(identificadorTotal + ";" + cantidadPublicaciones + ";" + totalAbonar);
 
                 archivoSalida.close();

@@ -1,3 +1,9 @@
-06   1           Indiana Jones - Raiders of the Lost Ark 11                                aca va la sinopsis 5/ 5/2020 1151981
-06   2                Indiana Jones and the Last Crusade 11                                aca va la sinopsis 5/ 5/2020 1271989
-07   3                                          Seinfeld  3                                aca va la sinopsis 5/ 5/2020   1   1
+06   1           INDIANA JONES - RAIDERS OF THE LOST ARK 11                                aca va la sinopsis 5/ 5/2020 1151981
+06   2                INDIANA JONES AND THE LAST CRUSADE 11                                aca va la sinopsis 5/ 5/2020 1271989
+07   3                                          SEINFELD  3                                aca va la sinopsis 5/ 5/2020   1   1
+06   4              INDIANA JONES AND THE TEMPLE OF DOOM 11                                aca va la sinopsis 5/ 5/2020 1181984
+07   5                                          SEINFELD  3                                aca va la sinopsis 5/ 5/2020   1   2
+07   6                                          SEINFELD  3                                aca va la sinopsis 5/ 5/2020   1   3
+07   7                                          SEINFELD  3                                aca va la sinopsis 5/ 5/2020   2   1
+07   8                                          SEINFELD  3                                aca va la sinopsis 5/ 5/2020   2   2
+07   9                                          SEINFELD  3                                aca va la sinopsis 5/ 5/2020   2   3

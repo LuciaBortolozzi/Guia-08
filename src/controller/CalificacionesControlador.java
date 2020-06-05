@@ -1,10 +1,7 @@
 package controller;
 
 import model.Audiovisuales;
-import model.DAO.AudiovisualesJSON;
 import model.DAO.CalificacionesTXT;
-import model.DAO.SuscriptoresTXT;
-import model.Peliculas;
 import model.Series;
 import model.Suscriptores;
 
@@ -23,8 +20,8 @@ public class CalificacionesControlador {
         Mostrar.mostrar("Calificar");
 
         // Corregir
-        String nombreAudiovisual = Validaciones.ingresar("nombre del audiovisual: ", true);
-        String nombreSuscriptor = Validaciones.ingresar("nombre del suscriptor: ", true);
+        long dni = Validaciones.validarLong("documento: ");
+        String nombreAudiovisual = Validaciones.ingresar("nombre del audiovisual: ", true).toUpperCase();
 
         Audiovisuales audiovisual;
         Suscriptores suscriptor;
@@ -45,15 +42,15 @@ public class CalificacionesControlador {
                         while (iteratorSuscriptores.hasNext()) {
                             suscriptor = iteratorSuscriptores.next();
 
-                            if (suscriptor.getNombre().equals(nombreSuscriptor)) {       // Encontro suscriptor
+                            if (suscriptor.getNroDoc() == dni) {                                                        // Encontro suscriptor
 
+                                Calendar fechaRealizada = Calendar.getInstance();
                                 Mostrar.mostrar("Ingresar estrellas: ");
                                 int estrellas = Validaciones.limite(1, 5);
-
                                 String motivo = Validaciones.ingresar("motivo de la calificacion propuesta: ", true);
-                                Calendar fechaRealizada = Calendar.getInstance();
 
                                 audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, suscriptor);
+                                break;
                             }
                         }
                     }
@@ -63,21 +60,18 @@ public class CalificacionesControlador {
                     while (iteratorSuscriptores.hasNext()) {
                         suscriptor = iteratorSuscriptores.next();
 
-                        if (suscriptor.getNombre().equals(nombreSuscriptor)) {       // Encontro suscriptor
+                        if (suscriptor.getNroDoc() == dni) {                                                            // Encontro suscriptor
 
+                            Calendar fechaRealizada = Calendar.getInstance();
                             Mostrar.mostrar("Ingresar estrellas: ");
                             int estrellas = Validaciones.limite(1, 5);
-
                             String motivo = Validaciones.ingresar("motivo de la calificacion propuesta: ", true);
-                            Calendar fechaRealizada = Calendar.getInstance();
 
                             audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, suscriptor);
+                            break;
                         }
-
                     }
                 }
-
-
             }
         }
 
