@@ -1,4 +1,2 @@
    1	Harrison	Ford
    1	Karen	Allen
-   2	pepe	lopez
-   3    sdjfsdsfd sdfds

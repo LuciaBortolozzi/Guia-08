@@ -13,39 +13,39 @@ public class Menu {
 
             Mostrar.mostrar("0. Calificar un audiovisual.\n");
 
-            Mostrar.mostrar("1. Crear cronograma de pagos");
+            Mostrar.mostrar("1. Crear cronograma de pagos\n");
 
-            Mostrar.mostrar("2. A todos los suscriptores jóvenes (menores de 35 años), se les recomienda la temporada " +
-                                    "completa de la serie con mejor calificación promedio durante los últimos 3 meses, evaluada " +
-                                    "por quienes cumplan con el mismo rango de edad, mediante la generación de un archivo " +
-                                    "Json. Este archivo incluye el nombre de la empresa, nombre de la serie, género, nómina de " +
-                                    "actores, sinopsis, temporada, cantidad de episodios y su calificación.\n");
+            Mostrar.mostrar("2. A todos los suscriptores jovenes (menores de 35 anios), se les recomienda la temporada " +
+                                    "completa de la serie con mejor calificacion promedio durante los ultimos 3 meses, evaluada " +
+                                    "por quienes cumplan con el mismo rango de edad, mediante la generacion de un archivo " +
+                                    "Json. Este archivo incluye el nombre de la empresa, nombre de la serie, genero, nomina de " +
+                                    "actores, sinopsis, temporada, cantidad de episodios y su calificacion.\n");
 
-            Mostrar.mostrar("3. Para cada uno de los géneros existentes, la película con mejor calificación obtenida en el " +
-                                    "último mes es recomendada a todos los suscriptores mayores de 55 años, mediante otro " +
+            Mostrar.mostrar("3. Para cada uno de los generos existentes, la pelicula con mejor calificacion obtenida en el " +
+                                    "ultimo mes es recomendada a todos los suscriptores mayores de 55 anios, mediante otro " +
                                     "archivo JSon con la estructura similar a la de las series.\n");
 
-            Mostrar.mostrar("4. Para cada uno de los distintos géneros, nombre de la serie, cantidad total de temporadas " +
-                                    "y cantidad de actores, ordenadas según la cantidad total de temporadas en forma " +
+            Mostrar.mostrar("4. Para cada uno de los distintos generos, nombre de la serie, cantidad total de temporadas " +
+                                    "y cantidad de actores, ordenadas segun la cantidad total de temporadas en forma " +
                                     "descendente.\n");
 
-            Mostrar.mostrar("5. Nombre y apellido de los suscriptores mayores de 60 años que nunca hayan calificado " +
-                                    "una película.\n");
+            Mostrar.mostrar("5. Nombre y apellido de los suscriptores mayores de 60 anios que nunca hayan calificado " +
+                                    "una pelicula.\n");
 
-            Mostrar.mostrar("6. Apellido y nombre de los actores (ordenados por ambos), duración de una película, fecha " +
-                                    "de publicación y evaluaciones (fecha, nombre del suscriptor y calificación) de una " +
-                                    "película seleccionada al azar.\n");
+            Mostrar.mostrar("6. Apellido y nombre de los actores (ordenados por ambos), duracion de una pelicula, fecha " +
+                                    "de publicacion y evaluaciones (fecha, nombre del suscriptor y calificacion) de una " +
+                                    "pelicula seleccionada al azar.\n");
 
-            Mostrar.mostrar("7. Código y nombre de serie, temporada y episodio de aquellas que no hayan sido " +
-                                    "calificadas por ningún suscriptor masculino adulto menor de 45 años.\n");
+            Mostrar.mostrar("7. Codigo y nombre de serie, temporada y episodio de aquellas que no hayan sido " +
+                                    "calificadas por ningun suscriptor masculino adulto menor de 45 anios.\n");
 
-            Mostrar.mostrar("8. Cantidad de actores que solamente participan de series o películas de un mismo género.\n");
+            Mostrar.mostrar("8. Cantidad de actores que solamente participan de series o peliculas de un mismo genero.\n");
 
-            Mostrar.mostrar("9. Nombre y género de las publicaciones cuyo monto abonado en concepto de renovación" +
-                                    "de derechos de publicación supere en un 10% el valor ingresado como argumento de la" +
-                                    "aplicacion y todas sus calificaciones del último año sean menores a 3 estrellas.\n");
+            Mostrar.mostrar("9. Nombre y genero de las publicaciones cuyo monto abonado en concepto de renovacion" +
+                                    "de derechos de publicacion supere en un 10% el valor ingresado como argumento de la" +
+                                    "aplicacion y todas sus calificaciones del ultimo anio sean menores a 3 estrellas.\n");
 
-            Mostrar.mostrar("10. Apellido y nombre de las actrices que hayan filmado una película en los últimos 2 anios.\n");
+            Mostrar.mostrar("10. Apellido y nombre de las actrices que hayan filmado una pelicula en los ultimos 2 anios.\n");
 
             Mostrar.mostrar("11. Salir del menu");
 
