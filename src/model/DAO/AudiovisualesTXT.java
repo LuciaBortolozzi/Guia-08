@@ -8,8 +8,8 @@ import model.DAO.*;
 
 public class AudiovisualesTXT {
 
- //   private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
-    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
+//    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     //Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + duracion + anio)
     //Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
@@ -36,12 +36,12 @@ public class AudiovisualesTXT {
                     String tipo = audi.substring(0, 2);
                     if (tipo.equals("06")) {
                         audiovisuales.add(new Peliculas());
-                        ((Peliculas) audiovisuales.get(i)).setDuracion(Integer.parseInt(audi.substring(119, 122)));
-                        ((Peliculas) audiovisuales.get(i)).setAnioFilm(Integer.parseInt(audi.substring(122, 126)));
+                        ((Peliculas) audiovisuales.get(i)).setDuracion(Integer.parseInt(audi.substring(119, 123).trim()));
+                        ((Peliculas) audiovisuales.get(i)).setAnioFilm(Integer.parseInt(audi.substring(123, 127).trim()));
                     } else if (tipo.equals("07")) {
                         audiovisuales.add(new Series());
                         ((Series) audiovisuales.get(i)).setTemporada(Integer.parseInt(audi.substring(119, 123).trim()));
-                        ((Series) audiovisuales.get(i)).setEpisodio(Integer.parseInt(audi.substring(123, 126).trim()));
+                        ((Series) audiovisuales.get(i)).setEpisodio(Integer.parseInt(audi.substring(123, 127).trim()));
                     } else {
                         break;
                     }
@@ -60,9 +60,9 @@ public class AudiovisualesTXT {
                     
                     audiovisuales.get(i).setSinopsis(audi.substring(59, 109).trim());
                     Calendar fechaPublicacion = Calendar.getInstance();
-                    fechaPublicacion.set(Calendar.DAY_OF_MONTH, Integer.parseInt(audi.substring(109, 111)));
-                    fechaPublicacion.set(Calendar.MONTH, (Integer.parseInt(audi.substring(112, 114).replace(" ", ""))) - 1);
-                    fechaPublicacion.set(Calendar.YEAR, Integer.parseInt(audi.substring(115, 119)));
+                    fechaPublicacion.set(Calendar.DAY_OF_MONTH, Integer.parseInt(audi.substring(109, 111).trim()));
+                    fechaPublicacion.set(Calendar.MONTH, (Integer.parseInt(audi.substring(112, 114).trim())) - 1);
+                    fechaPublicacion.set(Calendar.YEAR, Integer.parseInt(audi.substring(115, 119).trim()));
                     audiovisuales.get(i).setFechaPubli(fechaPublicacion);
 
                     i++;
