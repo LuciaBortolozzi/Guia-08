@@ -5,6 +5,7 @@ import model.Audiovisuales;
 import view.Validaciones;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,9 +20,8 @@ public class CronogramaPagosTXT {
     public static void grabarCronogramaPagosTXT(ArrayList<Audiovisuales> audiovisualesAux, int cantidadPublicaciones, double totalAbonar) {
         Calendar fechaActual = Calendar.getInstance();
         try {
-            File fichero = new File(directorio + "CronogramaPagos" + fechaActual.get(Calendar.MONTH) + fechaActual.get(Calendar.YEAR) + ".txt");
+            FileWriter fichero = new FileWriter(directorio + "CronogramaPagos" + fechaActual.get(Calendar.MONTH) + fechaActual.get(Calendar.YEAR) + ".txt");
 
-            if (fichero.exists()) {
                 PrintWriter archivoSalida = new PrintWriter(fichero);
                 String identificador = "01";
                 String identificadorTotal = "03";
@@ -44,7 +44,6 @@ public class CronogramaPagosTXT {
                 archivoSalida.println(identificadorTotal + ";" + cantidadPublicaciones + ";" + totalAbonar);
 
                 archivoSalida.close();
-            }
 
         } catch (IOException e) {
             System.out.println("No se puede grabar el archivo de CronogramaPagosmmdd.txt");
