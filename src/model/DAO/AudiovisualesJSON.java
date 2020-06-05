@@ -52,21 +52,21 @@ public class AudiovisualesJSON {
 
                     if (!encontrado) {
                         //NUEVA PELICULA
-                        // CORREGIR
-                        audiovisualesTXT.add(audiovisualesTXT.size(),new Peliculas());
-                        audiovisualesTXT.get(audiovisualesTXT.size()).setNombre((pelicula.get("nombre").toString()));
-                        audiovisualesTXT.get(audiovisualesTXT.size()).setSinopsis((pelicula.get("sinopsis").toString()));
-                        audiovisualesTXT.get(audiovisualesTXT.size()).setFechaPubli(fechaActual);
+
+                        audiovisualesTXT.add(new Peliculas());
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setNombre((pelicula.get("nombre").toString()));
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setSinopsis((pelicula.get("sinopsis").toString()));
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setFechaPubli(fechaActual);
 
                         JsonArray actoresJSONArray = pelicula.getJsonArray("actores");
                         TreeSet<Actores> actoresArray = new TreeSet<Actores>();
                         agregarActorJSON(actoresTXT, actoresArray, actoresJSONArray);
-                        audiovisualesTXT.get(audiovisualesTXT.size()).setActores(actoresArray);
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setActores(actoresArray);
 
-                        agregarGenero(audiovisualesTXT, generos, pelicula, audiovisualesTXT.size());
+                        agregarGenero(audiovisualesTXT, generos, pelicula, audiovisualesTXT.size() - 1);
 
-                        ((Peliculas) audiovisualesTXT.get(audiovisualesTXT.size())).setAnioFilm(Integer.parseInt((pelicula.get("anio")).toString()));
-                        ((Peliculas) audiovisualesTXT.get(audiovisualesTXT.size())).setDuracion(Integer.parseInt(pelicula.get("duracion").toString()));
+                        ((Peliculas) audiovisualesTXT.get(audiovisualesTXT.size() - 1)).setAnioFilm(Integer.parseInt((pelicula.get("anio")).toString()));
+                        ((Peliculas) audiovisualesTXT.get(audiovisualesTXT.size() - 1)).setDuracion(Integer.parseInt(pelicula.get("duracion").toString()));
                     }
                 }
 
@@ -86,7 +86,7 @@ public class AudiovisualesJSON {
                                 audiovisualesTXT.get(i).setSinopsis((serie.get("sinopsis").toString()));
                                 audiovisualesTXT.get(i).setFechaPubli(fechaActual);
 
-                                JsonArray actoresJSONArray = serie.getJsonArray("actoresTXT");
+                                JsonArray actoresJSONArray = serie.getJsonArray("actores");
                                 TreeSet<Actores> actoresArray = new TreeSet<Actores>();
                                 agregarActorJSON(actoresTXT, actoresArray, actoresJSONArray);
                                 audiovisualesTXT.get(i).setActores(actoresArray);
@@ -102,21 +102,21 @@ public class AudiovisualesJSON {
 
                     if (!encontrado) {
                         //NUEVA SERIE
-                        // CORREGIR
-                        audiovisualesTXT.add(new Series());
-                        audiovisualesTXT.get(audiovisualesTXT.size()).setNombre((serie.get("nombre").toString()));
-                        audiovisualesTXT.get(audiovisualesTXT.size()).setSinopsis((serie.get("sinopsis").toString()));
-                        audiovisualesTXT.get(audiovisualesTXT.size()).setFechaPubli(fechaActual);
 
-                        JsonArray actoresJSONArray = serie.getJsonArray("actoresTXT");
+                        audiovisualesTXT.add(new Series());
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setNombre((serie.get("nombre").toString()));
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setSinopsis((serie.get("sinopsis").toString()));
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setFechaPubli(fechaActual);
+
+                        JsonArray actoresJSONArray = serie.getJsonArray("actores");
                         TreeSet<Actores> actoresArray = new TreeSet<Actores>();
                         agregarActorJSON(actoresTXT, actoresArray, actoresJSONArray);
-                        audiovisualesTXT.get(audiovisualesTXT.size()).setActores(actoresArray);
+                        audiovisualesTXT.get(audiovisualesTXT.size() - 1).setActores(actoresArray);
 
-                        agregarGenero(audiovisualesTXT, generos, serie, audiovisualesTXT.size());
+                        agregarGenero(audiovisualesTXT, generos, serie, audiovisualesTXT.size() - 1);
 
-                        ((Series) audiovisualesTXT.get(audiovisualesTXT.size())).setTemporada(Integer.parseInt((serie.get("temporada")).toString()));
-                        ((Series) audiovisualesTXT.get(audiovisualesTXT.size())).setEpisodio(Integer.parseInt((serie.get("episodio")).toString()));
+                        ((Series) audiovisualesTXT.get(audiovisualesTXT.size()  - 1)).setTemporada(Integer.parseInt((serie.get("temporada")).toString()));
+                        ((Series) audiovisualesTXT.get(audiovisualesTXT.size()  - 1)).setEpisodio(Integer.parseInt((serie.get("episodio")).toString()));
                     }
                 }
 
