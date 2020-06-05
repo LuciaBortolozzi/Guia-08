@@ -2,6 +2,7 @@ package controller;
 
 import model.Audiovisuales;
 import model.DAO.CalificacionesTXT;
+import model.Peliculas;
 import model.Series;
 import model.Suscriptores;
 
@@ -17,65 +18,67 @@ public class CalificacionesControlador {
 
     public static void calificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores) {
 
-        Mostrar.mostrar("Calificar");
-
-        // Corregir
-        long dni = Validaciones.validarLong("documento: ");
-        String nombreAudiovisual = Validaciones.ingresar("nombre del audiovisual: ", true).toUpperCase();
-
         Audiovisuales audiovisual;
         Suscriptores suscriptor;
+        long dni = Validaciones.validarLong("documento: ");
+        int tipo = Validaciones.tipo("1 si es pelicula o 2 si es serie: ");
+        String nombreAudiovisual = Validaciones.ingresar("nombre del audiovisual: ", true).toUpperCase();
+        int estrellas;
+        String motivo;
+        boolean califico = false;
+        Calendar fechaRealizada = Calendar.getInstance();
 
-        Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
-        while (iteratorAudiovisuales.hasNext()) {
-            audiovisual = iteratorAudiovisuales.next();
+        Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
+        while (iteratorSuscriptores.hasNext()) {
+            suscriptor = iteratorSuscriptores.next();
 
-            if (audiovisual.getNombre().equals(nombreAudiovisual)) {             // Encontro audiovisual
+            if (suscriptor.getNroDoc() == dni) {                                                                        // Encontro suscriptor
 
-                if (audiovisual instanceof Series) {
+                Mostrar.mostrar("Ingresar estrellas: ");
+                estrellas = Validaciones.limite(1, 5);
+                motivo = Validaciones.ingresar("motivo de la calificacion propuesta: ", true);
+
+                if (tipo == 1 ) {
+
+                    Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
+                    while (iteratorAudiovisuales.hasNext()) {
+                        audiovisual = iteratorAudiovisuales.next();
+
+                        if (audiovisual instanceof Peliculas
+                                && audiovisual.getNombre().equals(nombreAudiovisual)) {                                 // Encontro pelicula
+                            audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, suscriptor);
+                            califico = true;
+                            break;
+                        }
+                    }
+
+                } else if (tipo == 2) {
+
                     int temporada = Validaciones.validarInt("temporada: ");
                     int episodio = Validaciones.validarInt("episodio: ");
 
-                    if (((Series) audiovisual).getTemporada() == temporada && ((Series) audiovisual).getEpisodio() == episodio) {
+                    Iterator<Audiovisuales> iteratorAudiovisuales = audiovisuales.iterator();
+                    while (iteratorAudiovisuales.hasNext()) {
+                        audiovisual = iteratorAudiovisuales.next();
 
-                        Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
-                        while (iteratorSuscriptores.hasNext()) {
-                            suscriptor = iteratorSuscriptores.next();
-
-                            if (suscriptor.getNroDoc() == dni) {                                                        // Encontro suscriptor
-
-                                Calendar fechaRealizada = Calendar.getInstance();
-                                Mostrar.mostrar("Ingresar estrellas: ");
-                                int estrellas = Validaciones.limite(1, 5);
-                                String motivo = Validaciones.ingresar("motivo de la calificacion propuesta: ", true);
-
-                                audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, suscriptor);
-                                break;
-                            }
-                        }
-                    }
-                } else {
-
-                    Iterator<Suscriptores> iteratorSuscriptores = suscriptores.iterator();
-                    while (iteratorSuscriptores.hasNext()) {
-                        suscriptor = iteratorSuscriptores.next();
-
-                        if (suscriptor.getNroDoc() == dni) {                                                            // Encontro suscriptor
-
-                            Calendar fechaRealizada = Calendar.getInstance();
-                            Mostrar.mostrar("Ingresar estrellas: ");
-                            int estrellas = Validaciones.limite(1, 5);
-                            String motivo = Validaciones.ingresar("motivo de la calificacion propuesta: ", true);
+                        if (audiovisual instanceof Series
+                                && audiovisual.getNombre().equals(nombreAudiovisual)
+                                && ((Series) audiovisual).getTemporada() == temporada
+                                && ((Series) audiovisual).getEpisodio() == episodio) {                                  // Encontro serie
 
                             audiovisual.setCalificaciones(estrellas, motivo, fechaRealizada, suscriptor);
+                            califico = true;
                             break;
+
                         }
                     }
                 }
             }
         }
-
-        CalificacionesTXT.grabarCalificacionesTXT(audiovisuales);
+        if (califico){
+            CalificacionesTXT.grabarCalificacionesTXT(audiovisuales);
+        } else {
+            Mostrar.mostrar("No se pudo calificar");
+        }
     }
-
 }
