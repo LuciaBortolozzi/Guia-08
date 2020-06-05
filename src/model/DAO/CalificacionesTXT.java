@@ -6,6 +6,7 @@ import model.*;
 import view.Validaciones;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -65,34 +66,33 @@ public class CalificacionesTXT {
     public static void grabarCalificacionesTXT(ArrayList<Audiovisuales> audiovisuales) {
 
         try {
-            File fichero = new File(directorio + "Calificaciones.txt");
+            FileWriter fichero = new FileWriter(directorio + "Calificaciones.txt");
 
-            if (fichero.exists()) {
-                PrintWriter archivoSalida = new PrintWriter(fichero);
 
-                for (Audiovisuales audiovisual : audiovisuales) {
+            PrintWriter archivoSalida = new PrintWriter(fichero);
 
-                    for (Calificaciones calificacion : audiovisual.getCalificaciones()) {
+            for (Audiovisuales audiovisual : audiovisuales) {
 
-                        //Calificaciones.txt -> ("\n" + codAudiovisual + ";"+ estrellas + ";" + motivo + ";" + dd/mm/aaaa + ";" + codSuscriptor)
-                        archivoSalida.println(audiovisual.getCodigo() + ";"
-                                + calificacion.getEstrellas() + ";"
-                                + calificacion.getMotivo() + ";"
-                                + calificacion.getFechaRealizada().get(Calendar.DAY_OF_MONTH)
-                                + "/"
-                                + (calificacion.getFechaRealizada().get(Calendar.MONTH) + 1)
-                                + "/"
-                                + calificacion.getFechaRealizada().get(Calendar.YEAR) + ";"
-                                + calificacion.getSuscriptor().getCodigo()
+                for (Calificaciones calificacion : audiovisual.getCalificaciones()) {
 
-                        );
-                    }
+                    //Calificaciones.txt -> ("\n" + codAudiovisual + ";"+ estrellas + ";" + motivo + ";" + dd/mm/aaaa + ";" + codSuscriptor)
+                    archivoSalida.println(audiovisual.getCodigo() + ";"
+                            + calificacion.getEstrellas() + ";"
+                            + calificacion.getMotivo() + ";"
+                            + calificacion.getFechaRealizada().get(Calendar.DAY_OF_MONTH)
+                            + "/"
+                            + (calificacion.getFechaRealizada().get(Calendar.MONTH) + 1)
+                            + "/"
+                            + calificacion.getFechaRealizada().get(Calendar.YEAR) + ";"
+                            + calificacion.getSuscriptor().getCodigo()
+
+                    );
                 }
-
-                archivoSalida.close();
             }
 
-        } catch (Exception e) {
+            archivoSalida.close();
+
+        } catch (IOException e) {
             System.out.println("No se puede grabar el archivo de Calificaciones.txt");
         }
     }

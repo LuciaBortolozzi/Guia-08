@@ -43,8 +43,8 @@ public class AudiovisualesActoresTXT {
                     String[] audiovisualST = s.split("\t");
 
                     int codAudiovisual = Integer.parseInt(audiovisualST[0].trim());                     // codAudiovisual
-                    String nombreActor = audiovisualST[1].trim(); 										// nombreActor
-                    String apellidoActor = audiovisualST[2].trim(); 									// apellidoActor
+                    String nombreActor = audiovisualST[1].trim().toUpperCase(); 						// nombreActor
+                    String apellidoActor = audiovisualST[2].trim().toUpperCase(); 						// apellidoActor
                  
                     if(primeraVez) {
                     	audiovisual = AudiovisualesControlador.buscarAudiovisual(codAudiovisual, audiovisualesTXT);
@@ -115,9 +115,9 @@ public class AudiovisualesActoresTXT {
                         //AudiovisualesActores.txt -> (codigoAudiovisual + "/t" + nombreApellido + "/t" + nombreApellido)
                         archivoSalida.println(String.format("%4s", audi.getCodigo())
                                 + "\t"
-                                + a.getApellido()
+                                + a.getApellido().toUpperCase()
                                 + "\t"
-                                + a.getNombre()
+                                + a.getNombre().toUpperCase()
                         );
                     }
                 }

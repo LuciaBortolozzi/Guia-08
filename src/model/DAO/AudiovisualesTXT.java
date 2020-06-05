@@ -46,7 +46,7 @@ public class AudiovisualesTXT {
                         break;
                     }
                     audiovisuales.get(i).setCodigo(Integer.parseInt(audi.substring(2, 6).trim()));
-                    audiovisuales.get(i).setNombre(audi.substring(6, 56).trim());
+                    audiovisuales.get(i).setNombre(audi.substring(6, 56).trim().toUpperCase());
 
                     Generos genero;
                     Iterator<Generos> gen = generos.iterator();
@@ -93,7 +93,7 @@ public class AudiovisualesTXT {
                         //Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + duracion + anio)
                         archivoSalida.println(String.format("%2s", "06")
                                 + String.format("%4s", audi.getCodigo())
-                                + String.format("%50s", audi.getNombre())
+                                + String.format("%50s", audi.getNombre().toUpperCase())
                                 + String.format("%3s", audi.getGenero().getCodigo())
                                 + String.format("%50s", audi.getSinopsis())
                                 + String.format("%2s", audi.getFechaPubli().get(Calendar.DAY_OF_MONTH))
@@ -111,7 +111,7 @@ public class AudiovisualesTXT {
                         //Audiovisuales.txt -> (identificador + codigo + nombre + genero + sinopsis + diaPublicacion + "/" + mesPublicacion + "/" + anioPublicacion + temporada + episodio)
                         archivoSalida.println(String.format("%2s", "07")
                                 + String.format("%4s", audi.getCodigo())
-                                + String.format("%50s", audi.getNombre())
+                                + String.format("%50s", audi.getNombre().toUpperCase())
                                 + String.format("%3s", audi.getGenero().getCodigo())
                                 + String.format("%50s", audi.getSinopsis())
                                 + String.format("%2s", audi.getFechaPubli().get(Calendar.DAY_OF_MONTH))
