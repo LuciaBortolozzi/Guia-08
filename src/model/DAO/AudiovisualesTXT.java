@@ -119,8 +119,8 @@ public class AudiovisualesTXT {
                                 + String.format("%2s", audi.getFechaPubli().get(Calendar.MONTH))
                                 + "/"
                                 + String.format("%2s", audi.getFechaPubli().get(Calendar.YEAR))
-                                + String.format("%3s", ((Series) audi).getTemporada())
-                                + String.format("%3s", ((Series) audi).getEpisodio()))
+                                + String.format("%4s", ((Series) audi).getTemporada())
+                                + String.format("%4s", ((Series) audi).getEpisodio()))
                         );
 
                     }
