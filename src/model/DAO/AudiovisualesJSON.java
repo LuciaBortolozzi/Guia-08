@@ -8,8 +8,8 @@ import javax.json.*;
 
 public class AudiovisualesJSON {
 
-    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
-//    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
+  //  private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
+    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     public static ArrayList<Audiovisuales> bajarAudiovisualesJSON(ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Actores> actoresTXT, ArrayList<Generos> generos) {
 
@@ -52,7 +52,7 @@ public class AudiovisualesJSON {
 
                     if (!encontrado) {
                         //NUEVA PELICULA
-                        // CORREGIR
+
                         audiovisualesTXT.add(new Peliculas());
                         audiovisualesTXT.get(audiovisualesTXT.size() - 1).setNombre((pelicula.get("nombre").toString()));
                         audiovisualesTXT.get(audiovisualesTXT.size() - 1).setSinopsis((pelicula.get("sinopsis").toString()));
@@ -102,7 +102,7 @@ public class AudiovisualesJSON {
 
                     if (!encontrado) {
                         //NUEVA SERIE
-                        // CORREGIR
+
                         audiovisualesTXT.add(new Series());
                         audiovisualesTXT.get(audiovisualesTXT.size() - 1).setNombre((serie.get("nombre").toString()));
                         audiovisualesTXT.get(audiovisualesTXT.size() - 1).setSinopsis((serie.get("sinopsis").toString()));

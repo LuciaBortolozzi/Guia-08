@@ -11,8 +11,8 @@ import view.Validaciones;
 
 public class AudiovisualesActoresTXT {
 
-    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
-//    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
+ //   private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-08\\\\src\\\\resources\\\\";
+    private static final String directorio = "C:\\\\Users\\\\Flor\\\\git\\\\Guia-08\\\\src\\\\resources\\";
 
     //AudiovisualesActores.txt -> (codigoAudiovisual + "/t" + nombreApellido + "/t" + nombreApellido + ...)
     public static ArrayList<Audiovisuales> bajarAudiovisualesActoresTXT(ArrayList<Audiovisuales> audiovisualesTXT, TreeSet<Actores> actoresTXT) {
