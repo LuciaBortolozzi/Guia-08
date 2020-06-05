@@ -43,7 +43,7 @@ public class AudiovisualesControlador {
         boolean primeroDelMes = true;
         int cantidadPublicaciones = 0;
         double totalAbonar = 0;
-        
+
         for (Audiovisuales audi : audiovisualesTXT) {
             if (audi.getFechaPubli().after(fechaHace1mes) && audi.getFechaPubli().before(fechaActual)) {
                 if (primeroDelMes) {
@@ -138,7 +138,7 @@ public class AudiovisualesControlador {
                 }
 
                 if (!calificadaPorHombreAdulto) {
-                    Mostrar.mostrar("Codigo: "+ audiovisual.getCodigo()
+                    Mostrar.mostrar("Codigo: " + audiovisual.getCodigo()
                             + " Nombre: " + audiovisual.getNombre()
                             + " Temporada: " + ((Series) audiovisual).getTemporada()
                             + " Episodio: " + ((Series) audiovisual).getEpisodio());
@@ -170,52 +170,60 @@ public class AudiovisualesControlador {
         }
 
         Mostrar.mostrar("Duracion de pelicula: " + ((Peliculas) azar).getDuracion());
-        Mostrar.mostrar("Fecha de publicacion: " + azar.getFechaPubli());
+        Mostrar.mostrar("Fecha de publicacion: " + azar.getFechaPubli().get(Calendar.DAY_OF_MONTH)
+                                                    + "/" + (azar.getFechaPubli().get(Calendar.MONTH) + 1)
+                                                    + "/" + azar.getFechaPubli().get(Calendar.YEAR));
 
-        Mostrar.mostrar("Calificaciones");
-        for (Calificaciones calificacion : azar.getCalificaciones()
-        ) {
-            Mostrar.mostrar("Fecha realizada: " + calificacion.getFechaRealizada());
-            Mostrar.mostrar("Nombre del suscriptor: " + calificacion.getSuscriptor().getNombre());
-            Mostrar.mostrar("Estrellas: " + calificacion.getEstrellas());
+        if (azar.getCalificaciones().isEmpty()) {
+            Mostrar.mostrar("No tiene calificaciones");
+        } else {
+            Mostrar.mostrar("Calificaciones");
+            for (Calificaciones calificacion : azar.getCalificaciones()
+            ) {
+                Mostrar.mostrar("Fecha realizada: " + calificacion.getFechaRealizada().get(Calendar.DAY_OF_MONTH)
+                                                        + "/" + (calificacion.getFechaRealizada().get(Calendar.MONTH) + 1)
+                                                        + "/" + calificacion.getFechaRealizada().get(Calendar.YEAR));
+                Mostrar.mostrar("Nombre del suscriptor: " + calificacion.getSuscriptor().getNombre());
+                Mostrar.mostrar("Estrellas: " + calificacion.getEstrellas());
+            }
         }
     }
 
     public static void superanAgumento(ArrayList<Audiovisuales> audiovisuales, String arg) {
-    	
-    	Calendar fechaActual = Calendar.getInstance();
-    	double argumento = Double.parseDouble(arg);
-    	for(Audiovisuales audi : audiovisuales) {
-    		boolean cumple = true;
-    		double difPorcentaje = calculoPorcentaje(audi.getCronogramaPagos().getMonto(),argumento);
-    		
-    		if( difPorcentaje > 10) {
-    			
-    			for(Calificaciones cal : audi.getCalificaciones()) {
-    				
-    				if(cal.getEstrellas()>=3 || cal.getFechaRealizada().get(Calendar.YEAR) != fechaActual.get(Calendar.YEAR)) {
-    					
-    					cumple = false;
-    					break;
-    				}
-    			}
-    			
-    			if(cumple) {
-    				
-    				Mostrar.mostrar("Nombre de la publicacion:" + audi.getNombre());
-    				Mostrar.mostrar("Genero:" + audi.getGenero().getDescripcion());
-    			}
-    		}	
-    	}	
+
+        Calendar fechaActual = Calendar.getInstance();
+        double argumento = Double.parseDouble(arg);
+        for (Audiovisuales audi : audiovisuales) {
+            boolean cumple = true;
+            double difPorcentaje = calculoPorcentaje(audi.getCronogramaPagos().getMonto(), argumento);
+
+            if (difPorcentaje > 10) {
+
+                for (Calificaciones cal : audi.getCalificaciones()) {
+
+                    if (cal.getEstrellas() >= 3 || cal.getFechaRealizada().get(Calendar.YEAR) != fechaActual.get(Calendar.YEAR)) {
+
+                        cumple = false;
+                        break;
+                    }
+                }
+
+                if (cumple) {
+
+                    Mostrar.mostrar("Nombre de la publicacion:" + audi.getNombre());
+                    Mostrar.mostrar("Genero:" + audi.getGenero().getDescripcion());
+                }
+            }
+        }
     }
-    
+
     public static double calculoPorcentaje(double monto, double argumento) {
-    	
-    	double porcentajeMonto = (monto * 100)/argumento;
-    	
-    	double difPorcentaje = porcentajeMonto - 100;
-    	
-    	return difPorcentaje;
+
+        double porcentajeMonto = (monto * 100) / argumento;
+
+        double difPorcentaje = porcentajeMonto - 100;
+
+        return difPorcentaje;
     }
 
     /*public static Audiovisuales buscarAudiovisualPorNombreyFecha(String nombreAudiovisual, ArrayList<Audiovisuales> audiovisuales) {
