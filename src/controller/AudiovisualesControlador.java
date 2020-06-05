@@ -129,7 +129,7 @@ public class AudiovisualesControlador {
 
             if (audiovisual instanceof Series) {
                 for (Calificaciones calificacion : audiovisual.getCalificaciones()) {
-
+                    calificadaPorHombreAdulto = false;
                     menorA45 = Validaciones.menor(calificacion.getSuscriptor().getFechaDeNac(), fechaActual, 45);
 
                     if (menorA45 && calificacion.getSuscriptor().getSexo() == 'M') {
@@ -138,7 +138,10 @@ public class AudiovisualesControlador {
                 }
 
                 if (!calificadaPorHombreAdulto) {
-                    Mostrar.mostrar(audiovisual.getNombre() + ((Series) audiovisual).getTemporada() + ((Series) audiovisual).getEpisodio());
+                    Mostrar.mostrar("Codigo: "+ audiovisual.getCodigo()
+                            + " Nombre: " + audiovisual.getNombre()
+                            + " Temporada: " + ((Series) audiovisual).getTemporada()
+                            + " Episodio: " + ((Series) audiovisual).getEpisodio());
                 }
             }
         }
