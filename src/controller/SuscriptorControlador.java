@@ -178,8 +178,8 @@ public class SuscriptorControlador {
 
     public static void mayoresSinCalificar(ArrayList<Audiovisuales> audiovisuales, TreeSet<Suscriptores> suscriptores) {
 
-        /*Nombre y apellido de los suscriptores mayores de 60 aÃ±os que nunca hayan calificado
-        una pelÃ­cula.*/
+        /*Nombre y apellido de los suscriptores mayores de 60 anios que nunca hayan calificado
+        una pelicula.*/
 
         TreeSet<Suscriptores> suscriptoresMayores = new TreeSet<Suscriptores>();
 
@@ -204,7 +204,11 @@ public class SuscriptorControlador {
             }
         }
 
-        mostrarSuscriptores(suscriptoresMayores);
+        if (suscriptoresMayores.isEmpty()){
+            Mostrar.mostrar("No hay suscriptores mayores de 60 anios que nunca hayan calificado una pelicula");
+        } else {
+            mostrarSuscriptores(suscriptoresMayores);
+        }
     }
 
     public static void mostrarSuscriptores(TreeSet<Suscriptores> suscriptores) {
@@ -213,7 +217,7 @@ public class SuscriptorControlador {
         while (iteratorSuscriptores.hasNext()) {
             suscriptor = iteratorSuscriptores.next();
 
-            Mostrar.mostrar(suscriptor.getNombre() + suscriptor.getApellido());
+            Mostrar.mostrar("Nombre: " + suscriptor.getNombre() + "Apellido: " + suscriptor.getApellido());
         }
     }
 }
