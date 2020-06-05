@@ -30,11 +30,11 @@ public class CronogramaPagosTXT {
                     //CronogramaPagos.txt -> (identificador + ";" + fechaDePago + ";" + nombrePublicacion + ";" + fechaPublicacion + ";" + monto )
                     archivoSalida.println(identificador + ";"
                             + audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.DAY_OF_MONTH) + "/"
-                            + audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.MONTH) + "/"
+                            + (audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.MONTH) +1)  + "/"
                             + audiovisual.getCronogramaPagos().getFechaDePago().get(Calendar.YEAR) + ";"
                             + audiovisual.getNombre() + ";"
                             + audiovisual.getFechaPubli().get(Calendar.DAY_OF_MONTH) + "/"
-                            + audiovisual.getFechaPubli().get(Calendar.MONTH) + "/"
+                            + (audiovisual.getFechaPubli().get(Calendar.MONTH) + 1) + "/"
                             + audiovisual.getFechaPubli().get(Calendar.YEAR) + ";"
                             + audiovisual.getCronogramaPagos().getMonto());
 
