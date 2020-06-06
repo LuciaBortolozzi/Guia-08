@@ -170,7 +170,7 @@ public class AudiovisualesJSON {
         }
     }
 
-    public static void grabarRecomendacionesSeriesJovenesJSON(Audiovisuales audiovisuales) {
+    public static void grabarRecomendacionesSeriesJovenesJSON(Audiovisuales audiovisuales, int cantEpisodios) {
 
         try {
 
@@ -193,18 +193,18 @@ public class AudiovisualesJSON {
             Iterator<Actores> act = audiovisuales.getActores().iterator();
             while (act.hasNext()) {
                 a = act.next();
-                actores.add((JsonValue) a);
+                actores.add(a.getNombre() + " " + a.getApellido());
             }
 
-            JsonObject actoresJson = (javax.json.JsonObject) actores.build();
+            JsonArray arrayActores = actores.build();
 
-            detalleSerie.add("Actores", actoresJson);
+            detalleSerie.add("Actores", arrayActores);
 
             detalleSerie.add("Sinopsis", audiovisuales.getSinopsis());
 
             detalleSerie.add("Temporada", ((Series) audiovisuales).getTemporada());
 
-            detalleSerie.add("Episodios", ((Series) audiovisuales).getEpisodio());
+            detalleSerie.add("Total de Episodios", cantEpisodios);
 
             int sumaEstrellas = 0;
             int cantidadCalificaciones = 0;
@@ -237,7 +237,7 @@ public class AudiovisualesJSON {
 
         try {
 
-            File aJson = new File(directorio + "RecomendacionesSeriesJovenes.json");
+            File aJson = new File(directorio + "RecomendacionesPeliculasMayores.json");
             FileOutputStream fsOutJson = new FileOutputStream(aJson);
             JsonWriter wrtJson = Json.createWriter(fsOutJson);
 
@@ -260,12 +260,11 @@ public class AudiovisualesJSON {
                 Iterator<Actores> act = audi.getActores().iterator();
                 while (act.hasNext()) {
                     a = act.next();
-                    actores.add((JsonValue) a);
+                    actores.add(a.getNombre() + " " + a.getApellido());
                 }
+                JsonArray arrayActores = actores.build();
 
-                JsonObject actoresJson = (javax.json.JsonObject) actores.build();
-
-                detallePelicula.add("Actores", actoresJson);
+                detallePelicula.add("Actores", arrayActores);
 
                 detallePelicula.add("Sinopsis", audi.getSinopsis());
 
@@ -288,7 +287,7 @@ public class AudiovisualesJSON {
                 peliculas.add(JPelicula);
             }
 
-            JsonObject JsonPeliculas = (javax.json.JsonObject) peliculas.build();
+            JsonArray JsonPeliculas = peliculas.build();
 
             empresa.add("Peliculas", JsonPeliculas);
 
