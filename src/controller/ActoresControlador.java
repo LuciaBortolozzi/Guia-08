@@ -71,12 +71,12 @@ public class ActoresControlador {
         for (Audiovisuales audiovisual : audiovisuales) {
             if (audiovisual instanceof Peliculas && ((Peliculas) audiovisual).getAnioFilm() > dosAniosAntes.get(Calendar.YEAR)) {
 
-                Iterator<Actores> iteratorActores = actores.iterator();
+                Iterator<Actores> iteratorActores = audiovisual.getActores().iterator();
                 while (iteratorActores.hasNext()) {
                     actor = iteratorActores.next();
 
                     if (actor.getSexo() == 'F') {
-                        Mostrar.mostrar(actor.getApellido() + actor.getNombre());
+                        Mostrar.mostrar("Apellido y nombre: " + actor.getApellido() + " " + actor.getNombre());
                         cumple = true;
                     }
                 }
