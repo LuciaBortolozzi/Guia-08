@@ -193,25 +193,28 @@ public class AudiovisualesControlador {
 
         Calendar fechaActual = Calendar.getInstance();
         double argumento = Double.parseDouble(arg);
-        for (Audiovisuales audi : audiovisuales) {
+        for (Audiovisuales audiovisual : audiovisuales) {
             boolean cumple = true;
-            double difPorcentaje = calculoPorcentaje(audi.getCronogramaPagos().getMonto(), argumento);
 
-            if (difPorcentaje > 10) {
+            if (audiovisual.getCronogramaPagos() != null){
+                double difPorcentaje = calculoPorcentaje(audiovisual.getCronogramaPagos().getMonto(), argumento);
 
-                for (Calificaciones cal : audi.getCalificaciones()) {
+                if (difPorcentaje > 10) {
 
-                    if (cal.getEstrellas() >= 3 || cal.getFechaRealizada().get(Calendar.YEAR) != fechaActual.get(Calendar.YEAR)) {
+                    for (Calificaciones cal : audiovisual.getCalificaciones()) {
 
-                        cumple = false;
-                        break;
+                        if (cal.getEstrellas() >= 3 || cal.getFechaRealizada().get(Calendar.YEAR) != fechaActual.get(Calendar.YEAR)) {
+
+                            cumple = false;
+                            break;
+                        }
                     }
-                }
 
-                if (cumple) {
+                    if (cumple) {
 
-                    Mostrar.mostrar("Nombre de la publicacion:" + audi.getNombre());
-                    Mostrar.mostrar("Genero:" + audi.getGenero().getDescripcion());
+                        Mostrar.mostrar("Nombre de la publicacion: " + audiovisual.getNombre());
+                        Mostrar.mostrar("Genero: " + audiovisual.getGenero().getDescripcion());
+                    }
                 }
             }
         }

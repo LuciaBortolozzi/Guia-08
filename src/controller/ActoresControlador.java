@@ -1,9 +1,6 @@
 package controller;
 
 import model.*;
-import model.DAO.ActoresTXT;
-import model.DAO.CalificacionesTXT;
-import model.DAO.GenerosTXT;
 import view.Mostrar;
 import view.Validaciones;
 
@@ -59,20 +56,20 @@ public class ActoresControlador {
             }
         }
 
-        Mostrar.mostrar("Cantidad de actores que solamente participan de series o películas de un mismo género: " + cantidad);
+        Mostrar.mostrar("Cantidad de actores que solamente participan de series o peliculas de un mismo genero: " + cantidad);
     }
 
     public static void actricesRecientes(ArrayList<Audiovisuales> audiovisuales, TreeSet<Actores> actores) {
-        /*Apellido y nombre de las actrices que hayan filmado una película en los últimos 2 anios.*/
+        /*Apellido y nombre de las actrices que hayan filmado una pelicula en los ultimos 2 anios.*/
 
         Actores actor;
 
-        Calendar fechaActual = Calendar.getInstance();
-        Calendar seisAniosAntes = Validaciones.dosAniosAntes(fechaActual);
-
+        Calendar dosAniosAntes = Calendar.getInstance();
+        Validaciones.dosAniosAntes(dosAniosAntes);
+        boolean cumple = false;
 
         for (Audiovisuales audiovisual : audiovisuales) {
-            if (audiovisual instanceof Peliculas && ((Peliculas) audiovisual).getAnioFilm() > seisAniosAntes.get(Calendar.YEAR)) {
+            if (audiovisual instanceof Peliculas && ((Peliculas) audiovisual).getAnioFilm() > dosAniosAntes.get(Calendar.YEAR)) {
 
                 Iterator<Actores> iteratorActores = actores.iterator();
                 while (iteratorActores.hasNext()) {
@@ -80,9 +77,13 @@ public class ActoresControlador {
 
                     if (actor.getSexo() == 'F') {
                         Mostrar.mostrar(actor.getApellido() + actor.getNombre());
+                        cumple = true;
                     }
                 }
             }
+        }
+        if (!cumple){
+            Mostrar.mostrar("No hay actrices que hayan filmado una pelicula en los iltimos 2 anios");
         }
     }
 

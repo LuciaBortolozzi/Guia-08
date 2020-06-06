@@ -5,9 +5,7 @@ import java.util.*;
 
 import controller.ActoresControlador;
 import controller.AudiovisualesControlador;
-import controller.SuscriptorControlador;
 import model.*;
-import view.Validaciones;
 
 public class AudiovisualesActoresTXT {
 

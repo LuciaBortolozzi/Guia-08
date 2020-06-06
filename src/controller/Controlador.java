@@ -4,7 +4,6 @@ import model.*;
 import model.DAO.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.TreeSet;
 
 public class Controlador {

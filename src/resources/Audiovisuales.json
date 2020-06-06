@@ -22,6 +22,14 @@
 				"sinopsis": "aca va la sinopsis",
 				"actores": ["Harrison Ford", "Sean Connery", "Denholm Elliott", "Alison Doody"],
 				"duracion": 127
+			},
+			{
+				"nombre": "Morning Glory",
+				"anio": 2010,
+				"genero": "comedia",
+				"sinopsis": "aca va la sinopsis",
+				"actores": ["Rachel McAdams","Harrison Ford", "Diane Keaton", "Patrick Wilson", "Jeff Goldblum"],
+				"duracion": 107
 			}
 		],
 		"Series": [{
