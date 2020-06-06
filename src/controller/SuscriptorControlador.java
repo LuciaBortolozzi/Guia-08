@@ -36,15 +36,16 @@ public class SuscriptorControlador {
 
         Audiovisuales mejorAudiovisual = null;
         
-        for (Audiovisuales audi : audiovisuales) {
+        for (Audiovisuales audiovisual : audiovisuales) {
         	
         	int sumaEstrellas = 0;
             int cantidadCalificaciones = 0;
             
-        	if(audi instanceof Series) {
+        	if(audiovisual instanceof Series) {
         		for (Audiovisuales au : audiovisuales) {
         			if(au instanceof Series) {
-	            		if(((Series)au).getTemporada() == ((Series)audi).getTemporada() && ((Series)au).getNombre().equals(((Series)audi).getNombre())) {
+	            		if(((Series) au).getTemporada() == ((Series) audiovisual).getTemporada()
+                                && au.getNombre().equals(audiovisual.getNombre())) {
 	            			
 	    	                for (Calificaciones calificacion : au.getCalificaciones()) {
 	
@@ -62,7 +63,7 @@ public class SuscriptorControlador {
 	        		promedioTemporada = sumaEstrellas/ cantidadCalificaciones;
 	        		 if (promedioTemporada > mejorPromedio) {
 	                     mejorPromedio = promedioTemporada;
-	                     mejorAudiovisual = audi;
+	                     mejorAudiovisual = audiovisual;
 	                 }
         		}
         	}

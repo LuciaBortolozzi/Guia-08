@@ -7,3 +7,6 @@
 07   7                                          SEINFELD  3                                aca va la sinopsis 5/ 5/2020   2   1
 07   8                                          SEINFELD  3                                aca va la sinopsis 5/ 5/2020   2   2
 07   9                                          SEINFELD  3                                aca va la sinopsis 5/ 5/2020   2   3
+06  10                                     MORNING GLORY  3                                aca va la sinopsis 5/ 5/2020 1072010
+06  11                                 AVENGERS: ENDGAME  1                                aca va la sinopsis 5/ 5/2020 1822019
+07  12                                        INSATIABLE  3                                aca va la sinopsis 5/ 5/2020   1   1

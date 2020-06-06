@@ -1,7 +1,6 @@
 package model.DAO;
 
 import model.Generos;
-import view.Mostrar;
 
 import java.io.File;
 import java.io.IOException;

@@ -22,6 +22,22 @@
 				"sinopsis": "aca va la sinopsis",
 				"actores": ["Harrison Ford", "Sean Connery", "Denholm Elliott", "Alison Doody"],
 				"duracion": 127
+			},
+			{
+				"nombre": "Morning Glory",
+				"anio": 2010,
+				"genero": "comedia",
+				"sinopsis": "aca va la sinopsis",
+				"actores": ["Rachel McAdams","Harrison Ford", "Diane Keaton", "Patrick Wilson", "Jeff Goldblum"],
+				"duracion": 107
+			},
+			{
+				"nombre": "Avengers: Endgame",
+				"anio": 2019,
+				"genero": "accion",
+				"sinopsis": "aca va la sinopsis",
+				"actores": ["Scarlett Johansson","Robert Downey, Jr.", "Elizabeth Olsen", "Brie Larson", "Chris Evans"],
+				"duracion": 182
 			}
 		],
 		"Series": [{
@@ -70,6 +86,14 @@
 				"actores": ["Jerry Seinfeld", "Julia LouisDreyfus", "Jason Alexander", "Michael Richards"],
 				"temporada": 2,
 				"episodio": 3,
+				"sinopsis": "aca va la sinopsis"
+			},
+			{
+				"nombre": "Insatiable",
+				"genero": "comedia",
+				"actores": ["Debby Ryan", "Michael Provost", "Dallas Roberts"],
+				"temporada": 1,
+				"episodio": 1,
 				"sinopsis": "aca va la sinopsis"
 			}
 		]

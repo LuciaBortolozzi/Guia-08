@@ -1,16 +1,12 @@
 package model.DAO;
 
-import controller.AudiovisualesControlador;
 import model.Audiovisuales;
-import view.Validaciones;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Scanner;
 
 public class CronogramaPagosTXT {
 

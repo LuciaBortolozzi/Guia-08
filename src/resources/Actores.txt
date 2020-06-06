@@ -10,3 +10,5 @@ Jason	Alexander	M
 Michael	Richards	M
 Paul	Richards	M
 Julia	Roberts	F
+Scarlett	Johansson	F
+Brie	Larson	F
