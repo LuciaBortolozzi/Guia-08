@@ -55,7 +55,7 @@ public class Controlador {
     }
 
     public static void opcion3() {
-        SuscriptorControlador.recomendarMejorPelicula(audiovisualesTXT, generos);
+        SuscriptorControlador.recomendarMejorPeliculaDeGenero(audiovisualesTXT, generos);
     }
 
     public static void opcion4(){

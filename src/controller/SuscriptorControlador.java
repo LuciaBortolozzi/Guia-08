@@ -68,30 +68,40 @@ public class SuscriptorControlador {
         		}
         	}
         }
+
+        int cant = 0;
+        for (Audiovisuales audiovisual : audiovisuales) {
+            if (audiovisual instanceof Series
+                && audiovisual.getNombre().equals(mejorAudiovisual.getNombre())
+                && ((Series) audiovisual).getTemporada() == ((Series) mejorAudiovisual).getTemporada()){
+                cant++;
+            }
+        }
+
         if (mejorAudiovisual != null){
-            AudiovisualesJSON.grabarRecomendacionesSeriesJovenesJSON(mejorAudiovisual);
+            AudiovisualesJSON.grabarRecomendacionesSeriesJovenesJSON(mejorAudiovisual, cant);
         } else {
             Mostrar.mostrar("No hay serie a recomendar");
         }
 
     }
     
-    public static void recomendarMejorPelicula(ArrayList<Audiovisuales> audiovisuales, ArrayList<Generos> generos) {
+    public static void recomendarMejorPeliculaDeGenero(ArrayList<Audiovisuales> audiovisuales, ArrayList<Generos> generos) {
 
     	ArrayList<Audiovisuales> audiovisualesAux = new ArrayList<Audiovisuales>();
         Calendar fechaActual = Calendar.getInstance();
         Calendar fechaAnterior = Calendar.getInstance();
         Validaciones.ultimoMes(fechaAnterior);
-
         
         int promedio;
-        int mejorPromedio = -1;
+        int mejorPromedio;
         boolean mayorA55;
 
-        Audiovisuales mejorAudiovisual = null;
+        Audiovisuales mejorAudiovisual;
 
         for (Generos genero : generos) {
-        	
+            mejorAudiovisual = null;
+            mejorPromedio = -1;
             for (Audiovisuales audiovisual : audiovisuales) {
             	int sumaEstrellas = 0;
                 int cantidadCalificaciones = 0;
@@ -106,17 +116,19 @@ public class SuscriptorControlador {
                             cantidadCalificaciones++;
                         }
                     }
-                }
+                    if (cantidadCalificaciones != 0) {
+                        promedio = sumaEstrellas / cantidadCalificaciones;
+                        if (promedio > mejorPromedio) {
+                            mejorPromedio = promedio;
+                            mejorAudiovisual = audiovisual;
 
-                if (cantidadCalificaciones != 0) {
-                    promedio = sumaEstrellas / cantidadCalificaciones;
-                    if (promedio > mejorPromedio) {
-                        mejorPromedio = promedio;
-                        mejorAudiovisual = audiovisual;
+                        }
                     }
                 }
             }
-            audiovisualesAux.add(mejorAudiovisual);
+            if (mejorAudiovisual != null) {
+                audiovisualesAux.add(mejorAudiovisual);
+            }
         }
 
         if (!audiovisualesAux.isEmpty()){
@@ -142,38 +154,44 @@ public class SuscriptorControlador {
     		for(Audiovisuales audi : audiovisuales) {
         		if(audi instanceof Series && audi.getGenero().getCodigo() == gen.getCodigo()) {
         			
-        			seriesAux.add((Series)audi);
+        			seriesAux.add((Series) audi);
         		}
         	}
-    		Collections.sort(seriesAux);
-    		
-    		seriesNoRepetidas.clear();
-    		
-    		int codigoSerie = -1;
-    		for(Series ser : seriesAux) {
-    			
-    			if(codigoSerie != ser.getCodigo()) {
-    				
-    				seriesNoRepetidas.add(ser);
-    				codigoSerie = ser.getCodigo();
-    			}
-    		}
-    		Collections.sort(seriesNoRepetidas);
-    		
-    		for(Series ser : seriesNoRepetidas) {
-    			Mostrar.mostrar("Serie: " + ser.getNombre());
-    			Mostrar.mostrar("Cantidad de temporadas : " + ser.getTemporada());
-    			//Al estar ordenado, nos trae la temporada más alta, por ende, es la cantidad de temporadas que posee la serie
-    			actor.clear();
-	    		for(Audiovisuales audi : audiovisuales) {
-	    			
-	    			if(audi instanceof Series && ser.getCodigo()==audi.getCodigo()) {
-	    				
-	    				actor.addAll(audi.getActores());
-	    			}	
-	    		}
-	    		Mostrar.mostrar("Cantidad de actores : " + actor.size());
-    		}	
+
+    		if (!seriesAux.isEmpty()){
+                Collections.sort(seriesAux);
+
+                seriesNoRepetidas.clear();
+
+                String nombreSerie = "";
+                for (Series ser : seriesAux) {
+
+                    if (!nombreSerie.equals(ser.getNombre())) {
+
+                        seriesNoRepetidas.add(ser);
+                        nombreSerie = ser.getNombre();
+                    }
+                }
+                Collections.sort(seriesNoRepetidas);
+
+                for (Series ser : seriesNoRepetidas) {
+                    Mostrar.mostrar("Serie: " + ser.getNombre());
+                    Mostrar.mostrar("Cantidad de temporadas : " + ser.getTemporada());
+                    //Al estar ordenado, nos trae la temporada más alta, por ende, es la cantidad de temporadas que posee la serie
+                    actor.clear();
+                    for (Audiovisuales audi : audiovisuales) {
+
+                        if (audi instanceof Series && ser.getCodigo() == audi.getCodigo()) {
+
+                            actor.addAll(audi.getActores());
+                        }
+                    }
+                    Mostrar.mostrar("Cantidad de actores : " + actor.size());
+                }
+            } else {
+                Mostrar.mostrar("No hay series para el genero " + gen.getDescripcion());
+
+            }
     	}	
     }
 

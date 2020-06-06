@@ -70,8 +70,8 @@ public class Series extends Audiovisuales implements Comparable<Series>{
 	
 	@Override
     public int compareTo(Series s) {
-        int lastCmp = s.temporada - this.temporada;                     // Primer parametro
-        return (lastCmp != 0 ? lastCmp : nombre.compareTo(s.nombre));   // Segundo parametro
+        int lastCmp = nombre.compareTo(s.nombre);                           // Primer parametro
+        return (lastCmp != 0 ? lastCmp : s.temporada - this.temporada);     // Segundo parametro
     }
     
 }
